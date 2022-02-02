@@ -12,4 +12,4 @@ tekstiä
 ## Järjestelmän määrittely
 
 tekstiä
-
+commit
