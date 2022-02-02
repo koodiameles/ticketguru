@@ -1,5 +1,6 @@
 # TicketGuru
 
+Ryhmä Github Newbies
 Tiimi: 
 - Jussi Junnila
 - Etunimi Sukunimi
@@ -11,3 +12,4 @@ tekstiä
 ## Järjestelmän määrittely
 
 tekstiä
+
