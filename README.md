@@ -4,6 +4,7 @@ Ryhmä Github Newbies
 Tiimi: 
 - Jussi Junnila
 - Etunimi Sukunimi
+- Max Arponen
 
 ## Johdanto
 
