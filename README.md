@@ -1,0 +1,2 @@
+# ticketguru
+Lipun myyntisovellus TicketGuru
