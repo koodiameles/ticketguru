@@ -12,13 +12,6 @@ Käyttöliittymäratkaisut ja teknologiat (esim. päätelaitteet: puhelin, täpp
 
 ## Järjestelmän määrittely
 
-*Määrittelyssä järjestelmää tarkastellaan käyttäjän näkökulmasta. Järjestelmän toiminnot hahmotellaan käyttötapausten tai käyttäjätarinoiden kautta, ja kuvataan järjestelmän käyttäjäryhmät.*
-
-*Lyhyt kuvaus käyttäjäryhmistä (rooleista)
-Käyttäjäroolit ja roolien tarvitsemat toiminnot, esim. käyttötapauskaaviona (use case diagram) tai käyttäjätarinoina.
-Lyhyt kuvaus käyttötapauksista tai käyttäjätarinat
-Kuvauksissa kannattaa harkita, mikä on toteuttajalle ja asiakkaalle oleellista tietoa ja keskittyä siihen.*
-
 ### Käyttäjäroolit
 + **Myyjä** - Myy ja tulostaa lippuja asiakkaalle
 
