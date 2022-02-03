@@ -47,7 +47,6 @@ Kuvauksissa kannattaa harkita, mikä on toteuttajalle ja asiakkaalle oleellista 
 
 10. Ylläpitäjänä haluan muokata lippujen tietoja, jotta voin muokata hintoja tai lipputyyppejä.
 
-11. Ylläpitäjänä haluan pyst
 
 ## Käyttöliittymä
 
