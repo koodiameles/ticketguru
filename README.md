@@ -51,3 +51,5 @@ Ticketgurulla käyttääjä voi muun muassa:
 *Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona.*
 
 *Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.*
+
+[UML-kaavio](https://github.com/koodiameles/ticketguru/blob/main/Kuvat/UML-kaavio.png)
