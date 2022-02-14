@@ -55,3 +55,6 @@ Ticketgurulla käyttääjä voi muun muassa:
 [UML-kaavio](https://github.com/koodiameles/ticketguru/blob/main/Kuvat/UML-kaavio.png)
 
 [Rautalankamalli](https://github.com/koodiameles/ticketguru/blob/main/Kuvat/Wireframe.pdf)
+
+### Tietokantakaavio
+![UML malli](./Kuvat/UMLkaaviokuva.PNG)
