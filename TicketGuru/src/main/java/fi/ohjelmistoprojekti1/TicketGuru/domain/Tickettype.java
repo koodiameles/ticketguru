@@ -1,9 +1,17 @@
 package fi.ohjelmistoprojekti1.TicketGuru.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+
+
 
 @Entity
 public class Tickettype {
@@ -11,8 +19,14 @@ public class Tickettype {
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 private Long tickettypeid; 
-private String tickettype;
-private double price;
+@NotBlank(message = "Tickettype must have a name/description")
+private String tickettype;	//Ex. student, adult, child, pension
+private double price;	//Price of the tickettype
+
+@ManyToOne
+@JoinColumn(name = "eventid")
+private Event event;
+
 
 public Tickettype(String tickettype, double price) {
 	super();
