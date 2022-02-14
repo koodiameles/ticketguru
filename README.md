@@ -53,3 +53,5 @@ Ticketgurulla käyttääjä voi muun muassa:
 *Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.*
 
 [UML-kaavio](https://github.com/koodiameles/ticketguru/blob/main/Kuvat/UML-kaavio.png)
+
+![Luokkakaavio](./Kuvat/UMLkaaviokuva.png)
