@@ -58,3 +58,4 @@ Ticketgurulla käyttääjä voi muun muassa:
 
 ### Tietokantakaavio
 ![UML malli](./Kuvat/UMLkaaviokuva.PNG)
+
