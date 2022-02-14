@@ -59,3 +59,12 @@ Ticketgurulla käyttääjä voi muun muassa:
 ### Tietokantakaavio
 ![UML malli](./Kuvat/UMLkaaviokuva.PNG)
 
+## Tietokanta
+
+> ### _Rooli_
+> Rooli-taulu sisältää työntekijöiden käyttöoikeudet järjestelmässä. Työntekijällä voi olla vain yksi rooli. Tietty rooli voi kuulua monelle eri työntekijälle.
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> id | long PK | Roolin tunnus
+> kuvaus | varchar |  Lyhyt kuvaus roolin oikeuksista järjestelmässä
