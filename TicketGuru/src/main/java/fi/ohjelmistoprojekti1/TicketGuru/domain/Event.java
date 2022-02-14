@@ -1,20 +1,25 @@
 package fi.ohjelmistoprojekti1.TicketGuru.domain;
 
+import java.util.List;
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
+import javax.validation.constraints.NotBlank;
+import javax.persistence.OneToMany;
+/*
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+*/
+
 
 @Entity
 public class Event {
@@ -32,13 +37,11 @@ public class Event {
     private String starttime;       // Which hour will the event take place. E.g "18.30"
     private int duration;           // Estimated duration of the event in minutes. E.g "75" (1h15min)
 
-    @ManyToOne
-    @JoinColumn(name = "ticketid")
-    private Ticket ticket;  //
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private List<Ticket> tickets;   // List of tickets for this event
 
-	@ManyToOne
-    @JoinColumn(name = "tickettypeid")
-    private Tickettype tickettype;  // 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private List<Tickettype> tickettypes;   //List of tickettypes for this event
 
 
     //CONSTRUCTORS
@@ -134,5 +137,5 @@ public class Event {
                 + ", location=" + location + ", name=" + name + ", starttime=" + starttime + ", ticketcount="
                 + ticketcount + "]";
     }
-    
+
 }
