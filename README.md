@@ -52,72 +52,77 @@ Ticketgurulla käyttääjä voi muun muassa:
 
 *Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.*
 
-[UML-kaavio](https://github.com/koodiameles/ticketguru/blob/main/Kuvat/UML-kaavio.png)
+![UML-kaavio](./Kuvat/UML-kaavio.png)
 
-[Rautalankamalli](https://github.com/koodiameles/ticketguru/blob/main/Kuvat/Wireframe.pdf)
-
-### Tietokantakaavio
-![UML malli](./Kuvat/UMLkaaviokuva.PNG)
+[Rautalankamalli](https://github.com/koodiameles/ticketguru/blob/main/Kuvat/Wireframe.pdf) kuvaa tarkemmin eri näkymien yhteyksiä ja toimintoja.
 
 ## Tietokanta
 
-> ### _Rooli_
+### Tietokantakaavio
+![UML malli](./Kuvat/UMLkaaviokuva.PNG) 
+
+> ### _Employee – Työntekijä_
+> 
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+
+> ### _Role – Rooli_
 > Rooli-taulu sisältää työntekijöiden käyttöoikeudet järjestelmässä. Työntekijällä voi olla vain yksi rooli. Tietty rooli voi kuulua monelle eri työntekijälle.
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > id | long PK | Roolin tunnus
-> kuvaus | varchar |  Lyhyt kuvaus roolin oikeuksista järjestelmässä
+> description | varchar |  Lyhyt kuvaus roolin oikeuksista järjestelmässä
 
-### _Tapahtuma_
+> ### _Event – Tapahtuma_
 > Tapahtuma-taulu sisältää tapahtuman tiedot. Tapahtumaan voidaan olla lisätty useita lipputyyppejä, mutta lipputyyppi kuuluu aina vain yhdelle tapahtumalle. Tapahtumaan voidaan myydä useita lippuja, mutta yksi lippu kuuluu aina vain yhteen tapahtumaan. Tapahtumaan liittyy yksi raportti ja raportti voi kuulua aina vain yhdelle tapahtumalle.
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > id | long PK | Tapahtuman id
-> lipputyyppi | long FK | Viittaus lipputyypit -tauluun. Tässä määritellään tapahtumalle lipputiedot hintoineen.
-> kuvaus | varchar | Tapahtuman nimi/kuvaus
-> paikka | varchar | Tapahtumapaikka esim. Finlandiatalo
-> kaupunki | varchar | Kaupunki, jossa tapahtumapaikka sijaitsee
-> lippumaara | int | Myytävien lippujen maksimimäärä
-> ajankohta | datetime | Tapahtuman ajankohta. PVM sekä KLO.
-> kesto | int | tapahtuman arvioitu kesto minuutteina esim. 90 min
+> tickettype | long FK | Viittaus lipputyypit -tauluun. Tässä määritellään tapahtumalle lipputiedot hintoineen.
+> description | varchar | Tapahtuman nimi/kuvaus
+> location | varchar | Tapahtumapaikka esim. Finlandiatalo
+> city | varchar | Kaupunki, jossa tapahtumapaikka sijaitsee
+> ticketcount | int | Myytävien lippujen maksimimäärä
+> datetime | datetime | Tapahtuman ajankohta. PVM sekä KLO.
+> duration | int | tapahtuman arvioitu kesto minuutteina esim. 90 min
 
-> ### _Lippu_
+> ### _Ticket – Lippu_
 > Lippu-taulu sisältää lipun tiedot. Lippu voi kuulua vain yhteen tapahtumaan (event). Lippu voi kuulua vain yhteen myyntitapahtumaan (sale).
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > id | long PK | Roolin tunnus
-> tapahtuma | long FK | Viittaus tapahtuma -tauluun. Mihin tapahtumaan lippu on myyty.
+> event | long FK | Viittaus tapahtuma -tauluun. Mihin tapahtumaan lippu on myyty.
 > valid | boolean |  Onko lippu voimassa. Esim. Onko vanhentunut, onko käytetty
 
-> ### _Myyntitapahtuma_
+> ### _Sale – Myyntitapahtuma_
 > Myyntitapahtuma-taulu sisältää tiedot myyntitapahtumasta ja siihen liittyvistä lipuista. Myyntitapahtuma kertoo, kuka työntekijä liput on myynyt ja koska. Myyntitapahtumaan voi liittyä useampia lippuja, mutta ainoastaan yksi työntekijä.
 > 
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > id | long PK | Myyntitapahtuman id
-> lippu | long FK | Myyntitapahtumaan liittyvä lippu, viittaus lippu-tauluun
-> tyontekija | long FK | Myyntitapahtuman tehnyt työntekijä, viittaus tyontekija-tauluun
-> summa | int | Myyntitapahtuman lippujen hintojen kokonaissumma
-> ajankohta | datetime | Myyntitapahtuman ajakohta
+> ticket | long FK | Myyntitapahtumaan liittyvä lippu, viittaus lippu-tauluun
+> employee | long FK | Myynnin suorittanut työntekijä, viittaus tyontekija-tauluun
+> amount | int | Myyntitapahtuman lippujen hintojen kokonaissumma
+> datetime | datetime | Myyntitapahtuman ajakohta
 
-###_Lipputyyppi_
-Lipputyyppi-taulu sisältää, minkälaisia lipputyyppejä on mahdollista saada tapahtumaan, esimerkiksi lapsi, aikuinen, eläkeläinen, opiskelija. Tapahtumalla voi olla useita lipputyyppejä.
+> ### _Tickettype – Lipputyyppi_
+> Lipputyyppi-taulu sisältää, minkälaisia lipputyyppejä on mahdollista saada tapahtumaan, esimerkiksi lapsi, aikuinen, eläkeläinen, opiskelija. Tapahtumalla voi olla useita lipputyyppejä.
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> id | long PK | Lipputyypin id
+> tickettype | varchar | kuvaus lipputyypistä, esim. opiskelija
+> price | double | paljonko kyseinen lippu maksaa, esim. opiskelijalippu
+> event | long FK | viittaus tapahtuma-tauluun, minkälaisia lipputyyppejä tapahtumassa on
 
-Kenttä | Tyyppi | Kuvaus
------- | ------ | ------
-id | long PK | Lipputyypin id
-lipputyyppi | varChar | kuvaus lipputyypistä, esim. opiskelija
-hinta | double | paljonko kyseinen lippu maksaa, esim. opiskelijalippu
-tapahtuma | long FK | viittaus tapahtuma-tauluun, minkälaisia lipputyyppejä tapahtumassa on
-
-###_Raportti_
-Raportti sisältää tiedot tapahtumasta ja tapahtumalle myydyistä lipuista. 
-
-Kenttä | Tyyppi | Kuvaus
------- | ------ | ------
-id | long PK | Raportin id
-raportin nimi | varChar | raportin nimi
-tapahtuma | long FK | viittaus tapahtuma-tauluun. Raportilla on yhden tapahtuman tiedot. 
+>### _Report – Raportti_
+>Raportti sisältää tiedot tapahtumasta ja tapahtumalle myydyistä lipuista. 
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> id | long PK | Raportin id
+> reportname | varchar | raportin nimi
+>event | long FK | viittaus tapahtuma-tauluun. Raportilla on yhden tapahtuman tiedot. 
