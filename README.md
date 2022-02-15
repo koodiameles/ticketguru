@@ -75,9 +75,19 @@ Ticketgurulla käyttääjä voi muun muassa:
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > id | long PK | Tapahtuman id
+> lipputyyppi | long FK | Viittaus lipputyypit -tauluun. Tässä määritellään tapahtumalle lipputiedot hintoineen.
 > kuvaus | varchar | Tapahtuman nimi/kuvaus
 > paikka | varchar | Tapahtumapaikka esim. Finlandiatalo
 > kaupunki | varchar | Kaupunki, jossa tapahtumapaikka sijaitsee
 > lippumaara | int | Myytävien lippujen maksimimäärä
 > ajankohta | datetime | Tapahtuman ajankohta. PVM sekä KLO.
 > kesto | int | tapahtuman arvioitu kesto minuutteina esim. 90 min
+
+> ### _Lippu_
+> Lippu-taulu sisältää lipun tiedot. Lippu voi kuulua vain yhteen tapahtumaan (event). Lippu voi kuulua vain yhteen myyntitapahtumaan (sale).
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> id | long PK | Roolin tunnus
+> tapahtuma | lonf FK | Viittaus tapahtuma -tauluun. Mihin tapahtumaan lippu on myyty.
+> valid | boolean |  Onko lippu voimassa. Esim. Onko vanhentunut, onko käytetty
