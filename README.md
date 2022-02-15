@@ -68,3 +68,16 @@ Ticketgurulla käyttääjä voi muun muassa:
 > ------ | ------ | ------
 > id | long PK | Roolin tunnus
 > kuvaus | varchar |  Lyhyt kuvaus roolin oikeuksista järjestelmässä
+
+### _Tapahtuma_
+> Tapahtuma-taulu sisältää tapahtuman tiedot. Tapahtumaan voidaan olla lisätty useita lipputyyppejä, mutta lipputyyppi kuuluu aina vain yhdelle tapahtumalle. Tapahtumaan voidaan myydä useita lippuja, mutta yksi lippu kuuluu aina vain yhteen tapahtumaan. Tapahtumaan liittyy yksi raportti ja raportti voi kuulua aina vain yhdelle tapahtumalle.
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> id | long PK | Tapahtuman id
+> kuvaus | varchar | Tapahtuman nimi/kuvaus
+> paikka | varchar | Tapahtumapaikka esim. Finlandiatalo
+> kaupunki | varchar | Kaupunki, jossa tapahtumapaikka sijaitsee
+> lippumaara | int | Myytävien lippujen maksimimäärä
+> ajankohta | datetime | Tapahtuman ajankohta. PVM sekä KLO.
+> kesto | int | tapahtuman arvioitu kesto minuutteina esim. 90 min
