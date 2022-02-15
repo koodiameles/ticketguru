@@ -102,3 +102,13 @@ Ticketgurulla käyttääjä voi muun muassa:
 > tyontekija | long FK | Myyntitapahtuman tehnyt työntekijä, viittaus tyontekija-tauluun
 > summa | int | Myyntitapahtuman lippujen hintojen kokonaissumma
 > ajankohta | datetime | Myyntitapahtuman ajakohta
+
+###_Lipputyyppi_
+Lipputyyppi-taulu sisältää, minkälaisia lipputyyppejä on mahdollista saada tapahtumaan, esimerkiksi lapsi, aikuinen, eläkeläinen, opiskelija. Tapahtumalla voi olla useita lipputyyppejä.
+
+Kenttä | Tyyppi | Kuvaus
+------ | ------ | ------
+id | long PK | Lipputyypin id
+lipputyyppi | varChar | kuvaus lipputyypistä, esim. opiskelija
+hinta | double | paljonko kyseinen lippu maksaa, esim. opiskelijalippu
+tapahtuma | long FK | viittaus tapahtuma-tauluun, minkälaisia lipputyyppejä tapahtumassa on
