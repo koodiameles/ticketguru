@@ -28,13 +28,11 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long eventid;           // id
     @NotBlank(message = "Event must have a name/description")
-	private String name;            // Name of the event
+    private String description;     // Description/name for the event
     private String location;      	// Location of the event. E.g. "Finlandia-Talo"
-    //private String description;   // Description for the event // HUOM! Rautalankamallissa kuvaus=nimi // Toistaiseksi pois käytöstä
     private String city;            // Name of the city where the event will take place. E.g. "Helsinki"
     private int ticketcount;        // Number of tickets (max)
-    private Date date;      		// Which day will the event take place. E.g "13.3.2003"
-    private String starttime;       // Which hour will the event take place. E.g "18.30"
+    private Date datetime;      	// Which day and time will the event take place. E.g "13.3.2003 18:30"
     private int duration;           // Estimated duration of the event in minutes. E.g "75" (1h15min)
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
@@ -45,19 +43,18 @@ public class Event {
 
 
     //CONSTRUCTORS
-    public Event(@NotBlank(message = "Event must have a name/description") String name, String location, String city,
-            int ticketcount, Date date, String starttime, int duration) {
-        this.name = name;
+    public Event(@NotBlank(message = "Event must have a name/description") String description, String location, String city,
+            int ticketcount, Date datetime, int duration) {
+        this.description = description;
         this.location = location;
         this.city = city;
         this.ticketcount = ticketcount;
-        this.date = date;
-        this.starttime = starttime;
+        this.datetime = datetime;
         this.duration = duration;
     }
 
-    public Event(@NotBlank(message = "Event must have a name/description") String name) {
-        this.name = name;
+    public Event(@NotBlank(message = "Event must have a name/description") String description) {
+        this.description = description;
     }
 
     public Event() {
@@ -74,12 +71,12 @@ public class Event {
         this.eventid = eventid;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLocation() {
@@ -106,20 +103,12 @@ public class Event {
         this.ticketcount = ticketcount;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getStarttime() {
-        return starttime;
-    }
-
-    public void setStarttime(String starttime) {
-        this.starttime = starttime;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 
     public int getDuration() {
@@ -129,13 +118,11 @@ public class Event {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-
+    
     //TOSTRING
     @Override
     public String toString() {
-        return "Event [city=" + city + ", date=" + date + ", duration=" + duration + ", eventid=" + eventid
-                + ", location=" + location + ", name=" + name + ", starttime=" + starttime + ", ticketcount="
-                + ticketcount + "]";
+        return "Event [city=" + city + ", datetime=" + datetime + ", description=" + description + ", duration="
+                + duration + ", eventid=" + eventid + ", location=" + location + ", ticketcount=" + ticketcount + "]";
     }
-
 }
