@@ -112,3 +112,12 @@ id | long PK | Lipputyypin id
 lipputyyppi | varChar | kuvaus lipputyypistä, esim. opiskelija
 hinta | double | paljonko kyseinen lippu maksaa, esim. opiskelijalippu
 tapahtuma | long FK | viittaus tapahtuma-tauluun, minkälaisia lipputyyppejä tapahtumassa on
+
+###_Raportti_
+Raportti sisältää tiedot tapahtumasta ja tapahtumalle myydyistä lipuista. 
+
+Kenttä | Tyyppi | Kuvaus
+------ | ------ | ------
+id | long PK | Raportin id
+raportin nimi | varChar | raportin nimi
+tapahtuma | long FK | viittaus tapahtuma-tauluun. Raportilla on yhden tapahtuman tiedot. 
