@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 
 @Entity
 public class Report {
@@ -15,6 +17,19 @@ public class Report {
 private Long reportid; 
 private String reportname;
 
+@OneToOne
+private Event event; 
+
+
+
+public Event getEvent() {
+	return event;
+}
+
+
+public void setEvent(Event event) {
+	this.event = event;
+}
 
 
 public Report(String reportname) {
