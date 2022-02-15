@@ -89,5 +89,16 @@ Ticketgurulla käyttääjä voi muun muassa:
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > id | long PK | Roolin tunnus
-> tapahtuma | lonf FK | Viittaus tapahtuma -tauluun. Mihin tapahtumaan lippu on myyty.
+> tapahtuma | long FK | Viittaus tapahtuma -tauluun. Mihin tapahtumaan lippu on myyty.
 > valid | boolean |  Onko lippu voimassa. Esim. Onko vanhentunut, onko käytetty
+
+> ### _Myyntitapahtuma_
+> Myyntitapahtuma-taulu sisältää tiedot myyntitapahtumasta ja siihen liittyvistä lipuista. Myyntitapahtuma kertoo, kuka työntekijä liput on myynyt ja koska. Myyntitapahtumaan voi liittyä useampia lippuja, mutta ainoastaan yksi työntekijä.
+> 
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> id | long PK | Myyntitapahtuman id
+> lippu | long FK | Myyntitapahtumaan liittyvä lippu, viittaus lippu-tauluun
+> tyontekija | long FK | Myyntitapahtuman tehnyt työntekijä, viittaus tyontekija-tauluun
+> summa | int | Myyntitapahtuman lippujen hintojen kokonaissumma
+> ajankohta | datetime | Myyntitapahtuman ajakohta
