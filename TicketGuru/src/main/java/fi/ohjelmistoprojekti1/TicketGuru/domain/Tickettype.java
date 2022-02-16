@@ -1,8 +1,8 @@
 package fi.ohjelmistoprojekti1.TicketGuru.domain;
 
-import java.util.List;
+//import java.util.List;
 
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

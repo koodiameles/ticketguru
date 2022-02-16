@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.validation.constraints.NotBlank;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 /*
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -40,6 +41,9 @@ public class Event {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Tickettype> tickettypes;   //List of tickettypes for this event
+
+    @OneToOne
+    private Report report; 
 
 
     //CONSTRUCTORS
