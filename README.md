@@ -62,7 +62,7 @@ Ticketgurulla käyttääjä voi muun muassa:
 ![UML malli](./Kuvat/UMLkaaviokuva.PNG) 
 
 > ### _Employee – Työntekijä_
-> Työntekijä-taulu sisältää tiedon tyontekijän etu- ja sukunimestä sekä hänen roolsitaan. Työntekijällä voi olla myös useita myyntitapahtumia tehtynä.
+> Työntekijä-taulu sisältää tiedon tyontekijän etu- ja sukunimestä sekä hänen roolistaan. Työntekijällä voi olla myös useita myyntitapahtumia tehtynä.
 > 
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
