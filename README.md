@@ -62,9 +62,14 @@ Ticketgurulla käyttääjä voi muun muassa:
 ![UML malli](./Kuvat/UMLkaaviokuva.PNG) 
 
 > ### _Employee – Työntekijä_
+> Työntekijä-taulu sisältää tiedon tyontekijän etu- ja sukunimestä sekä hänen roolsitaan. Työntekijällä voi olla myös useita myyntitapahtumia tehtynä.
 > 
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
+> id | long PK | Työntekijän id
+> rooli | long FK | Viittaus Roolit-tauluun. Määrittelee työntekijän oikeudet käyttää järjestelmää
+> firstname | varchar | Työntekijän etunimi
+> lastname | varchar | Työntekijän sukunimi
 
 > ### _Role – Rooli_
 > Rooli-taulu sisältää työntekijöiden käyttöoikeudet järjestelmässä. Työntekijällä voi olla vain yksi rooli. Tietty rooli voi kuulua monelle eri työntekijälle.
