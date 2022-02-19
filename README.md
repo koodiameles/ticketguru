@@ -123,11 +123,3 @@ Ticketgurulla käyttääjä voi muun muassa:
 > price | double | paljonko kyseinen lippu maksaa, esim. opiskelijalippu
 > event | long FK | viittaus tapahtuma-tauluun, minkälaisia lipputyyppejä tapahtumassa on
 
->### _Report – Raportti_
->Raportti sisältää tiedot tapahtumasta ja tapahtumalle myydyistä lipuista. 
->
-> Kenttä | Tyyppi | Kuvaus
-> ------ | ------ | ------
-> id | long PK | Raportin id
-> reportname | varchar | raportin nimi
->event | long FK | viittaus tapahtuma-tauluun. Raportilla on yhden tapahtuman tiedot. 
