@@ -123,3 +123,19 @@ Ticketgurulla käyttääjä voi muun muassa:
 > price | double | paljonko kyseinen lippu maksaa, esim. opiskelijalippu
 > event | long FK | viittaus tapahtuma-tauluun, minkälaisia lipputyyppejä tapahtumassa on
 
+## REST API
+
+### Endpoints, ei autentikointia (No authentication)
+
+Endpointit, joihin kaikilla käyttäjillä on pääsy: 
+
++ GET /api/events/
++ GET /api/events/{id}
+
+### Endpoints, vaatii autentikoinnin (Authentication required)
+
+Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
+
++ POST /api/events/
++ PUT /api/events/{id}
++ DELETE /api/events/{id}
