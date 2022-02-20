@@ -1,5 +1,6 @@
 package fi.ohjelmistoprojekti1.TicketGuru.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class EventController {
 	private TicketRepository ticketrepository; 
 	
 	@Autowired
-	private TickettypeRepository tickettypetrepository; 
+	private TickettypeRepository tickettyperepository; 
 
 
 	// Get event by id
@@ -35,6 +36,12 @@ public class EventController {
     } 
 
 	// Get ALL events
+    // ei vielä kokeiltu, ei tietoa, toimiikko -Mirka
+    @RequestMapping(value="/events", method = RequestMethod.GET)
+    public @ResponseBody List<Event> eventListRest() {	
+        return (List<Event>) eventrepository.findAll();
+    }    
+    
 	// Add (PUT) a new event
 	// Delete event by id
 	// Edit (POST) event 
