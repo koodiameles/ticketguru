@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,20 +30,26 @@ public class EventController {
 
 
 	// Get event by id
-	// ei vielä kokeiltu, en tiedä onko tämä oikein -Jussi
     @RequestMapping(value="/event/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Event> findEventRest(@PathVariable("id") Long eventid) {	
     	return eventrepository.findById(eventid);
     } 
 
 	// Get ALL events
-    // ei vielä kokeiltu, ei tietoa, toimiikko -Mirka
     @RequestMapping(value="/events", method = RequestMethod.GET)
     public @ResponseBody List<Event> eventListRest() {	
         return (List<Event>) eventrepository.findAll();
     }    
     
 	// Add (PUT) a new event
+    
 	// Delete event by id
+    @DeleteMapping(value="/event/{id}")
+    public @ResponseBody List<Event> deleteEventRest(@PathVariable("id") Long eventid) {
+    	eventrepository.deleteById(eventid);
+        return (List<Event>) eventrepository.findAll();
+
+    }
+    
 	// Edit (POST) event 
 }

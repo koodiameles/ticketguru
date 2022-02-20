@@ -80,6 +80,6 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [employeeid=" + employeeid + ", firstname=" + firstname + ", lastname=" + lastname + ", sales="
-				+ sales + "]"; //add role
+				+ sales + ", role=" + role + "]";
 	}	
 }
