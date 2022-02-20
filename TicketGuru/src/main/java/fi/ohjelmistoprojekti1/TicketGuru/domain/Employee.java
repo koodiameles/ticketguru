@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -23,25 +23,19 @@ public class Employee {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 	private List<Sale> sales;
 	
-	/*@ManyToOne
-	@JoinColumn(name = "roleid")
-	private Role role;
+	@ManyToOne
+    @JoinColumn(name = "roleid")
+    private Role role; 
+
 	
+	public Employee(String firstname, String lastname) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+
 	public Employee() {
 	}
-	
-	public Employee(String firstname, String lastname, Role role) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.role = role;
-	}*/
 
-	public Employee(String firstname, String lastname) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-	}
 
 	public Long getEmployeeid() {
 		return employeeid;
@@ -75,13 +69,13 @@ public class Employee {
 		this.sales = sales;
 	}
 
-	/*public Role getRole() {
+	public Role getRole() {
 		return role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
-	}*/
+	}
 
 	@Override
 	public String toString() {
