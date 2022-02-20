@@ -24,12 +24,11 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "eventid")
     private Event event;  // 
-
-    /*
+    
 	@ManyToOne
-    @JoinColumn(name = "saleventid")
-    private SaleEvent salevent;  //
-    */
+    @JoinColumn(name = "saleid")
+    private Sale sale;  //
+    
 
 
     //CONSTRUCTORS
