@@ -41,7 +41,7 @@ public class EventController {
         return (List<Event>) eventrepository.findAll();
     }    
     
-	// Add (PUT) a new event
+	// Add (POST) a new event
     
 	// Delete event by id
     @DeleteMapping(value="/event/{id}")
@@ -51,5 +51,5 @@ public class EventController {
 
     }
     
-	// Edit (POST) event 
+	// Edit (PUT) event 
 }
