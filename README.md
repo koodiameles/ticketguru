@@ -137,6 +137,6 @@ Endpointit, joihin kaikilla käyttäjillä on pääsy:
 Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
 
 + [**Luo tapahtuma**](APIdokumentaatio/post.md) : POST /api/events/
-+ **Päivitä tapahtuma** : PUT /api/events/{id}
++ [**Päivitä tapahtuma**](APIdokumentaatio/put.md) : PUT /api/events/{id}
 + **Poista tapahtuma** : DELETE /api/events/{id}
 +
