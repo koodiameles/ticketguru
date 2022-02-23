@@ -2,7 +2,7 @@
 
 Päivitä tapahtuma. Tapahtuman päivitys vaatii Admin-oikeudet.
 
-**URL** : `/api/events/{id}`
+**URL** : `/api/event/{id}`
 
 **Method** : `PUT`
 

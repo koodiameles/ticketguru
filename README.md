@@ -129,14 +129,14 @@ Ticketgurulla käyttääjä voi muun muassa:
 
 Endpointit, joihin kaikilla käyttäjillä on pääsy: 
 
-+ **Näytä kaikki tapahtumat** : GET /api/events/
-+ **Näytä yksi tapahtuma(ID)** : GET /api/events/{id}
++ **Näytä kaikki tapahtumat** : `GET /api/events`
++ **Näytä yksi tapahtuma(ID)** : `GET /api/event/{id}`
 
 ### Endpoints, vaatii autentikoinnin (Authentication required)
 
 Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
 
-+ [**Luo tapahtuma**](APIdokumentaatio/post.md) : POST /api/events/
-+ [**Päivitä tapahtuma**](APIdokumentaatio/put.md) : PUT /api/events/{id}
-+ **Poista tapahtuma** : DELETE /api/events/{id}
++ [**Luo tapahtuma**](APIdokumentaatio/post.md) : `POST /api/event`
++ [**Päivitä tapahtuma**](APIdokumentaatio/put.md) : `PUT /api/event/{id}`
++ **Poista tapahtuma** : `DELETE /api/event/{id}`
 +
