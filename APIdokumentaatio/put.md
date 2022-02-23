@@ -1,6 +1,6 @@
-# Muokkaa Tapahtumaa
+# Päivitä Tapahtuma
 
-Muokkaa tapahtuma. Tapahtuman muokkaus vaatii Admin-oikeudet.
+Päivitä tapahtuma. Tapahtuman päivitys vaatii Admin-oikeudet.
 
 **URL** : `/api/events/{id}`
 
