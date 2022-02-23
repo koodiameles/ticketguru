@@ -19,20 +19,18 @@ public class Sale {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long saleid;
 	private Date datetime;
-	private int count;    // Sum of the tickets included in the sale
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sale")
-	private List<Ticket> tickets;
 	
 	@ManyToOne
 	@JoinColumn(name = "employeeid")
 	private Employee employee;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sale")
+	private List<Ticket> tickets;   // List of tickets for this sale
 
-	public Sale(Long saleid, Date datetime, int count, Employee employee) {
+	public Sale(Long saleid, Date datetime, Employee employee) {
 		super();
 		this.saleid = saleid;
 		this.datetime = datetime;
-		this.count = count;
 		this.employee = employee;
 	}
 
@@ -56,22 +54,6 @@ public class Sale {
 		this.datetime = datetime;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	public List<Ticket> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(List<Ticket> tickets) {
-		this.tickets = tickets;
-	}
-
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -82,7 +64,7 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return "Sale [saleid=" + saleid + ", datetime=" + datetime + ", count=" + count + ", tickets=" + tickets
+		return "Sale [saleid=" + saleid + ", datetime=" + datetime + ", tickets=" + tickets
 				+ ", employee=" + employee + "]";
 	}
 	
