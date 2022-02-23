@@ -51,7 +51,7 @@ public class EventController {
     
 //	 Add (POST) a new event 
     @RequestMapping(value= "/event", method = RequestMethod.POST)
-    public Event addEvent(Event event)
+    public Event addEvent(@RequestBody Event event)
     {
     	eventrepository.save(event);
     	return event;
