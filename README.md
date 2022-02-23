@@ -48,9 +48,7 @@ Ticketgurulla käyttääjä voi muun muassa:
 
 ## Käyttöliittymä
 
-*Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona.*
-
-*Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.*
+### UML-kaavio
 
 ![UML-kaavio](./Kuvat/UML-kaavio.png)
 
@@ -140,5 +138,4 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 
 + [**Luo tapahtuma**](APIdokumentaatio/post.md) : `POST /api/event`
 + [**Päivitä tapahtuma**](APIdokumentaatio/put.md) : `PUT /api/event/{id}`
-+ **Poista tapahtuma** : `DELETE /api/event/{id}`
-+
++ [**Poista tapahtuma**](APIdokumentaatio/delete.md) : `DELETE /api/event/{id}`
