@@ -7,16 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;	
 
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Event;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
 
-@Controller
+
+
 public class EventController {
 	
 	@Autowired
@@ -41,8 +44,19 @@ public class EventController {
         return (List<Event>) eventrepository.findAll();
     }    
     
-	// Add (POST) a new event
+//	 Add (POST) a new event 
+    @RequestMapping(value= "/event", method = RequestMethod.POST)
+    public Event addEvent(Event event)
+    {
+    	eventrepository.save(event);
+    	return event;
+   
+    }
     
+    
+	// Add (PUT) a new event 
+
+ 
 	// Delete event by id
     @DeleteMapping(value="/event/{id}")
     public @ResponseBody List<Event> deleteEventRest(@PathVariable("id") Long eventid) {
