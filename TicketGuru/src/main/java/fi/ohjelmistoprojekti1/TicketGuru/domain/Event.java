@@ -33,7 +33,7 @@ public class Event {
     private String location;      	// Location of the event. E.g. "Finlandia-Talo"
     private String city;            // Name of the city where the event will take place. E.g. "Helsinki"
     private int ticketcount;        // Number of tickets (max)
-    private Date datetime;      	// Which day and time will the event take place. E.g "13.3.2003 18:30"
+    private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00"
     private int duration;           // Estimated duration of the event in minutes. E.g "75" (1h15min)
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")

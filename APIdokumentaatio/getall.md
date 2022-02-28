@@ -19,7 +19,7 @@ Näytä lista kaikista tapahtumista. Kaikilla käyttöoikeuksilla saa etsittyä 
     "location" : "Finlandia-Talo",
     "city" : "Helsinki",
     "ticketcount" : "400" ,
-    "datetime" : "22/5/2022 18:00" ,
+    "datetime" : "2022-05-22T18:00:00",
     "duration" :  "130"
 }, 
 
