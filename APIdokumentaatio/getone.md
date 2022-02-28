@@ -16,7 +16,7 @@ Näytä yhden tapahtuman tiedot. Kaikki **käyttäjät** voivat hakea tapahtuman
 
 **Content examples**
 
-Haettu tapahtuman (ID 99) tiedot. /api/event/1
+Haettu tapahtuman (ID 99) tiedot. /api/event/99
 
 ```json
 {
