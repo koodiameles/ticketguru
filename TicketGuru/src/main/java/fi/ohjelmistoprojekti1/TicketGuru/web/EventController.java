@@ -49,7 +49,7 @@ public class EventController {
         return (List<Event>) eventrepository.findAll();
     }    
     
-//	 Add (POST) a new event 
+	// Add (POST) a new event 
     @RequestMapping(value= "/event", method = RequestMethod.POST)
     public Event addEvent(@RequestBody Event event)
     {
