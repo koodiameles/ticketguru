@@ -55,11 +55,22 @@ public class EventController {
 		return event;
 	}
 
-	// Update event or add (PUT) a new event
-	@PutMapping("/event")
-	public Event saveOrUpdateEvent(@RequestBody Event event) {
-		eventrepository.save(event);
-		return event;
+	// Update event or add (PUT) a new event if id doesn't exist
+	@PutMapping("/event/{id}")
+	public Event updateEvent(@RequestBody Event newEvent, @PathVariable("id") Long eventid) {
+		return eventrepository.findById(eventid)
+				.map(event -> {
+					event.setDescription(newEvent.getDescription());
+					event.setLocation(newEvent.getLocation());
+					event.setCity(newEvent.getCity());
+					event.setTicketcount(newEvent.getTicketcount());
+					event.setDatetime(newEvent.getDatetime());
+					event.setDuration(newEvent.getDuration());
+					return eventrepository.save(event);
+				})
+				.orElseGet(() -> {
+					return eventrepository.save(newEvent);
+				});
 	}
 
 	// Delete event by id
@@ -68,5 +79,5 @@ public class EventController {
 		eventrepository.deleteById(eventid);
 		return eventrepository.findAll();
 	}
-	
+
 }

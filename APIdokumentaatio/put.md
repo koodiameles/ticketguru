@@ -64,12 +64,3 @@ Tapahtumalla on oltava nimi (description).
     ]
 }
 ```
-**Condition** : Jos taphtumaa ei ole olemassa.
-
-**Code** : `404 NOT FOUND`
-
-**Content example**
-
-```json
-{}
-```
