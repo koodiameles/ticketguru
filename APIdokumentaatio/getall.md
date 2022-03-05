@@ -2,7 +2,7 @@
 
 Näytä lista kaikista tapahtumista. Kaikilla käyttöoikeuksilla saa etsittyä listauksen. 
 
-**URL** : `/api/events`
+**URL** : `/events`
 
 **Method** : `GET`
 
