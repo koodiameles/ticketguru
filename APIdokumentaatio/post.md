@@ -2,7 +2,7 @@
 
 Luo tapahtuma. Tapahtuman luonti vaatii Admin-oikeudet.
 
-**URL** : `/api/event`
+**URL** : `/events`
 
 **Method** : `POST`
 

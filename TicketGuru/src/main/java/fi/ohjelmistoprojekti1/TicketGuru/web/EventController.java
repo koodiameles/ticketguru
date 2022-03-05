@@ -1,5 +1,6 @@
 package fi.ohjelmistoprojekti1.TicketGuru.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class EventController {
 	private TickettypeRepository tickettyperepository;
 
 	// Get event by id
-	@GetMapping("/event/{id}")
+	@GetMapping("/events/{id}")
 	public Optional<Event> findEventRest(@PathVariable("id") Long eventid) {
 		return eventrepository.findById(eventid);
 	}
@@ -49,14 +50,14 @@ public class EventController {
 	}
 
 	// Add (POST) a new event
-	@PostMapping("/event")
+	@PostMapping("/events")
 	public Event addEvent(@RequestBody Event event) {
 		eventrepository.save(event);
 		return event;
 	}
 
 	// Update event or add (PUT) a new event if id doesn't exist
-	@PutMapping("/event/{id}")
+	@PutMapping("/events/{id}")
 	public Event updateEvent(@RequestBody Event newEvent, @PathVariable("id") Long eventid) {
 		return eventrepository.findById(eventid)
 				.map(event -> {
@@ -74,10 +75,13 @@ public class EventController {
 	}
 
 	// Delete event by id
-	@DeleteMapping("/event/{id}")
-	public List<Event> deleteEventRest(@PathVariable("id") Long eventid) {
+	@DeleteMapping("/events/{id}")
+	public ResponseEntity<?> deleteEventRest(@PathVariable("id") Long eventid) {
+		Optional<Event> event = eventrepository.findById(eventid);
 		eventrepository.deleteById(eventid);
-		return eventrepository.findAll();
+		HashMap<String, String> message = new HashMap<String, String>();
+		message.put("message", "Deleted event " + event.get().getDescription() + " with the id " + eventid);
+		return ResponseEntity.ok(message);
 	}
 
 }

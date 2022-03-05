@@ -2,7 +2,7 @@
 
 Poista tapahtuma. Tapahtuman poistaminen vaatii Admin-oikeudet.
 
-**URL** : `/api/event/{id}`
+**URL** : `/events/{id}`
 
 **Method** : `DELETE`
 
@@ -20,19 +20,6 @@ Tapahtumalla on oltava nimi (description).
 }
 ```
 
-**Data example**
-
-```json
-{
-    "description": "Kalevala Ooppera",
-    "location" : "Finlandia-Talo",
-    "city" : "Helsinki",
-    "ticketcount" : "400" ,
-    "datetime" : "2022-05-22T18:00:00" ,
-    "duration" :  "130"
-}
-```
-
 ## Success Response
 
 **Condition** : Jos kaikki on OK ja tapahtuma poistettiin.
@@ -41,7 +28,9 @@ Tapahtumalla on oltava nimi (description).
 
 **Content example**
 ```json
-{}
+{
+    "message": "Deleted event {description} with the id {id}"
+}
 ```
 
 ## Error Responses

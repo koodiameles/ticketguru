@@ -2,7 +2,7 @@
 
 Näytä yhden tapahtuman tiedot. Kaikki **käyttäjät** voivat hakea tapahtuman tiedot.
 
-**URL** : `/api/event/`
+**URL** : `/events/{id}`
 
 **Method** : `GET`
 
