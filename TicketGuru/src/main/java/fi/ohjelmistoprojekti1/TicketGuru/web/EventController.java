@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Event;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
 
 @RestController
@@ -35,9 +36,11 @@ public class EventController {
 
 	@Autowired
 	private TickettypeRepository tickettyperepository;
+	
+	
 
 	// Get event by id
-	@GetMapping("/event/{id}")
+	@GetMapping("/events/{id}")
 	public Optional<Event> findEventRest(@PathVariable("id") Long eventid) {
 		return eventrepository.findById(eventid);
 	}
@@ -47,16 +50,17 @@ public class EventController {
 	public List<Event> eventListRest() {
 		return eventrepository.findAll();
 	}
-
+	
+	
 	// Add (POST) a new event
-	@PostMapping("/event")
+	@PostMapping("/events")
 	public Event addEvent(@RequestBody Event event) {
 		eventrepository.save(event);
 		return event;
 	}
 
 	// Update event or add (PUT) a new event if id doesn't exist
-	@PutMapping("/event/{id}")
+	@PutMapping("/events/{id}")
 	public Event updateEvent(@RequestBody Event newEvent, @PathVariable("id") Long eventid) {
 		return eventrepository.findById(eventid)
 				.map(event -> {
