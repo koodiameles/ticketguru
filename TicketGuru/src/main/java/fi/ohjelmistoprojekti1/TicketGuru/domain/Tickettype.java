@@ -20,17 +20,39 @@ public class Tickettype {
 @GeneratedValue(strategy=GenerationType.AUTO)
 private Long tickettypeid; 
 @NotBlank(message = "Tickettype must have a name/description")
-private String tickettype;	//Ex. student, adult, child, pension
+private String name;	//Ex. student, adult, child, pension
 private double price;	//Price of the tickettype
 
 @ManyToOne
 @JoinColumn(name = "eventid")
 private Event event;
 
+public Tickettype () {
+	super(); 
+}
 
-public Tickettype(String tickettype, double price) {
-	super();
-	this.tickettype = tickettype;
+public Tickettype(String name) {
+	this.name = name; 
+}
+
+
+public Tickettype(String name, double price, Event event) {
+	super(); 
+	this.name = name;
+	this.price = price;
+	this.event = event; 
+}
+
+public Tickettype(String name, double price) {
+	super(); 
+	this.name = name;
+	this.price = price;
+}
+
+public Tickettype(Long tickettypeid, String name, double price) {
+	super(); 
+	this.tickettypeid = tickettypeid; 
+	this.name = name;
 	this.price = price;
 }
 
@@ -42,12 +64,12 @@ public void setTickettypeid(Long tickettypeid) {
 	this.tickettypeid = tickettypeid;
 }
 
-public String getTickettype() {
-	return tickettype;
+public String getName() {
+	return name;
 }
 
-public void setTickettype(String tickettype) {
-	this.tickettype = tickettype;
+public void setName(String name) {
+	this.name = name;
 }
 
 public double getPrice() {
@@ -60,7 +82,7 @@ public void setPrice(double price) {
 
 @Override
 public String toString() {
-	return "Tickettype [tickettypeid=" + tickettypeid + ", tickettype=" + tickettype + ", price=" + price + "]";
+	return "Tickettype [tickettypeid=" + tickettypeid + ", tickettype=" + name + ", price=" + price + "]";
 } 
 
 

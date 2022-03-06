@@ -35,6 +35,7 @@ public class Event {
     private int ticketcount;        // Number of tickets (max)
     private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00"
     private int duration;           // Estimated duration of the event in minutes. E.g "75" (1h15min)
+    
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Ticket> tickets;   // List of tickets for this event
@@ -52,7 +53,18 @@ public class Event {
         this.city = city;
         this.ticketcount = ticketcount;
         this.datetime = datetime;
+        this.duration = duration; 
+    }
+    
+    public Event(@NotBlank(message = "Event must have a name/description") String description, String location, String city,
+            int ticketcount, Date datetime, int duration, List<Tickettype> tickettype) {
+        this.description = description;
+        this.location = location;
+        this.city = city;
+        this.ticketcount = ticketcount;
+        this.datetime = datetime;
         this.duration = duration;
+        this.tickettypes = tickettypes; 
     }
 
     public Event(@NotBlank(message = "Event must have a name/description") String description) {
@@ -121,7 +133,15 @@ public class Event {
         this.duration = duration;
     }
     
-    //TOSTRING
+    public List<Tickettype> getTickettypes() {
+		return tickettypes;
+	}
+
+	public void setTickettypes(List<Tickettype> tickettypes) {
+		this.tickettypes = tickettypes;
+	}
+
+	//TOSTRING
     @Override
     public String toString() {
         return "Event [city=" + city + ", datetime=" + datetime + ", description=" + description + ", duration="

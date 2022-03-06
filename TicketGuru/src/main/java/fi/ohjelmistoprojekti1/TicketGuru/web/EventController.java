@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Event;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
 
 @RestController
@@ -36,6 +37,8 @@ public class EventController {
 
 	@Autowired
 	private TickettypeRepository tickettyperepository;
+	
+	
 
 	// Get event by id
 	@GetMapping("/events/{id}")
@@ -48,7 +51,8 @@ public class EventController {
 	public List<Event> eventListRest() {
 		return eventrepository.findAll();
 	}
-
+	
+	
 	// Add (POST) a new event
 	@PostMapping("/events")
 	public Event addEvent(@RequestBody Event event) {
