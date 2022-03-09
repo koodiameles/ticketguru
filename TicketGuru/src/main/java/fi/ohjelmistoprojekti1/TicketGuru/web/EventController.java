@@ -41,7 +41,7 @@ public class EventController {
 	
 
 	// Get event by id
-	@GetMapping("/events/{id}")
+	@GetMapping("/event/{id}")
 	public Optional<Event> findEventRest(@PathVariable("id") Long eventid) {
 		return eventrepository.findById(eventid);
 	}

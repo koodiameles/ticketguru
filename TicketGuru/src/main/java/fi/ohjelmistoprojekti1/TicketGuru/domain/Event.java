@@ -64,7 +64,7 @@ public class Event {
         this.ticketcount = ticketcount;
         this.datetime = datetime;
         this.duration = duration;
-        this.tickettypes = tickettypes; 
+        this.tickettypes = tickettype; 
     }
 
     public Event(@NotBlank(message = "Event must have a name/description") String description) {

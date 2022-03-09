@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 */
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 public class Ticket {
@@ -25,6 +27,7 @@ public class Ticket {
     @JoinColumn(name = "eventid")
     private Event event;  // 
     
+    @JsonBackReference
 	@ManyToOne
     @JoinColumn(name = "saleid")
     private Sale sale;  //
@@ -32,6 +35,12 @@ public class Ticket {
 
 
     //CONSTRUCTORS
+
+    public Ticket(Boolean valid, Event event, Sale sale) {
+        this.valid = valid;
+        this.event = event;
+        this.sale = sale;
+    }
     public Ticket(Boolean valid, Event event) {
         this.valid = valid;
         this.event = event;
@@ -47,7 +56,7 @@ public class Ticket {
 
      //GETTERS AND SETTERS
 
-    public Long getTicketid() {
+     public Long getTicketid() {
         return ticketid;
     }
 
@@ -71,10 +80,18 @@ public class Ticket {
         this.event = event;
     }
 
-    //TOSTRING
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+
     @Override
     public String toString() {
-        return "Ticket [event=" + event + ", ticketid=" + ticketid + ", valid=" + valid + "]";
+        return "Ticket [event=" + event + ", sale=" + sale + ", ticketid=" + ticketid + ", valid=" + valid + "]";
     }
+
 
 }

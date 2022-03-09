@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
+
 @Entity
 public class Sale {
 
@@ -24,6 +28,7 @@ public class Sale {
 	@JoinColumn(name = "employeeid")
 	private Employee employee;
 	
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sale")
 	private List<Ticket> tickets;   // List of tickets for this sale
 
@@ -32,6 +37,11 @@ public class Sale {
 		this.saleid = saleid;
 		this.datetime = datetime;
 		this.employee = employee;
+	}
+
+	public Sale(Date datetime) {
+		super();
+		this.datetime = datetime;
 	}
 
 	public Sale() {
@@ -72,8 +82,7 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return "Sale [saleid=" + saleid + ", datetime=" + datetime + ", tickets=" + tickets
-				+ ", employee=" + employee + "]";
+		return "Sale [saleid=" + saleid + ", datetime=" + datetime + ", employee=" + employee + "]";
 	}
 	
 }

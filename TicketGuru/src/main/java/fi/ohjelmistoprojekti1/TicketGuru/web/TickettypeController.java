@@ -26,10 +26,6 @@ public class TickettypeController {
 	@Autowired
 	private TickettypeRepository tickettyperepository;
 
-	
-
-
-
 	// Get one tickettype
 	@GetMapping("/tickettypes/{id}")
 	public Optional<Tickettype> findTickettypeRest(@PathVariable("id") Long tickettypeid) {
