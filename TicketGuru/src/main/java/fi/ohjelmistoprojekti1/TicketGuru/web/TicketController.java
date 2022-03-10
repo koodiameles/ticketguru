@@ -70,9 +70,18 @@ public class TicketController {
 		Event event = eventResult.get(); // get the event in question
 		Tickettype tickettype = tickettypeResult.get(); // get the event in question
 
+		// ADDING TICKET TO DATABASE
 		Ticket ticket = new Ticket(true, event, sale, tickettype); // generate ticket (is valid?, which event?, which sale?, which tickettype?)
+		// set ticketprice
+		// ! API accepts manual price input (User can input manually). If not set, then use the default value from the tickettype
+		if (ticketDTO.getPrice() != 0) {
+			ticket.setTicketprice(ticketDTO.getPrice()); 
+		} else {
+			ticket.setTicketprice(ticket.getTickettype().getPrice()); 
+		}
 		ticketsRepo.save(ticket); // save the ticket to the ticketrepository
 
+		// DATA WHICH WILL BE RETURNED
 		TicketDTO data = new TicketDTO(); // DATA which we want to return to frontend
 		data.setTicketid(ticket.getTicketid());
 		data.setEventid(ticket.getEvent().getEventid());
@@ -80,17 +89,13 @@ public class TicketController {
 		data.setTickettype(ticket.getTickettype().getName());
 		data.setTickettypeid(ticket.getTickettype().getTickettypeid());
 		data.setDescription(ticket.getEvent().getDescription());
-
-		// set ticketprice + dataprice
+		// set dataprice
 		// ! API accepts manual price input (User can input manually). If not set, then use the default value from the tickettype
 		if (ticketDTO.getPrice() != 0) {
-			ticket.setTicketprice(ticketDTO.getPrice()); 
 			data.setPrice(ticketDTO.getPrice());
 		} else {
-			ticket.setTicketprice(ticket.getTickettype().getPrice()); 
 			data.setPrice(ticket.getTickettype().getPrice());
 		}
-
 
 	return data; 	
 	}
