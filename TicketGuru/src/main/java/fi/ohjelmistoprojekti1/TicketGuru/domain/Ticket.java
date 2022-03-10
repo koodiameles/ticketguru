@@ -22,6 +22,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ticketid;          // id
 	private Boolean valid;          // Is ticket still valid. E.g not used
+    private double ticketprice;     // gets value from tickettype OR user can input manually
 
     @ManyToOne
     @JoinColumn(name = "eventid")
@@ -31,11 +32,34 @@ public class Ticket {
 	@ManyToOne
     @JoinColumn(name = "saleid")
     private Sale sale;  //
-    
 
+    @ManyToOne
+    @JoinColumn(name = "tickettypeid")
+    private Tickettype tickettype;
+    
 
     //CONSTRUCTORS
 
+    
+    public Ticket(Boolean valid, double ticketprice, Event event, Sale sale, Tickettype tickettype) {
+        this.valid = valid;
+        this.ticketprice = ticketprice;
+        this.event = event;
+        this.sale = sale;
+        this.tickettype = tickettype;
+    }
+
+    public Ticket(Boolean valid, Event event, Sale sale, Tickettype tickettype) {
+        this.valid = valid;
+        this.event = event;
+        this.sale = sale;
+        this.tickettype = tickettype;
+    }
+    public Ticket(Boolean valid, Event event, Tickettype ticketType) {
+        this.valid = valid;
+        this.event = event;
+        this.tickettype = ticketType;
+    }
     public Ticket(Boolean valid, Event event, Sale sale) {
         this.valid = valid;
         this.event = event;
@@ -56,42 +80,47 @@ public class Ticket {
 
      //GETTERS AND SETTERS
 
-     public Long getTicketid() {
+    public Long getTicketid() {
         return ticketid;
     }
-
     public void setTicketid(Long ticketid) {
         this.ticketid = ticketid;
     }
-
     public Boolean getValid() {
         return valid;
     }
-
     public void setValid(Boolean valid) {
         this.valid = valid;
     }
-
+    public double getTicketprice() {
+        return ticketprice;
+    }
+    public void setTicketprice(double ticketprice) {
+        this.ticketprice = ticketprice;
+    }
     public Event getEvent() {
         return event;
     }
-
     public void setEvent(Event event) {
         this.event = event;
     }
-
     public Sale getSale() {
         return sale;
     }
-
     public void setSale(Sale sale) {
         this.sale = sale;
+    }
+    public Tickettype getTickettype() {
+        return tickettype;
+    }
+    public void setTickettype(Tickettype ticketType) {
+        this.tickettype = ticketType;
     }
 
     @Override
     public String toString() {
-        return "Ticket [event=" + event + ", sale=" + sale + ", ticketid=" + ticketid + ", valid=" + valid + "]";
+        return "Ticket [event=" + event + ", sale=" + sale + ", ticketType=" + tickettype + ", ticketid=" + ticketid
+                + ", ticketprice=" + ticketprice + ", valid=" + valid + "]";
     }
-
 
 }

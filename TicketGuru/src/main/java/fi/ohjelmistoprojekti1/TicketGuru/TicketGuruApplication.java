@@ -79,8 +79,7 @@ public class TicketGuruApplication {
 			salerepository.save(testsale2);
 
 			//TICKET TESTDATA
-			Ticket ticket1 = new Ticket(true, event1);
-			ticket1.setSale(testsale1);
+			Ticket ticket1 = new Ticket(true, tt1.getPrice(), event1, testsale1, tt1);
 			ticketrepository.save(ticket1);
 
 			//TICKETDTO with entities TESTDATA
