@@ -41,7 +41,7 @@ public class TicketController {
 	private SaleRepository salesRepo;
 
 	@Autowired
-	private TickettypeRepository ticketTypesRepo;
+	private TickettypeRepository tickettypesRepo;
 	
 	@Autowired
 	private EventRepository eventsRepo;	
@@ -60,20 +60,39 @@ public class TicketController {
 		if (!eventResult.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event id not valid" + ticketDTO.getEventid());
 		} // if the eventid doesn't exist => error
+
+		Optional <Tickettype> tickettypeResult = tickettypesRepo.findById(ticketDTO.getTickettypeid()); //Tickettype in question
+		if (!tickettypeResult.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tickettype id not valid" + ticketDTO.getTickettypeid());
+		} // if the tickettypeid doesn't exist => error 
 		
 		Sale sale = saleResult.get(); // get the sale in question
 		Event event = eventResult.get(); // get the event in question
-		Ticket ticket = new Ticket(true, event, sale); // generate ticket (is valid?, which event?, which sale?)
-		ticketsRepo.save(ticket); // save the ticket to the ticketrepository
-		TicketDTO data = new TicketDTO();
-		data.setEventid(ticket.getEvent().getEventid());
-		data.setPrice(ticketDTO.getPrice());
-		data.setValid(true);
-		data.setTickettype(ticketDTO.getTickettype());
-		data.setDescription(ticket.getEvent().getDescription());
-		
+		Tickettype tickettype = tickettypeResult.get(); // get the event in question
 
-	return data;				
+		Ticket ticket = new Ticket(true, event, sale, tickettype); // generate ticket (is valid?, which event?, which sale?, which tickettype?)
+		ticketsRepo.save(ticket); // save the ticket to the ticketrepository
+
+		TicketDTO data = new TicketDTO(); // DATA which we want to return to frontend
+		data.setTicketid(ticket.getTicketid());
+		data.setEventid(ticket.getEvent().getEventid());
+		data.setValid(true);
+		data.setTickettype(ticket.getTickettype().getName());
+		data.setTickettypeid(ticket.getTickettype().getTickettypeid());
+		data.setDescription(ticket.getEvent().getDescription());
+
+		// set ticketprice + dataprice
+		// ! API accepts manual price input (User can input manually). If not set, then use the default value from the tickettype
+		if (ticketDTO.getPrice() != 0) {
+			ticket.setTicketprice(ticketDTO.getPrice()); 
+			data.setPrice(ticketDTO.getPrice());
+		} else {
+			ticket.setTicketprice(ticket.getTickettype().getPrice()); 
+			data.setPrice(ticket.getTickettype().getPrice());
+		}
+
+
+	return data; 	
 	}
 
 	
