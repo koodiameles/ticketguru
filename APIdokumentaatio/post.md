@@ -85,3 +85,21 @@ Tapahtumalla on oltava nimi (description).
 }
 ```
 
+### Or
+
+**Condition** : Jos lippumäärä ylittää maksimin.
+
+**Code** : `400 BAD REQUEST`
+
+**Content example**
+
+```json
+{
+    "timestamp": "2022-02-23T17:20:55.061+00:00",
+    "status": 400,
+    "error": "Bad request",    
+    "message": "must be less than or equal to 40000",
+    "path": "/events",
+}
+```
+
