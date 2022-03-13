@@ -10,7 +10,11 @@ Näytä lista kaikista tapahtumista. Kaikilla käyttöoikeuksilla saa etsittyä 
 
 **Permissions required** : None
 
-**Data example** 
+## Success Response
+
+**Code** : `200 OK`
+
+**Content examples**
 
 ```json
 {
@@ -43,6 +47,3 @@ Näytä lista kaikista tapahtumista. Kaikilla käyttöoikeuksilla saa etsittyä 
     "duration": 0
 }
 ```
-## Success Response
-
-**Code** : `200 OK`

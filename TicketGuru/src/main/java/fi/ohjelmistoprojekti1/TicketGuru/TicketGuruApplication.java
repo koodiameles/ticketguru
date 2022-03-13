@@ -52,10 +52,11 @@ public class TicketGuruApplication {
 			//EVENT TESTDATA
 			log.info("save some event test data");
 			Date date = parseDate("2022-06-24 18:00");
-			Date date2 = parseDate("2022-08-12 15:30"); 
+			Date date2 = parseDate("2022-08-12 15:30");
+			Date date4 = parseDate("2022-10-15 17:30");
 			Event event1 = new Event("Konsertti", "Finlandia-Talo", "Helsinki", 400, date, 90);
 			Event event2 = new Event("Trio röyhkeät", "Musiikkitalo", "Helsinki", 300, date2, 120);
-			Event event3 = new Event("Event3");
+			Event event3 = new Event("Sinfoniaorkesteri",  "Musiikkitalo", "Tampere", 300, date4, 100);
 			eventrepository.save(event1); 
 			eventrepository.save(event2);
 			eventrepository.save(event3);	 
