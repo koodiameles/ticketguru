@@ -137,3 +137,5 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Luo tapahtuma**](APIdokumentaatio/post.md) : `POST /events`
 + [**Päivitä tapahtuma**](APIdokumentaatio/put.md) : `PUT /events/{id}`
 + [**Poista tapahtuma**](APIdokumentaatio/delete.md) : `DELETE /events/{id}`
+
+[**Etsi kaikki myyntitapahtumat](APIdokumentaatio/getallsales.md) : GET/sales
