@@ -10,9 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.FutureOrPresent;
 
 /*
@@ -31,16 +29,12 @@ public class Event {
     private Long eventid;           // id
     @NotBlank(message = "Event must have a name/description")
     private String description;     // Description/name for the event
-    @Size(min=2, max=30)
     private String location;      	// Location of the event. E.g. "Finlandia-Talo"
-    @Size(min=2, max=30)
     private String city;            // Name of the city where the event will take place. E.g. "Helsinki"
     @Max(value=40000)
     private int ticketcount;        // Number of tickets (max)
     @FutureOrPresent
-    private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00"
-    @Min(value=1)
-    @Max(value=300)
+    private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00")
     private int duration;           // Estimated duration of the event in minutes. E.g "75" (1h15min)
     
 
@@ -51,9 +45,9 @@ public class Event {
     private List<Tickettype> tickettypes;   //List of tickettypes for this event
 
 	//CONSTRUCTORS
-    public Event(@NotBlank(message = "Event must have a name/description") String description,
-			@Size(min = 2, max = 30) String location, @Size(min = 2, max = 30) String city,
-			@Min(10) @Max(40000) int ticketcount, @FutureOrPresent Date datetime, @Min(1) @Max(300) int duration) {
+    
+	public Event(@NotBlank(message = "Event must have a name/description") String description, String location,
+			String city, @Max(40000) int ticketcount, @FutureOrPresent Date datetime, int duration) {
 		super();
 		this.description = description;
 		this.location = location;
@@ -62,10 +56,9 @@ public class Event {
 		this.datetime = datetime;
 		this.duration = duration;
 	}
-    
-	public Event(@NotBlank(message = "Event must have a name/description") @Size(min = 2, max = 30) String description,
-			@Size(min = 2, max = 30) String location, @Size(min = 2, max = 30) String city,
-			@Min(10) @Max(40000) int ticketcount, @FutureOrPresent Date datetime, @Min(1) @Max(300) int duration,
+
+    public Event(@NotBlank(message = "Event must have a name/description") String description, String location,
+			String city, @Max(40000) int ticketcount, @FutureOrPresent Date datetime, int duration,
 			List<Tickettype> tickettypes) {
 		super();
 		this.description = description;
@@ -77,7 +70,7 @@ public class Event {
 		this.tickettypes = tickettypes;
 	}
 
-    public Event(@NotBlank(message = "Event must have a name/description") String description) {
+	public Event(@NotBlank(message = "Event must have a name/description") String description) {
         this.description = description;
     }
 
