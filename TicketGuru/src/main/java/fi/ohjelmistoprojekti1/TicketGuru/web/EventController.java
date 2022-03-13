@@ -26,6 +26,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Event;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.Sale;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
@@ -58,9 +59,15 @@ public class EventController {
 
 	// Get ALL events
 	@GetMapping("/events")
-	public List<Event> eventListRest() {
-		return eventrepository.findAll();
+	public ResponseEntity<List<Event>> getAllEvents() {
+		List<Event>list =(List<Event>)eventrepository.findAll(); 
+		if (list.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There are no events"); 
+		} else {
+			return new ResponseEntity<>(list, HttpStatus.OK); 
+		}
 	}
+	
 	
 	
 	// Add (POST) a new event
