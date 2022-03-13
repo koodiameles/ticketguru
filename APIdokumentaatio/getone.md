@@ -16,7 +16,7 @@ Näytä yhden tapahtuman tiedot. Kaikki **käyttäjät** voivat hakea tapahtuman
 
 **Content examples**
 
-Haettu tapahtuman (ID 99) tiedot. /api/event/99
+Haettu tapahtuman (ID 99) tiedot. /events/99
 
 ```json
 {
@@ -30,7 +30,7 @@ Haettu tapahtuman (ID 99) tiedot. /api/event/99
 }
 ```
 
-Haettu tapahtuman (ID 2) tiedot. Tapahtumalla ei ole kaikkia arvoja alustettu. /api/event/2
+Haettu tapahtuman (ID 2) tiedot. Tapahtumalla ei ole kaikkia arvoja alustettu. /events/2
 
 ```json
 {
@@ -45,11 +45,20 @@ Haettu tapahtuman (ID 2) tiedot. Tapahtumalla ei ole kaikkia arvoja alustettu. /
 ```
 ## Error Responses
 
-**Condition** : Jos kyseisellä `id` arvolla ei löydy tapahtumaa.
+**Condition** : Id on virheellinen.
 
-**Code** : `404 NOT FOUND`
+**Code** : `404 Not Found`
 
-**Content** : `{}`
+**Content example**
+```json
+{
+    "timestamp": "2022-02-23T17:20:55.061+00:00",
+    "status": 404,
+    "error": "Not Found",    
+    "message": "Event id {id} not found",
+    "path": "/events/{id}"
+}
+```
 
 ### Or
 

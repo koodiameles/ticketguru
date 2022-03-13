@@ -7,14 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
-import javax.validation.constraints.NotBlank;
 import javax.persistence.OneToMany;
 
-/*
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.FutureOrPresent;
+
+/*
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.text.DateFormat;
@@ -32,8 +31,10 @@ public class Event {
     private String description;     // Description/name for the event
     private String location;      	// Location of the event. E.g. "Finlandia-Talo"
     private String city;            // Name of the city where the event will take place. E.g. "Helsinki"
+    @Max(value=40000)
     private int ticketcount;        // Number of tickets (max)
-    private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00"
+    @FutureOrPresent
+    private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00")
     private int duration;           // Estimated duration of the event in minutes. E.g "75" (1h15min)
     
 
@@ -43,35 +44,37 @@ public class Event {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Tickettype> tickettypes;   //List of tickettypes for this event
 
-
-
-    //CONSTRUCTORS
-    public Event(@NotBlank(message = "Event must have a name/description") String description, String location, String city,
-            int ticketcount, Date datetime, int duration) {
-        this.description = description;
-        this.location = location;
-        this.city = city;
-        this.ticketcount = ticketcount;
-        this.datetime = datetime;
-        this.duration = duration; 
-    }
+	//CONSTRUCTORS
     
-    public Event(@NotBlank(message = "Event must have a name/description") String description, String location, String city,
-            int ticketcount, Date datetime, int duration, List<Tickettype> tickettype) {
+	public Event(@NotBlank(message = "Event must have a name/description") String description, String location,
+			String city, @Max(40000) int ticketcount, @FutureOrPresent Date datetime, int duration) {
+		super();
+		this.description = description;
+		this.location = location;
+		this.city = city;
+		this.ticketcount = ticketcount;
+		this.datetime = datetime;
+		this.duration = duration;
+	}
+
+    public Event(@NotBlank(message = "Event must have a name/description") String description, String location,
+			String city, @Max(40000) int ticketcount, @FutureOrPresent Date datetime, int duration,
+			List<Tickettype> tickettypes) {
+		super();
+		this.description = description;
+		this.location = location;
+		this.city = city;
+		this.ticketcount = ticketcount;
+		this.datetime = datetime;
+		this.duration = duration;
+		this.tickettypes = tickettypes;
+	}
+
+	public Event(@NotBlank(message = "Event must have a name/description") String description) {
         this.description = description;
-        this.location = location;
-        this.city = city;
-        this.ticketcount = ticketcount;
-        this.datetime = datetime;
-        this.duration = duration;
-        this.tickettypes = tickettype; 
     }
 
-    public Event(@NotBlank(message = "Event must have a name/description") String description) {
-        this.description = description;
-    }
-
-    public Event() {
+	public Event() {
         super();
     }
 

@@ -10,16 +10,6 @@ Poista tapahtuma. Tapahtuman poistaminen vaatii Admin-oikeudet.
 
 **Permissions required** : None
 
-**Data constraints**
-
-Tapahtumalla on oltava nimi (description).
-
-```json
-{
-    "description": "[unicode 100 chars max]"
-}
-```
-
 ## Success Response
 
 **Condition** : Jos kaikki on OK ja tapahtuma poistettiin.
@@ -46,21 +36,23 @@ Tapahtumalla on oltava nimi (description).
     "status": 405,
     "error": "Method Not Allowed",    
     "message": "Request method 'DELETE' not supported",
-    "path": "api/event"
+    "path": "/events/"
 }
 ```
 
+### Or
+
 **Condition** : Id on virheellinen.
 
-**Code** : `500 Internal Server Error`
+**Code** : `404 Not Found`
 
 **Content example**
 ```json
 {
     "timestamp": "2022-02-23T17:20:55.061+00:00",
-    "status": 500,
-    "error": "Internal Server Error",    
-    "message": "No class fi.ohjelmistoprojekti1.TicketGuru.domain.Event entity with id {id} exists!",
-    "path": "api/event/{id}"
+    "status": 404,
+    "error": "Not Found",    
+    "message": "Event id {id} not found",
+    "path": "/events/{id}"
 }
 ```
