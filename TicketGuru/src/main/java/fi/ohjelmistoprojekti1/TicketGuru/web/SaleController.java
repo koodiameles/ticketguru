@@ -31,47 +31,44 @@ import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
 @RestController
 public class SaleController {
 
-    @Autowired
+	@Autowired
 	private SaleRepository salerepository;
-    
-    @Autowired
+
+	@Autowired
 	private EmployeeRepository employeerepository;
-	
+
 	@Autowired
 	private TickettypeRepository tickettyperepository;
 
-
 	// Get one sale
-	@GetMapping("/sale/{id}")
+	@GetMapping("/sales/{id}")
 	public Optional<Sale> findSaleRest(@PathVariable("id") Long saleid) {
-		Optional<Sale> saleResult = salerepository.findById(saleid); 
+		Optional<Sale> saleResult = salerepository.findById(saleid);
 		if (!saleResult.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Saleid is not valid"); 
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sale id " + saleid + " not found");
 		}
 		return saleResult;
 	}
-	
-	
+
 	// Get all sales
 	@GetMapping("/sales")
 	public ResponseEntity<List<Sale>> getAllSales() {
-		List<Sale>list=(List<Sale>) salerepository.findAll();
-		if(list.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There are no sales"); 
+		List<Sale> list = (List<Sale>) salerepository.findAll();
+		if (list.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no sales");
 		} else {
-			return new ResponseEntity<>(list, HttpStatus.OK); 
+			return new ResponseEntity<>(list, HttpStatus.OK);
 		}
 	}
-	
+
 	// Add (POST) a new sale
-    @PostMapping("/sales")
-    public Sale addSale(@Valid @RequestBody Sale sale, BindingResult bindingresult) { 
-    	if (bindingresult.hasErrors()) {
-    		throw new ResponseStatusException(HttpStatus.BAD_REQUEST); 
-    	}
-        salerepository.save(sale);
-        return sale;
-    }
-    
+	@PostMapping("/sales")
+	public Sale addSale(@Valid @RequestBody Sale sale, BindingResult bindingresult) {
+		if (bindingresult.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage());
+		}
+		salerepository.save(sale);
+		return sale;
+	}
 
 }

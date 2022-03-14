@@ -23,6 +23,7 @@ public class Sale {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long saleid;
+	@NotNull(message = "Sale must have a datetime")
 	private Date datetime;
 	
 	@ManyToOne
