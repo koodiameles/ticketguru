@@ -47,7 +47,7 @@ public class EventController {
 
 	// Get event by id
 	@GetMapping("/events/{id}")
-	public Optional<Event> findEventRest(@PathVariable("id") Long eventid) {
+	public Optional<Event> findEvent(@PathVariable("id") Long eventid) {
 		
 		Optional<Event> event = eventrepository.findById(eventid);
 		if (!event.isPresent()) {
@@ -72,12 +72,11 @@ public class EventController {
 	
 	// Add (POST) a new event
 	@PostMapping("/events")
-	public Event addEvent(@Valid @RequestBody Event event, BindingResult bindingresult) {
+	public ResponseEntity<?> addEvent(@Valid @RequestBody Event event, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage());
 		}
-		eventrepository.save(event);
-		return event;
+		return new ResponseEntity<>(eventrepository.save(event), HttpStatus.CREATED);
 	}
 
 	// Update event or add (PUT) a new event if id doesn't exist
@@ -101,7 +100,7 @@ public class EventController {
 
 	// Delete event by id
 	@DeleteMapping("/events/{id}")
-	public ResponseEntity<?> deleteEventRest(@PathVariable("id") Long eventid) {
+	public ResponseEntity<?> deleteEvent(@PathVariable("id") Long eventid) {
 		
 		Optional<Event> event = eventrepository.findById(eventid);
 		if (!event.isPresent()) {
