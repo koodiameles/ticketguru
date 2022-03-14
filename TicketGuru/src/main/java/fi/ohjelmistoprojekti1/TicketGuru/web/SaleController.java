@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -63,6 +64,7 @@ public class SaleController {
 
 	// Add (POST) a new sale
 	@PostMapping("/sales")
+	@ResponseStatus(HttpStatus.CREATED)
 	public Sale addSale(@Valid @RequestBody Sale sale, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage());
