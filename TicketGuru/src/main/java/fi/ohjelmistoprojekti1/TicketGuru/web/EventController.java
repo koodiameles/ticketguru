@@ -94,7 +94,8 @@ public class EventController {
 					return eventrepository.save(event);
 				})
 				.orElseGet(() -> {
-					return eventrepository.save(newEvent);
+					//return eventrepository.save(newEvent);
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event id " + eventid + " not found");
 				});
 	}
 
