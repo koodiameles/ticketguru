@@ -43,9 +43,13 @@ Tapahtumalla on oltava nimi (description).
 
 ```json
 {
-    "id": 99,
-    "description": "Kalevala Ooppera",
-    "url": "http://testserver/api/events/99/"
+    "eventid": 5,
+    "description": "Sinfoniaorkesteri",
+    "location": "Musiikkitalo",
+    "city": "Tamperee",
+    "ticketcount": 3000,
+    "datetime": "2023-08-12T12:30:00.000+00:00",
+    "duration": 120
 }
 ```
 
