@@ -55,4 +55,4 @@
 
 **Condition** : Jos ei ole myyntitapahtumia.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `404 NOT FOUND`
