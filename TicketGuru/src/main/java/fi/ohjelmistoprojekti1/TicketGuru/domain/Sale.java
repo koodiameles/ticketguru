@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Sale {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long saleid;
 	private Date datetime;
 	
@@ -32,9 +33,8 @@ public class Sale {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sale")
 	private List<Ticket> tickets;   // List of tickets for this sale
 
-	public Sale(Long saleid, Date datetime, Employee employee) {
+	public Sale(Date datetime, Employee employee) {
 		super();
-		this.saleid = saleid;
 		this.datetime = datetime;
 		this.employee = employee;
 	}
