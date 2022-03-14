@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ticketid;          // id
 	private Boolean valid;          // Is ticket still valid. E.g not used
     private double ticketprice;     // gets value from tickettype OR user can input manually

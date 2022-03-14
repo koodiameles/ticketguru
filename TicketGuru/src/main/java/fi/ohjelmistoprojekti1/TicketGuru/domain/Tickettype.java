@@ -22,7 +22,7 @@ import javax.validation.constraints.NotBlank;
 public class Tickettype {
 
 @Id
-@GeneratedValue(strategy=GenerationType.AUTO)
+@GeneratedValue(strategy=GenerationType.IDENTITY)
 private Long tickettypeid; 
 @NotBlank(message = "Tickettype must have a name/description")
 private String name;	//Ex. student, adult, child, pension

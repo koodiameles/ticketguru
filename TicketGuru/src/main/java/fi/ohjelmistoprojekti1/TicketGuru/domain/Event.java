@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventid;           // id
     @NotBlank(message = "Event must have a name/description")
     private String description;     // Description/name for the event
