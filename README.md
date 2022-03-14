@@ -129,13 +129,13 @@ Login : POST /api/login/
 
 ### Endpoints, vaatii autentikoinnin (Authentication required)
 
-+ [**Näytä kaikki tapahtumat**](APIdokumentaatio/getall.md) : `GET /events`
-+ [**Näytä yksi tapahtuma(ID)**](APIdokumentaatio/getone.md) : `GET /events/{id}`
++ [**Näytä kaikki tapahtumat**](APIdokumentaatio/getallevents.md) : `GET /events`
++ [**Näytä yksi tapahtuma(ID)**](APIdokumentaatio/getoneevent.md) : `GET /events/{id}`
 
 Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
 
-+ [**Luo tapahtuma**](APIdokumentaatio/post.md) : `POST /events`
-+ [**Päivitä tapahtuma**](APIdokumentaatio/put.md) : `PUT /events/{id}`
-+ [**Poista tapahtuma**](APIdokumentaatio/delete.md) : `DELETE /events/{id}`
++ [**Luo tapahtuma**](APIdokumentaatio/postevent.md) : `POST /events`
++ [**Päivitä tapahtuma**](APIdokumentaatio/putevent.md) : `PUT /events/{id}`
++ [**Poista tapahtuma**](APIdokumentaatio/deleteevent.md) : `DELETE /events/{id}`
 
-+ [**Etsi kaikki myyntitapahtumat](APIdokumentaatio/getallsales.md) : GET/sales
++ [**Etsi kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
