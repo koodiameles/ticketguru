@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Employee {
@@ -17,7 +18,9 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long employeeid;
+	@NotBlank(message = "Employee must have a firstname")
 	private String firstname;
+	@NotBlank(message = "Employee must have a lastname")
 	private String lastname;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
