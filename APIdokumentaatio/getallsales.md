@@ -1,3 +1,7 @@
+# Näytä kaikki myyntitapahtumat
+
+Näytä lista kaikista myyntitapahtumista.
+
 **URL** : `/sales`
 
 **Method** : `GET`
@@ -46,6 +50,8 @@
         "employee": null,
         "tickets": []
     }
+            }
+}
 ```
 ## Success Response
 

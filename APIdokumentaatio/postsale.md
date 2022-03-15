@@ -1,6 +1,6 @@
 # Luo myyntitapahtuma
 
-Luo myyntitapahtuma. Myyntitapahtuman luonti vaatii Admin-oikeudet.
+Luo uusi myyntitapahtuma. Myyntitapahtuman luonti vaatii Admin-oikeudet.
 
 **URL** : `/sales`
 
