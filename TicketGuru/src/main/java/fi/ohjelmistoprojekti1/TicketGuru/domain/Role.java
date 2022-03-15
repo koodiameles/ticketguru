@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Role {
@@ -15,6 +16,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long roleid;
+	@NotBlank(message = "Role must have a description")
 	private String description;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
