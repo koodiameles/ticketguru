@@ -98,6 +98,8 @@ Ticketgurulla käyttääjä voi muun muassa:
 > id | long PK | Roolin tunnus
 > event | long FK | Viittaus tapahtuma -tauluun. Mihin tapahtumaan lippu on myyty.
 > sale | long FK | Viittaus sale -tauluun. Mihin myyntitapahtumaan lippu liittyy.
+> tickettype | long FK | Viittaus tickettype -tauluun. Minkä tyyppinen lippu tämä on. (Child/Adult/...)
+> ticketprice | double | Lipun hinta. Voidaan ottaa tickettypen mukaan tai syöttää manuaalisesti.
 > valid | boolean |  Onko lippu voimassa. Esim. onko käytetty
 
 > ### _Sale – Myyntitapahtuma_
@@ -115,9 +117,9 @@ Ticketgurulla käyttääjä voi muun muassa:
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > id | long PK | Lipputyypin id
-> description | varchar(100) | kuvaus lipputyypistä, esim. opiskelija
-> price | double | paljonko kyseinen lippu maksaa, esim. 8.00
-> event | long FK | Tapahtumat joihin tämä lipputyyppi on liitetty, viittaus tapahtuma-tauluun
+> description | varchar(100) | Kuvaus lipputyypistä, esim. opiskelija
+> price | double | Paljonko kyseinen lippu maksaa, esim. 8.00
+> event | long FK | Tapahtuma johon tämä lipputyyppi on liitetty, viittaus tapahtuma-tauluun
 
 ## REST API
 
@@ -144,3 +146,5 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Näytä kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
 + [**Näytä yksi myyntitapahtuma (ID)**](APIdokumentaatio/getonesale.md) : `GET /sales/{id}`
 + [**Luo myyntitapahtuma**](APIdokumentaatio/postsale.md) : `POST /sales`
+
++ [**Luo Lippu myyntitapahtumaan**](APIdokumentaatio/postticket.md) : `POST /sales/{id}/tickets`
