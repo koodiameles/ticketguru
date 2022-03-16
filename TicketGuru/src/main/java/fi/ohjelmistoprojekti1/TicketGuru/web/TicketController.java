@@ -3,9 +3,7 @@ package fi.ohjelmistoprojekti1.TicketGuru.web;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -43,48 +41,52 @@ public class TicketController {
 
 	@Autowired
 	private TickettypeRepository tickettypesRepo;
-	
+
 	@Autowired
-	private EventRepository eventsRepo;	
-	
+	private EventRepository eventsRepo;
 
 	// Add (POST) a new ticket to sale
 	@PostMapping("/sales/{id}/tickets")
-	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO, BindingResult bindingresult) {
-		
+	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO,
+			BindingResult bindingresult) {
+
 		Optional<Sale> saleResult = salesRepo.findById(id); // Sale for which the ticket will be added
 		if (!saleResult.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sale id not valid" + id);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sale id " + id + " not valid");
 		} // if the saleid doesn't exist => error
-		
-		Optional <Event> eventResult = eventsRepo.findById(ticketDTO.getEventid()); //Event in question
+
+		Optional<Event> eventResult = eventsRepo.findById(ticketDTO.getEventid()); // Event in question
 		if (!eventResult.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event id not valid" + ticketDTO.getEventid());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"Event id " + ticketDTO.getEventid() + " not valid");
 		} // if the eventid doesn't exist => error
 
-		Optional <Tickettype> tickettypeResult = tickettypesRepo.findById(ticketDTO.getTickettypeid()); //Tickettype in question
+		Optional<Tickettype> tickettypeResult = tickettypesRepo.findById(ticketDTO.getTickettypeid()); // Tickettype in
+																										// question
 		if (!tickettypeResult.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tickettype id not valid" + ticketDTO.getTickettypeid());
-		} // if the tickettypeid doesn't exist => error 
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"Tickettype id " + ticketDTO.getTickettypeid() + " not valid");
+		} // if the tickettypeid doesn't exist => error
 
-		
-		
 		Sale sale = saleResult.get(); // get the sale in question
 		Event event = eventResult.get(); // get the event in question
 		Tickettype tickettype = tickettypeResult.get(); // get the event in question
 
 		// ADDING TICKET TO DATABASE
-		Ticket ticket = new Ticket(true, event, sale, tickettype); // generate ticket (is valid?, which event?, which sale?, which tickettype?)
+		Ticket ticket = new Ticket(true, event, sale, tickettype); // generate ticket (is valid?, which event?, which
+																	// sale?, which tickettype?)
 		// set ticketprice
-		// ! API accepts manual price input (User can input manually). If not set, then use the default value from the tickettype
+		// ! API accepts manual price input (User can input manually). If not set, then
+		// use the default value from the tickettype
 		if (ticketDTO.getPrice() != 0) {
-			ticket.setTicketprice(ticketDTO.getPrice()); 
+			ticket.setTicketprice(ticketDTO.getPrice());
 		} else {
-			ticket.setTicketprice(ticket.getTickettype().getPrice()); 
+			ticket.setTicketprice(ticket.getTickettype().getPrice());
 		}
-		
+
 		if (bindingresult.hasErrors()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					bindingresult.getFieldError().getDefaultMessage());
 		}
 		ticketsRepo.save(ticket); // save the ticket to the ticketrepository
 
@@ -97,19 +99,17 @@ public class TicketController {
 		data.setTickettypeid(ticket.getTickettype().getTickettypeid());
 		data.setDescription(ticket.getEvent().getDescription());
 		// set dataprice
-		// ! API accepts manual price input (User can input manually). If not set, then use the default value from the tickettype
+		// ! API accepts manual price input (User can input manually). If not set, then
+		// use the default value from the tickettype
 		if (ticketDTO.getPrice() != 0) {
 			data.setPrice(ticketDTO.getPrice());
 		} else {
 			data.setPrice(ticket.getTickettype().getPrice());
 		}
 
-	return data; 	
+		return data;
 	}
-	
 
-
-	
 	// Get ALL tickets
 	@GetMapping("/tickets")
 	public ResponseEntity<List<Ticket>> getAllSales() {
@@ -120,10 +120,10 @@ public class TicketController {
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		}
 	}
-	
+
 	@GetMapping("/tickets/{id}")
 	public Optional<Ticket> findEvent(@PathVariable("id") Long ticketid) {
-		
+
 		Optional<Ticket> ticket = ticketsRepo.findById(ticketid);
 		if (!ticket.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketid + " not found");

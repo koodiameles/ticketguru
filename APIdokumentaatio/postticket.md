@@ -76,7 +76,7 @@ Luo Lippu. Lippu kuuluu aina myyntitapahtumaan (sale). Lipun luonti vaatii Admin
     "timestamp": "2022-02-23T17:20:55.061+00:00",
     "status": 400,
     "error": "Bad request",    
-    "message": "Event id not valid 11",,
+    "message": "Event id 666  not valid",
     "path": "/sales/1/tickets"
 }
 ```
@@ -94,14 +94,14 @@ Luo Lippu. Lippu kuuluu aina myyntitapahtumaan (sale). Lipun luonti vaatii Admin
     "timestamp": "2022-02-23T17:20:55.061+00:00",
     "status": 400,
     "error": "Bad request",    
-    "message": "Tickettype id not valid 14",
+    "message": "Tickettype id 666 not valid",
     "path": "/sales/1/tickets"
 }
 ```
 
 ### Or
 
-**Condition** : Annettu price on virheellinen (Huom! Price:a ei tarvitse antaa lainkaan ja se saa olla myös null)
+**Condition** : Annettu price on virheellinen (Huom! Price kohtaan ei tarvitse merkitä mitään ja se saa olla myös null)
 
 **Code** : `400 BAD REQUEST`
 
