@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Min;
 /*
 import javax.persistence.OneToMany;
 */
@@ -25,7 +24,6 @@ public class Ticket {
     private Long ticketid;          // id
 	private Boolean valid;          // Is ticket still valid. E.g not used
 	@NotNull(message = "Ticket must have a price")
-	@Min(value=0)
     private double ticketprice;     // gets value from tickettype OR user can input manually
 
     @ManyToOne

@@ -14,7 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 
@@ -26,6 +28,7 @@ public class Tickettype {
 private Long tickettypeid; 
 @NotBlank(message = "Tickettype must have a name/description")
 private String name;	//Ex. student, adult, child, pension
+@NotNull(message = "Ticket must have a price")
 private double price;	//Price of the tickettype
 
 @ManyToOne
