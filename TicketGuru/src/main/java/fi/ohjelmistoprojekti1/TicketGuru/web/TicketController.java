@@ -101,15 +101,34 @@ public class TicketController {
 		// set dataprice
 		// ! API accepts manual price input (User can input manually). If not set, then
 		// use the default value from the tickettype
-		if (ticketDTO.getPrice() != 0) {
+		
+		
+//		if (ticketDTO.getPrice() != 0 && ticketDTO.getPrice() > 0) {
+//			data.setPrice(ticketDTO.getPrice());
+//		} 
+//		else {
+//			data.setPrice(ticket.getTickettype().getPrice());
+//		}
+
+		
+		if (ticketDTO.getPrice() != 0 && ticketDTO.getPrice() > 0) {
 			data.setPrice(ticketDTO.getPrice());
-		} else {
+		} 
+		if (ticketDTO.getPrice() == 0) {
 			data.setPrice(ticket.getTickettype().getPrice());
 		}
+		if (ticketDTO.getPrice() < 0) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be a positive number (e.g 5.50) or null. (If null, price is set automatically according to tickettype)");
+		}
+		
+		
+
+		
 
 		return data;
 	}
 
+	
 	// Get ALL tickets
 	@GetMapping("/tickets")
 	public ResponseEntity<List<Ticket>> getAllSales() {

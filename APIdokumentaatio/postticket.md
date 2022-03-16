@@ -112,7 +112,7 @@ Luo Lippu. Lippu kuuluu aina myyntitapahtumaan (sale). Lipun luonti vaatii Admin
     "timestamp": "2022-02-23T17:20:55.061+00:00",
     "status": 400,
     "error": "Bad request",    
-    "message": "Price must be a number (e.g 5.50) or null. (If null, price is set automatically according to tickettype)",
+    "message": "Price must be a positive number (e.g 5.50) or null. (If null, price is set automatically according to tickettype)",
     "path": "/sales/1/tickets"
 }
 ```
