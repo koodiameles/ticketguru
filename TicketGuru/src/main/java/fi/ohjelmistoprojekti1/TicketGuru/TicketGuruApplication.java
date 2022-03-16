@@ -81,7 +81,9 @@ public class TicketGuruApplication {
 
 			//TICKET TESTDATA
 			Ticket ticket1 = new Ticket(true, tt1.getPrice(), event1, testsale1, tt1);
+			Ticket ticket2 = new Ticket(true, tt2.getPrice(), event2, testsale2, tt2);
 			ticketrepository.save(ticket1);
+			ticketrepository.save(ticket2);
 
 			//TICKETDTO with entities TESTDATA
 			TicketDTO ticketDTO = new TicketDTO(tt1, event1);

@@ -130,7 +130,10 @@ Login : POST /api/login/
 ### Endpoints, vaatii autentikoinnin (Authentication required)
 
 + [**Näytä kaikki tapahtumat**](APIdokumentaatio/getallevents.md) : `GET /events`
++ [**Näytä kaikki liput**](APIdokumentaatio/getalltickets.md) : `GET /tickets`
 + [**Näytä yksi tapahtuma (ID)**](APIdokumentaatio/getoneevent.md) : `GET /events/{id}`
++ [**Näytä yksi lippu (ID)**](APIdokumentaatio/getoneticket.md) : `GET /tickets/{id}`
+
 
 Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
 

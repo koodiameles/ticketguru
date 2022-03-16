@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 /*
 import javax.persistence.OneToMany;
 */
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -22,6 +23,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ticketid;          // id
 	private Boolean valid;          // Is ticket still valid. E.g not used
+	@NotNull(message = "Ticket must have a price")
     private double ticketprice;     // gets value from tickettype OR user can input manually
 
     @ManyToOne

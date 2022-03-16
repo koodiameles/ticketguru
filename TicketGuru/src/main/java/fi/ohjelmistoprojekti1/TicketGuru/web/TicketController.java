@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +50,7 @@ public class TicketController {
 
 	// Add (POST) a new ticket to sale
 	@PostMapping("/sales/{id}/tickets")
-	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO) {
+	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO, BindingResult bindingresult) {
 		
 		Optional<Sale> saleResult = salesRepo.findById(id); // Sale for which the ticket will be added
 		if (!saleResult.isPresent()) {
@@ -65,6 +66,8 @@ public class TicketController {
 		if (!tickettypeResult.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tickettype id not valid" + ticketDTO.getTickettypeid());
 		} // if the tickettypeid doesn't exist => error 
+
+		
 		
 		Sale sale = saleResult.get(); // get the sale in question
 		Event event = eventResult.get(); // get the event in question
@@ -78,6 +81,10 @@ public class TicketController {
 			ticket.setTicketprice(ticketDTO.getPrice()); 
 		} else {
 			ticket.setTicketprice(ticket.getTickettype().getPrice()); 
+		}
+		
+		if (bindingresult.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage());
 		}
 		ticketsRepo.save(ticket); // save the ticket to the ticketrepository
 
@@ -99,12 +106,29 @@ public class TicketController {
 
 	return data; 	
 	}
+	
+
 
 	
 	// Get ALL tickets
 	@GetMapping("/tickets")
-	public List<Ticket> ticketListRest() {
-		return ticketsRepo.findAll();
+	public ResponseEntity<List<Ticket>> getAllSales() {
+		List<Ticket> list = (List<Ticket>) ticketsRepo.findAll();
+		if (list.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no tickets");
+		} else {
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping("/tickets/{id}")
+	public Optional<Ticket> findEvent(@PathVariable("id") Long ticketid) {
+		
+		Optional<Ticket> ticket = ticketsRepo.findById(ticketid);
+		if (!ticket.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketid + " not found");
+		} // if event id doesn't exist => error
+		return ticket;
 	}
 
 }
