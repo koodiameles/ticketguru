@@ -31,7 +31,6 @@ public class Event {
     private String description;     // Description/name for the event
     private String location;      	// Location of the event. E.g. "Finlandia-Talo"
     private String city;            // Name of the city where the event will take place. E.g. "Helsinki"
-    @Max(value=40000)
     private int ticketcount;        // Number of tickets (max)
     @FutureOrPresent
     private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00")
@@ -47,7 +46,7 @@ public class Event {
 	//CONSTRUCTORS
     
 	public Event(@NotBlank(message = "Event must have a name/description") String description, String location,
-			String city, @Max(40000) int ticketcount, @FutureOrPresent Date datetime, int duration) {
+			String city, int ticketcount, @FutureOrPresent Date datetime, int duration) {
 		super();
 		this.description = description;
 		this.location = location;
@@ -58,7 +57,7 @@ public class Event {
 	}
 
     public Event(@NotBlank(message = "Event must have a name/description") String description, String location,
-			String city, @Max(40000) int ticketcount, @FutureOrPresent Date datetime, int duration,
+			String city, int ticketcount, @FutureOrPresent Date datetime, int duration,
 			List<Tickettype> tickettypes) {
 		super();
 		this.description = description;
