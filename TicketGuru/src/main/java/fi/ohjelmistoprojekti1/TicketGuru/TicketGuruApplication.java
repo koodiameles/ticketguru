@@ -16,8 +16,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import fi.ohjelmistoprojekti1.TicketGuru.domain.Employee;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.EmployeeRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Event;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.Role;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.RoleRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Sale;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.SaleRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Ticket;
@@ -25,6 +29,7 @@ import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.web.TicketDTO;
+
 
 @SpringBootApplication
 public class TicketGuruApplication {
@@ -44,7 +49,7 @@ public class TicketGuruApplication {
 	 }
 
 	@Bean
-	public CommandLineRunner DemoRunner(EventRepository eventrepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository) {
+	public CommandLineRunner DemoRunner(EventRepository eventrepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository, RoleRepository rolerepository, EmployeeRepository emprepository) {
 		return (args) -> {
 
 			//TEST DATA
@@ -89,6 +94,19 @@ public class TicketGuruApplication {
 			TicketDTO ticketDTO = new TicketDTO(tt1, event1);
 			log.info(ticketDTO.toString());
 
+			//ROLE TESTDATA
+			Role roleuser = new Role("USER");
+			Role roleadmin = new Role("ADMIN");
+			rolerepository.save(roleuser);
+			rolerepository.save(roleadmin);
+
+			//EMPLOYEE TESTDATA
+			//firstname, lastname, username, password, role
+			Employee user = new Employee("Liisa", "Ihmemaa", "user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", roleuser);
+			Employee admin = new Employee("cpt Jaakko", "Varpunen", "admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", roleadmin);
+			emprepository.save(user);
+			emprepository.save(admin);
+
 			//LOG DATA IN TERMINAL
 			log.info("fetch all events");
 			for (Event event : eventrepository.findAll()) {
@@ -103,6 +121,10 @@ public class TicketGuruApplication {
 			log.info("fetch all sales");
 			for (Sale sale : salerepository.findAll()) {
 				log.info(sale.toString());
+			}
+			log.info("fetch all employees");
+			for (Employee employee : emprepository.findAll()) {
+				log.info(employee.toString());
 			}
 	
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class TickettypeController {
 
 	// Get one tickettype
 	@GetMapping("/tickettypes/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public Optional<Tickettype> findTickettypeRest(@PathVariable("id") Long tickettypeid) {
 	Optional <Tickettype> tickettypeResult = tickettyperepository.findById(tickettypeid); 
 	if (!tickettypeResult.isPresent()) {
@@ -47,21 +49,23 @@ public class TickettypeController {
 	
 	// Get all tickettypes
 	@GetMapping("/tickettypes")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<List<Tickettype>> getAllTickettypes() {
 		List<Tickettype>list=(List<Tickettype>) tickettyperepository.findAll(); 
 		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
 	
 	// Add (POST) a new event
-		@PostMapping("/tickettypes")
-		@ResponseStatus(HttpStatus.CREATED)
-		public Tickettype addTickettype(@Valid @RequestBody Tickettype tickettype, BindingResult bindingresult) {
-			if (bindingresult.hasErrors()) {
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage()); 
-			}
-			tickettyperepository.save(tickettype);
-			return tickettype;
+	@PostMapping("/tickettypes")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Tickettype addTickettype(@Valid @RequestBody Tickettype tickettype, BindingResult bindingresult) {
+		if (bindingresult.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage()); 
 		}
+		tickettyperepository.save(tickettype);
+		return tickettype;
+	}
 		
 
 }

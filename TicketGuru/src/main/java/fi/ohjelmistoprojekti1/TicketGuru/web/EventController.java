@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,6 +49,7 @@ public class EventController {
 
 	// Get event by id
 	@GetMapping("/events/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public Optional<Event> findEvent(@PathVariable("id") Long eventid) {
 		
 		Optional<Event> event = eventrepository.findById(eventid);
@@ -59,6 +62,7 @@ public class EventController {
 
 	// Get ALL events
 	@GetMapping("/events")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<List<Event>> getAllEvents() {
 		List<Event>list =(List<Event>)eventrepository.findAll(); 
 		return new ResponseEntity<>(list, HttpStatus.OK); 
@@ -66,6 +70,7 @@ public class EventController {
 	
 	// Add (POST) a new event
 	@PostMapping("/events")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> addEvent(@Valid @RequestBody Event event, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage());
@@ -75,6 +80,7 @@ public class EventController {
 
 	// Update event or add (PUT) a new event if id doesn't exist
 	@PutMapping("/events/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public Event updateEvent(@Valid @RequestBody Event newEvent, @PathVariable("id") Long eventid) {
 		return eventrepository.findById(eventid)
 				.map(event -> {
@@ -94,6 +100,7 @@ public class EventController {
 
 	// Delete event by id
 	@DeleteMapping("/events/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> deleteEvent(@PathVariable("id") Long eventid) {
 		
 		Optional<Event> event = eventrepository.findById(eventid);
