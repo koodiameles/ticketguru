@@ -59,8 +59,27 @@ Tapahtumalla on oltava nimi (description).
 
 ```json
 {
-    "description": [
-        "This field is required."
-    ]
+    "timestamp": "2022-02-23T17:20:55.061+00:00",
+    "status": 400,
+    "error": "Bad request",    
+    "message": "Event must have a name/description",
+    "path": "/events",
+}
+```
+### Or
+
+**Condition** : Jos päivämäärä/aika on jo mennyt.
+
+**Code** : `400 BAD REQUEST`
+
+**Content example**
+
+```json
+{
+    "timestamp": "2022-02-23T17:20:55.061+00:00",
+    "status": 400,
+    "error": "Bad request",    
+    "message": "must be a date in the present or in the future",
+    "path": "/events",
 }
 ```
