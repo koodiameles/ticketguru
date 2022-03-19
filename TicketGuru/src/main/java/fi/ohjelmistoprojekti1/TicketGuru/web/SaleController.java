@@ -55,11 +55,7 @@ public class SaleController {
 	@GetMapping("/sales")
 	public ResponseEntity<List<Sale>> getAllSales() {
 		List<Sale> list = (List<Sale>) salerepository.findAll();
-		if (list.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no sales");
-		} else {
-			return new ResponseEntity<>(list, HttpStatus.OK);
-		}
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	// Add (POST) a new sale

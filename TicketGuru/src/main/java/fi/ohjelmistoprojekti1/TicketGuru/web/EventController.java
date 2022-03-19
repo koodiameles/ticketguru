@@ -61,14 +61,8 @@ public class EventController {
 	@GetMapping("/events")
 	public ResponseEntity<List<Event>> getAllEvents() {
 		List<Event>list =(List<Event>)eventrepository.findAll(); 
-		if (list.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There are no events"); 
-		} else {
-			return new ResponseEntity<>(list, HttpStatus.OK); 
-		}
+		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
-	
-	
 	
 	// Add (POST) a new event
 	@PostMapping("/events")

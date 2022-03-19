@@ -133,11 +133,7 @@ public class TicketController {
 	@GetMapping("/tickets")
 	public ResponseEntity<List<Ticket>> getAllSales() {
 		List<Ticket> list = (List<Ticket>) ticketsRepo.findAll();
-		if (list.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no tickets");
-		} else {
-			return new ResponseEntity<>(list, HttpStatus.OK);
-		}
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/tickets/{id}")

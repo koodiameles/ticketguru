@@ -10,16 +10,20 @@ Näytä lista kaikista myyntitapahtumista.
 
 **Permissions required** : None
 
-**Data example** 
+## Success Response
+
+**Code** : `200 OK`
+
+**Data examples**
 
 ```json
-{
-        "saleid": 8,
-        "datetime": "2022-03-13T17:13:11.610+00:00",
+    {
+        "saleid": 1,
+        "datetime": "2022-03-19T07:58:08.600+00:00",
         "employee": null,
         "tickets": [
             {
-                "ticketid": 10,
+                "ticketid": 1,
                 "valid": true,
                 "ticketprice": 50.5,
                 "event": {
@@ -32,33 +36,23 @@ Näytä lista kaikista myyntitapahtumista.
                     "duration": 90,
                     "tickettypes": [
                         {
-                            "tickettypeid": 4,
+                            "tickettypeid": 1,
                             "name": "Adult",
                             "price": 50.5
                         },
                         {
-                            "tickettypeid": 5,
+                            "tickettypeid": 2,
                             "name": "Child",
                             "price": 25.5
                         }
                     ]
                 },
-                
-    {
-        "saleid": 9,
-        "datetime": "2022-07-22T09:37:00.000+00:00",
-        "employee": null,
-        "tickets": []
-    }
+                "tickettype": {
+                    "tickettypeid": 1,
+                    "name": "Adult",
+                    "price": 50.5
+                }
             }
-}
+        ]
+    },
 ```
-## Success Response
-
-**Code** : `200 OK`
-
-## Error Responses
-
-**Condition** : Jos ei ole myyntitapahtumia.
-
-**Code** : `404 NOT FOUND`

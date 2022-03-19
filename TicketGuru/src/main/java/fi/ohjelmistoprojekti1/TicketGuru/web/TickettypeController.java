@@ -49,12 +49,7 @@ public class TickettypeController {
 	@GetMapping("/tickettypes")
 	public ResponseEntity<List<Tickettype>> getAllTickettypes() {
 		List<Tickettype>list=(List<Tickettype>) tickettyperepository.findAll(); 
-		if(list.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no tickettypes"); 
-		} else {
-			return new ResponseEntity<>(list, HttpStatus.OK); 
-		}
-		
+		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
 	
 	// Add (POST) a new event

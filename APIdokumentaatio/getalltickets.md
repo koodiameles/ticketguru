@@ -82,9 +82,3 @@ Näytä lista kaikista lipuista.
     }
 ]
 ```
-
-## Error Responses
-
-**Condition** : Jos ei ole lippuja.
-
-**Code** : `404 NOT FOUND`
