@@ -15,8 +15,16 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+<<<<<<< HEAD
+=======
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+>>>>>>> origin/security
 @Entity
 public class Employee {
+
+	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,23 +42,42 @@ public class Employee {
 	
 	@Column(name = "password", nullable = false)
 	@JsonIgnore
+<<<<<<< HEAD
 	private String hashPassword;
+=======
+	private String hashpassword;
+>>>>>>> origin/security
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 	private List<Sale> sales;
 	
+<<<<<<< HEAD
 
 	@JsonIgnore
     private String role; 
+=======
+	@ManyToOne
+    @JoinColumn(name = "roleid")
+	@JsonIgnore
+    private Role role; 
+>>>>>>> origin/security
 
 	public Employee() {
 	}
 	
-	public Employee(String firstname, String lastname, String username, String hashPassword) {
+	public Employee(String firstname, String lastname, String username, String hashpassword, Role role) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
-		this.hashPassword = hashPassword;
+		this.hashpassword = hashpassword;
+		this.role = role;
+	}
+
+	public Employee(String firstname, String lastname, String username, String hashpassword) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.hashpassword = hashpassword;
 	}
 	
 	
@@ -97,12 +124,12 @@ public class Employee {
 		this.username = username;
 	}
 
-	public String getHashPassword() {
-		return hashPassword;
+	public String getHashpassword() {
+		return hashpassword;
 	}
 
-	public void setHashPassword(String hashPassword) {
-		this.hashPassword = hashPassword;
+	public void setHashpassword(String hashpassword) {
+		this.hashpassword = PASSWORD_ENCODER.encode(hashpassword);
 	}
 
 	public List<Sale> getSales() {
@@ -123,8 +150,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [employeeid=" + employeeid + ", firstname=" + firstname + ", lastname=" + lastname + ", sales="
-				+ sales + ", role=" + role + "]";
+		return "Employee [employeeid=" + employeeid + ", firstname=" + firstname + ", hashpassword=" + hashpassword
+				+ ", lastname=" + lastname + ", role=" + role + ", username=" + username + "]";
 	}
 	
 }

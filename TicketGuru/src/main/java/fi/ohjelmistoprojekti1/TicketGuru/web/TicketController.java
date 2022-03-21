@@ -48,6 +48,7 @@ public class TicketController {
 
 	// Add (POST) a new ticket to sale
 	@PostMapping("/sales/{id}/tickets")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO,
 			BindingResult bindingresult) {
 
@@ -103,7 +104,6 @@ public class TicketController {
 		// ! API accepts manual price input (User can input manually). If not set, then
 		// use the default value from the tickettype
 		
-		
 //		if (ticketDTO.getPrice() != 0 && ticketDTO.getPrice() > 0) {
 //			data.setPrice(ticketDTO.getPrice());
 //		} 
@@ -111,7 +111,6 @@ public class TicketController {
 //			data.setPrice(ticket.getTickettype().getPrice());
 //		}
 
-		
 		if (ticketDTO.getPrice() != 0 && ticketDTO.getPrice() > 0) {
 			data.setPrice(ticketDTO.getPrice());
 		} 
@@ -121,9 +120,6 @@ public class TicketController {
 		if (ticketDTO.getPrice() < 0) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be a positive number (e.g 5.50) or null. (If null, price is set automatically according to tickettype)");
 		}
-		
-		
-
 		
 
 		return data;
@@ -141,7 +137,6 @@ public class TicketController {
 	@GetMapping("/tickets/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public Optional<Ticket> findEvent(@PathVariable("id") Long ticketid) {
-
 		Optional<Ticket> ticket = ticketsRepo.findById(ticketid);
 		if (!ticket.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketid + " not found");

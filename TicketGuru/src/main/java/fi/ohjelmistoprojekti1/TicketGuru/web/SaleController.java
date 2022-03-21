@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,7 @@ public class SaleController {
 
 	// Get one sale
 	@GetMapping("/sales/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public Optional<Sale> findSaleRest(@PathVariable("id") Long saleid) {
 		Optional<Sale> saleResult = salerepository.findById(saleid);
 		if (!saleResult.isPresent()) {
@@ -53,6 +55,7 @@ public class SaleController {
 
 	// Get all sales
 	@GetMapping("/sales")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<List<Sale>> getAllSales() {
 		List<Sale> list = (List<Sale>) salerepository.findAll();
 		return new ResponseEntity<>(list, HttpStatus.OK);
@@ -60,6 +63,7 @@ public class SaleController {
 
 	// Add (POST) a new sale
 	@PostMapping("/sales")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Sale addSale(@Valid @RequestBody Sale sale, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
