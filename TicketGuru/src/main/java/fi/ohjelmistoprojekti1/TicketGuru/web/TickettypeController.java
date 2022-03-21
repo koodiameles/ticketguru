@@ -38,7 +38,7 @@ public class TickettypeController {
 
 	// Get one tickettype
 	@GetMapping("/tickettypes/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public Optional<Tickettype> findTickettypeRest(@PathVariable("id") Long tickettypeid) {
 	Optional <Tickettype> tickettypeResult = tickettyperepository.findById(tickettypeid); 
 	if (!tickettypeResult.isPresent()) {
@@ -49,7 +49,7 @@ public class TickettypeController {
 	
 	// Get all tickettypes
 	@GetMapping("/tickettypes")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public ResponseEntity<List<Tickettype>> getAllTickettypes() {
 		List<Tickettype>list=(List<Tickettype>) tickettyperepository.findAll(); 
 		return new ResponseEntity<>(list, HttpStatus.OK); 
@@ -57,7 +57,7 @@ public class TickettypeController {
 	
 	// Add (POST) a new event
 	@PostMapping("/tickettypes")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Tickettype addTickettype(@Valid @RequestBody Tickettype tickettype, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {

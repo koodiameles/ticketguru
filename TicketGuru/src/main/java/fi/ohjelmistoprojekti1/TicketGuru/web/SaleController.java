@@ -44,7 +44,7 @@ public class SaleController {
 
 	// Get one sale
 	@GetMapping("/sales/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public Optional<Sale> findSaleRest(@PathVariable("id") Long saleid) {
 		Optional<Sale> saleResult = salerepository.findById(saleid);
 		if (!saleResult.isPresent()) {
@@ -55,7 +55,7 @@ public class SaleController {
 
 	// Get all sales
 	@GetMapping("/sales")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public ResponseEntity<List<Sale>> getAllSales() {
 		List<Sale> list = (List<Sale>) salerepository.findAll();
 		return new ResponseEntity<>(list, HttpStatus.OK);
@@ -63,7 +63,7 @@ public class SaleController {
 
 	// Add (POST) a new sale
 	@PostMapping("/sales")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Sale addSale(@Valid @RequestBody Sale sale, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
