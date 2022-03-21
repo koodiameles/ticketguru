@@ -16,6 +16,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import fi.ohjelmistoprojekti1.TicketGuru.domain.Employee;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.EmployeeRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Event;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Sale;
@@ -24,6 +26,8 @@ import fi.ohjelmistoprojekti1.TicketGuru.domain.Ticket;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.User;
+import fi.ohjelmistoprojekti1.TicketGuru.domain.UserRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.web.TicketDTO;
 
 @SpringBootApplication
@@ -44,10 +48,17 @@ public class TicketGuruApplication {
 	 }
 
 	@Bean
-	public CommandLineRunner DemoRunner(EventRepository eventrepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository) {
+	public CommandLineRunner DemoRunner(EventRepository eventrepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository, UserRepository userrepository) {
 		return (args) -> {
 
 			//TEST DATA
+			
+			//EMPLOYEE TESTDATA
+			
+			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER"); 
+			User user2 = new User("admin", "$2y$10$WaUppKKvbP/tew16gNwmYOG4wJuqxgf2k2b4wUXwcz1cfinpaOQkW", "ADMIN");
+			userrepository.save(user1); 
+			userrepository.save(user2); 
 
 			//EVENT TESTDATA
 			log.info("save some event test data");

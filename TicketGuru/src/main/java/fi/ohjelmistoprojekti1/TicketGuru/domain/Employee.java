@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Employee {
 	
@@ -31,14 +33,15 @@ public class Employee {
 	private String username;
 	
 	@Column(name = "password", nullable = false)
+	@JsonIgnore
 	private String hashPassword;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 	private List<Sale> sales;
 	
-	@ManyToOne
-    @JoinColumn(name = "roleid")
-    private Role role; 
+
+	@JsonIgnore
+    private String role; 
 
 	public Employee() {
 	}
@@ -48,6 +51,18 @@ public class Employee {
 		this.lastname = lastname;
 		this.username = username;
 		this.hashPassword = hashPassword;
+	}
+	
+	
+
+	public Employee(@NotBlank(message = "Employee must have a firstname") String firstname,
+			@NotBlank(message = "Employee must have a lastname") String lastname, String username, String hashPassword, String role) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.hashPassword = hashPassword;
+		this.role = role;
 	}
 
 	public Long getEmployeeid() {
@@ -98,11 +113,11 @@ public class Employee {
 		this.sales = sales;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

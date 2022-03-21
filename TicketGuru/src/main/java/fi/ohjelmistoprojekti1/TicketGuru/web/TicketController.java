@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -131,12 +132,14 @@ public class TicketController {
 	
 	// Get ALL tickets
 	@GetMapping("/tickets")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<List<Ticket>> getAllSales() {
 		List<Ticket> list = (List<Ticket>) ticketsRepo.findAll();
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/tickets/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Optional<Ticket> findEvent(@PathVariable("id") Long ticketid) {
 
 		Optional<Ticket> ticket = ticketsRepo.findById(ticketid);
