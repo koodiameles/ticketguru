@@ -28,8 +28,6 @@ import fi.ohjelmistoprojekti1.TicketGuru.domain.Ticket;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
-import fi.ohjelmistoprojekti1.TicketGuru.domain.User;
-import fi.ohjelmistoprojekti1.TicketGuru.domain.UserRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.web.TicketDTO;
 
 

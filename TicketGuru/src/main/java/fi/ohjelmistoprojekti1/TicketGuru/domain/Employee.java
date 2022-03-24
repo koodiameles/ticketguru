@@ -15,12 +15,10 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-<<<<<<< HEAD
-=======
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
->>>>>>> origin/security
+
 @Entity
 public class Employee {
 
@@ -42,36 +40,23 @@ public class Employee {
 	
 	@Column(name = "password", nullable = false)
 	@JsonIgnore
-<<<<<<< HEAD
-	private String hashPassword;
-=======
+
+
 	private String hashpassword;
->>>>>>> origin/security
+
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 	private List<Sale> sales;
-	
-<<<<<<< HEAD
 
-	@JsonIgnore
-    private String role; 
-=======
 	@ManyToOne
     @JoinColumn(name = "roleid")
 	@JsonIgnore
     private Role role; 
->>>>>>> origin/security
+
 
 	public Employee() {
 	}
 	
-	public Employee(String firstname, String lastname, String username, String hashpassword, Role role) {
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.hashpassword = hashpassword;
-		this.role = role;
-	}
 
 	public Employee(String firstname, String lastname, String username, String hashpassword) {
 		this.firstname = firstname;
@@ -83,12 +68,12 @@ public class Employee {
 	
 
 	public Employee(@NotBlank(message = "Employee must have a firstname") String firstname,
-			@NotBlank(message = "Employee must have a lastname") String lastname, String username, String hashPassword, String role) {
+			@NotBlank(message = "Employee must have a lastname") String lastname, String username, String hashpassword, Role role) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
-		this.hashPassword = hashPassword;
+		this.hashpassword = hashpassword;
 		this.role = role;
 	}
 
@@ -140,11 +125,11 @@ public class Employee {
 		this.sales = sales;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 

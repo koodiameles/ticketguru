@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.FutureOrPresent;
 
@@ -28,9 +29,10 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventid;           // id
     @NotBlank(message = "Event must have a name/description")
+    @Size(min = 2, max = 100, message = "Size must be between 2-100 characters")
     private String description;     // Description/name for the event
     private String location;      	// Location of the event. E.g. "Finlandia-Talo"
-    private String city;            // Name of the city where the event will take place. E.g. "Helsinki"
+    private String city; 			// Name of the city where the event will take place. E.g. "Helsinki"
     private int ticketcount;        // Number of tickets (max)
     @FutureOrPresent
     private Date datetime;      	// Which day and time will the event take place. E.g "2022-05-22T18:00:00")
