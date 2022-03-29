@@ -38,10 +38,8 @@ public class Employee {
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = false, unique = true)
 	@JsonIgnore
-
-
 	private String hashpassword;
 
 	

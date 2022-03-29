@@ -62,7 +62,7 @@ public class EventController {
 
 	// Get ALL events
 	@GetMapping("/events")
-	@PreAuthorize("hasAuhtority('ADMIN') or hasAuthority('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public ResponseEntity<List<Event>> getAllEvents() {
 		List<Event>list =(List<Event>)eventrepository.findAll(); 
 		return new ResponseEntity<>(list, HttpStatus.OK); 
@@ -80,7 +80,7 @@ public class EventController {
 
 	// Update event or add (PUT) a new event if id doesn't exist
 	@PutMapping("/events/{id}")
-	@PreAuthorize("hasAuhtority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Event updateEvent(@Valid @RequestBody Event newEvent, @PathVariable("id") Long eventid) {
 		return eventrepository.findById(eventid)
 				.map(event -> {
@@ -100,7 +100,7 @@ public class EventController {
 
 	// Delete event by id
 	@DeleteMapping("/events/{id}")
-	@PreAuthorize("hasAuhtority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<?> deleteEvent(@PathVariable("id") Long eventid) {
 		
 		Optional<Event> event = eventrepository.findById(eventid);
