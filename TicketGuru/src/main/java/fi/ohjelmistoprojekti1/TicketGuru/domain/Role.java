@@ -28,6 +28,9 @@ public class Role {
 		super();
 		this.description = description;
 	}
+	public Role() {
+		super();
+	}
 
 	public Long getroleid() {
 		return roleid;
@@ -57,7 +60,6 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [roleid=" + roleid + ", description=" + description +  ", employees="
-				+ employees + "]"; 
+		return "Role [description=" + description + ", roleid=" + roleid + "]";
 	}	
 }
