@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @Entity
 public class Employee {
 
@@ -37,34 +38,41 @@ public class Employee {
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = false, unique = true)
 	@JsonIgnore
 	private String hashpassword;
+
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 	private List<Sale> sales;
-	
+
 	@ManyToOne
     @JoinColumn(name = "roleid")
 	@JsonIgnore
     private Role role; 
 
+
 	public Employee() {
 	}
 	
-	public Employee(String firstname, String lastname, String username, String hashpassword, Role role) {
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.hashpassword = hashpassword;
-		this.role = role;
-	}
 
 	public Employee(String firstname, String lastname, String username, String hashpassword) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.hashpassword = hashpassword;
+	}
+	
+	
+
+	public Employee(@NotBlank(message = "Employee must have a firstname") String firstname,
+			@NotBlank(message = "Employee must have a lastname") String lastname, String username, String hashpassword, Role role) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.hashpassword = hashpassword;
+		this.role = role;
 	}
 
 	public Long getEmployeeid() {

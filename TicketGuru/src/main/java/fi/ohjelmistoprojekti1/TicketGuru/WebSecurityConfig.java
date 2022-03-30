@@ -23,21 +23,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/h2-console/**").permitAll()  // kommentoi h-2 consolen käyttö permitall pois lopullisesta sovelluksesta
-            .and().csrf().ignoringAntMatchers("/h2-console/**") // -- h2
-            .and().headers().frameOptions().sameOrigin() // -- h2
-            .and() // -- h2
+        http
+        	.authorizeRequests()
+            	.antMatchers("/h2-console/**").permitAll()  // kommentoi h-2 consolen käyttö permitall pois lopullisesta sovelluksesta
+            	.and().csrf().ignoringAntMatchers("/h2-console/**") // -- h2
+            	.and().headers().frameOptions().sameOrigin() // -- h2
+            	.and() // -- h2
             .authorizeRequests()
-            .anyRequest().authenticated()
-            .and()
+            	.anyRequest().authenticated()
+            	.and()
             .httpBasic()
-            .and()
+            	.and()
             .formLogin()
                 .and()
             .logout()
                 .permitAll()
             .and().csrf().disable();
+
     }
     
     @Autowired

@@ -1,8 +1,12 @@
 package fi.ohjelmistoprojekti1.TicketGuru;
 
-import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,10 +15,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Employee;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EmployeeRepository;
@@ -48,11 +48,12 @@ public class TicketGuruApplication {
 		}
 	 }
 
-	@Bean
-	public CommandLineRunner DemoRunner(EventRepository eventrepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository, RoleRepository rolerepository, EmployeeRepository emprepository) {
+@Bean
+	public CommandLineRunner DemoRunner(EventRepository eventrepository, RoleRepository rolerepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository, EmployeeRepository emprepository) {
 		return (args) -> {
 
 			//TEST DATA
+			
 
 			//EVENT TESTDATA
 			log.info("save some event test data");
