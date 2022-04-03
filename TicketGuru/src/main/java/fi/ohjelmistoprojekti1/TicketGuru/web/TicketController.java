@@ -41,7 +41,7 @@ public class TicketController {
 
 	// Add (POST) a new ticket to sale
 	@PostMapping("/sales/{id}/tickets")
-	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO,
 			BindingResult bindingresult) {
 
@@ -121,14 +121,14 @@ public class TicketController {
 	
 	// Get ALL tickets
 	@GetMapping("/tickets")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public ResponseEntity<List<Ticket>> getAllSales() {
 		List<Ticket> list = (List<Ticket>) ticketsRepo.findAll();
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/tickets/{id}")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public Optional<Ticket> findEvent(@PathVariable("id") Long ticketid) {
 		Optional<Ticket> ticket = ticketsRepo.findById(ticketid);
 		if (!ticket.isPresent()) {
