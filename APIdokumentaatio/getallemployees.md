@@ -1,6 +1,6 @@
-# NÃ¤ytÃ¤ kaikki työntekijät
+# Näytä kaikki työntekijät
 
-NÃ¤ytÃ¤ lista kaikista työntekijöistä. Kaikilla kÃ¤yttÃ¶oikeuksilla saa etsittyÃ¤ listauksen. 
+Näytä lista kaikista työntekijöistä. Kaikilla käyttäjäoikeuksilla saa etsittyä listauksen. 
 
 **URL** : `/employees`
 
