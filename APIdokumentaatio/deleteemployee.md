@@ -1,6 +1,6 @@
 # Poista työntekijä
 
-Poista työntekijä. Ty�ntekij�n poistaminen vaatii Admin-oikeudet.
+Poista työntekijä. Työntekijän poistaminen vaatii Admin-oikeudet.
 
 **URL** : `/employees/{id}`
 
