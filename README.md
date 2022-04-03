@@ -131,20 +131,19 @@ Login : POST /api/login/
 
 ### Endpoints, vaatii autentikoinnin (Authentication required)
 
-+ [**Näytä kaikki tapahtumat**](APIdokumentaatio/getallevents.md) : `GET /events`
-+ [**Näytä kaikki liput**](APIdokumentaatio/getalltickets.md) : `GET /tickets`
-+ [**Näytä yksi tapahtuma (ID)**](APIdokumentaatio/getoneevent.md) : `GET /events/{id}`
-+ [**Näytä yksi lippu (ID)**](APIdokumentaatio/getoneticket.md) : `GET /tickets/{id}`
+Endpointit, joihin pääsy edellyttää user- tai admin-käyttöoikeudet:
 
++ [**Näytä kaikki tapahtumat**](APIdokumentaatio/getallevents.md) : `GET /events`
++ [**Näytä yksi tapahtuma (ID)**](APIdokumentaatio/getoneevent.md) : `GET /events/{id}`
++ [**Näytä kaikki liput**](APIdokumentaatio/getalltickets.md) : `GET /tickets`
++ [**Näytä yksi lippu (ID)**](APIdokumentaatio/getoneticket.md) : `GET /tickets/{id}`
++ [**Luo myyntitapahtuma**](APIdokumentaatio/postsale.md) : `POST /sales`
 
 Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
 
 + [**Luo tapahtuma**](APIdokumentaatio/postevent.md) : `POST /events`
 + [**Päivitä tapahtuma**](APIdokumentaatio/putevent.md) : `PUT /events/{id}`
 + [**Poista tapahtuma**](APIdokumentaatio/deleteevent.md) : `DELETE /events/{id}`
-
 + [**Näytä kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
 + [**Näytä yksi myyntitapahtuma (ID)**](APIdokumentaatio/getonesale.md) : `GET /sales/{id}`
-+ [**Luo myyntitapahtuma**](APIdokumentaatio/postsale.md) : `POST /sales`
-
-+ [**Luo Lippu myyntitapahtumaan**](APIdokumentaatio/postticket.md) : `POST /sales/{id}/tickets`
++ [**Luo lippu myyntitapahtumaan**](APIdokumentaatio/postticket.md) : `POST /sales/{id}/tickets`
