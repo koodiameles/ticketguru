@@ -1,8 +1,8 @@
-# Poista tapahtuma
+# Poista työntekijä
 
-Poista tapahtuma. Tapahtuman poistaminen vaatii Admin-oikeudet.
+Poista työntekijä. Ty�ntekij�n poistaminen vaatii Admin-oikeudet.
 
-**URL** : `/events/{id}`
+**URL** : `/employees/{id}`
 
 **Method** : `DELETE`
 
@@ -19,7 +19,7 @@ Poista tapahtuma. Tapahtuman poistaminen vaatii Admin-oikeudet.
 **Content example**
 ```json
 {
-    "message": "Deleted event {description} with the id {id}"
+    "message": "Deleted employee {firstname} {lastname} with the id {id}"
 }
 ```
 
@@ -36,7 +36,7 @@ Poista tapahtuma. Tapahtuman poistaminen vaatii Admin-oikeudet.
     "status": 405,
     "error": "Method Not Allowed",    
     "message": "Request method 'DELETE' not supported",
-    "path": "/events/"
+    "path": "/employees/"
 }
 ```
 
@@ -52,7 +52,24 @@ Poista tapahtuma. Tapahtuman poistaminen vaatii Admin-oikeudet.
     "timestamp": "2022-02-23T17:20:55.061+00:00",
     "status": 404,
     "error": "Not Found",    
-    "message": "Event id {id} not found",
-    "path": "/events/{id}"
+    "message": "Employee id {id} not found",
+    "path": "/employees/{id}"
+}
+```
+
+### Or
+
+**Condition** : Työntekijään on linkitetty myyntitietoja.
+
+**Code** : `403 Forbidden`
+
+**Content example**
+```json
+{
+    "timestamp": "2022-02-23T17:20:55.061+00:00",
+    "status": 403,
+    "error": "Forbidden",    
+    "message": "Employee has sales and can not be deleted.",
+    "path": "/employees/{id}"
 }
 ```

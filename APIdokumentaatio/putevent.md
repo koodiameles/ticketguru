@@ -1,4 +1,4 @@
-# Päivitä Tapahtuma
+# Päivitä tapahtuma
 
 Päivitä tapahtuma. Tapahtuman päivitys vaatii Admin-oikeudet.
 
@@ -81,5 +81,22 @@ Tapahtumalla on oltava nimi (description).
     "error": "Bad request",    
     "message": "must be a date in the present or in the future",
     "path": "/events",
+}
+```
+
+### Or
+
+**Condition** : Id on virheellinen.
+
+**Code** : `404 Not Found`
+
+**Content example**
+```json
+{
+    "timestamp": "2022-02-23T17:20:55.061+00:00",
+    "status": 404,
+    "error": "Not Found",    
+    "message": "Event id {id} not found",
+    "path": "/events/{id}"
 }
 ```
