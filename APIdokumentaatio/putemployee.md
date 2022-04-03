@@ -1,6 +1,6 @@
-# PÃ¤ivitÃ¤ työntekijä
+# Päivitä työntekijä
 
-PÃ¤ivitÃ¤ työntekijä. Ty�ntekij�n pÃ¤ivitys vaatii Admin-oikeudet.
+Päivitä työntekijä. Työntekijän päivitys vaatii Admin-oikeudet.
 
 **URL** : `/employees/{id}`
 
@@ -96,7 +96,7 @@ Työntekijällä on oltava etunimi ja sukunimi.
 
 ### Or
 
-**Condition** : Jos työntekijän role id on väärin.
+**Condition** : Jos työntekijän role id on virheellinen.
 
 **Code** : `400 BAD REQUEST`
 
