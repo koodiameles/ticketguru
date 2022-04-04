@@ -147,3 +147,7 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Näytä kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
 + [**Näytä yksi myyntitapahtuma (ID)**](APIdokumentaatio/getonesale.md) : `GET /sales/{id}`
 + [**Luo lippu myyntitapahtumaan**](APIdokumentaatio/postticket.md) : `POST /sales/{id}/tickets`
++ [**Näytä kaikki työntekijät**](APIdokumentaatio/getallemployees.md) : `GET /employees`
++ [**Luo työntekijät**](APIdokumentaatio/postemployee.md) : `POST /employees`
++ [**Päivitä työntekijä**](APIdokumentaatio/putemployee.md) : `PUT /employees/{id}`
++ [**Poista työntekijä**](APIdokumentaatio/deleteemployee.md) : `DELETE /employees/{id}`

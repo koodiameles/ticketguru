@@ -97,7 +97,7 @@ public class EmployeeController {
 		if (employee.isPresent()) { //if employeeid is ok, we have to check if employee has made sales
 			List<Sale> sales = employee.get().getSales(); 
 			if(sales.size()>0 ) {
-				response.put("message", "Employer has sales and can not be deleted."); 
+				response.put("message", "Employee has sales and can not be deleted."); 
 				return new ResponseEntity<>(response, HttpStatus.FORBIDDEN); 
 			} else { // no sales, employee can be deleted
 			emprepo.deleteById(employeeid);
