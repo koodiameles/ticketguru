@@ -142,7 +142,7 @@ public class TicketController {
 	}
 	
 	@PutMapping("/useticket/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAhthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public Ticket updateTicket(@Valid @RequestBody Ticket newTicket, @PathVariable("id") Long ticketid) {
         return ticketsRepo.findById(ticketid)
                 .map(ticket -> {
