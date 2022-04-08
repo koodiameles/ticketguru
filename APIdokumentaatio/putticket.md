@@ -38,24 +38,8 @@ Päivitä tapahtuma. Tapahtuman päivitys vaatii Admin- tai user-oikeudet.
 
 ## Error Responses
 
-**Condition** : Jos tapahtumalle ei annettu nimeä.
 
-**Code** : `400 BAD REQUEST`
-
-**Content example**
-
-```json
-{
-    "timestamp": "2022-02-23T17:20:55.061+00:00",
-    "status": 400,
-    "error": "Bad request",    
-    "message": "Event must have a name/description",
-    "path": "/events",
-}
-```
-### Or
-
-**Condition** : Jos päivämäärä/aika on jo mennyt.
+**Condition** : Jos lipun id on väärä.
 
 **Code** : `404 BAD NOT FOUND`
 
