@@ -1,6 +1,5 @@
 package fi.ohjelmistoprojekti1.TicketGuru.web;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -61,7 +61,7 @@ public class TicketController {
 		} // if the eventid doesn't exist => error
 
 		Optional<Tickettype> tickettypeResult = tickettypesRepo.findById(ticketDTO.getTickettypeid()); // Tickettype in
-																										// question
+		// question
 		if (!tickettypeResult.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 					"Tickettype id " + ticketDTO.getTickettypeid() + " not valid");
@@ -73,7 +73,7 @@ public class TicketController {
 
 		// ADDING TICKET TO DATABASE
 		Ticket ticket = new Ticket(true, event, sale, tickettype); // generate ticket (is valid?, which event?, which
-																	// sale?, which tickettype?)
+		// sale?, which tickettype?)
 		// set ticketprice
 		// ! API accepts manual price input (User can input manually). If not set, then
 		// use the default value from the tickettype
@@ -94,35 +94,35 @@ public class TicketController {
 		data.setTicketid(ticket.getTicketid());
 		data.setEventid(ticket.getEvent().getEventid());
 		data.setValid(true);
+		data.setTicketcode(ticket.getTicketcode());
 		data.setTickettype(ticket.getTickettype().getName());
 		data.setTickettypeid(ticket.getTickettype().getTickettypeid());
 		data.setDescription(ticket.getEvent().getDescription());
 		// set dataprice
 		// ! API accepts manual price input (User can input manually). If not set, then
 		// use the default value from the tickettype
-		
-//		if (ticketDTO.getPrice() != 0 && ticketDTO.getPrice() > 0) {
-//			data.setPrice(ticketDTO.getPrice());
-//		} 
-//		else {
-//			data.setPrice(ticket.getTickettype().getPrice());
-//		}
+
+		// if (ticketDTO.getPrice() != 0 && ticketDTO.getPrice() > 0) {
+		// data.setPrice(ticketDTO.getPrice());
+		// }
+		// else {
+		// data.setPrice(ticket.getTickettype().getPrice());
+		// }
 
 		if (ticketDTO.getPrice() != 0 && ticketDTO.getPrice() > 0) {
 			data.setPrice(ticketDTO.getPrice());
-		} 
+		}
 		if (ticketDTO.getPrice() == 0) {
 			data.setPrice(ticket.getTickettype().getPrice());
 		}
 		if (ticketDTO.getPrice() < 0) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be a positive number (e.g 5.50) or null. (If null, price is set automatically according to tickettype)");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"Price must be a positive number (e.g 5.50) or null. (If null, price is set automatically according to tickettype)");
 		}
-		
 
 		return data;
 	}
 
-	
 	// Get ALL tickets
 	@GetMapping("/tickets")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
@@ -140,19 +140,37 @@ public class TicketController {
 		} // if event id doesn't exist => error
 		return ticket;
 	}
-	
+
 	@PutMapping("/useticket/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-    public Ticket updateTicket(@Valid @RequestBody Ticket newTicket, @PathVariable("id") Long ticketid) {
-        return ticketsRepo.findById(ticketid)
-                .map(ticket -> {
-                    ticket.setValid(false);
-                    return ticketsRepo.save(ticket);
-                })
-                .orElseGet(() -> {
-                    //return eventrepository.save(newEvent);
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketid + " not found");
-                });
-    }
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+	public Ticket updateTicket(@Valid @RequestBody Ticket newTicket, @PathVariable("id") Long ticketid) {
+		return ticketsRepo.findById(ticketid)
+				.map(ticket -> {
+					ticket.setValid(false);
+					return ticketsRepo.save(ticket);
+				})
+				.orElseGet(() -> {
+					// return eventrepository.save(newEvent);
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketid + " not found");
+				});
+	}
+
+	@PutMapping("/tickets")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+	public Ticket useTicket(@RequestParam("code") String ticketcode) {
+		// Optional<Ticket> ticket = ticketsRepo.findByTicketcode(ticketcode);
+		// if (!ticket.isPresent()) {
+		// 	throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketcode + " not found");
+		// } // if event id doesn't exist => error
+		// return ticket;
+					Ticket ticket = ticketsRepo.findByTicketcode(ticketcode);
+
+					if (ticket == null) {
+						throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketcode + " not found");
+					} // if ticketcode doesn't exist => error
+					ticket.setValid(false);
+					return ticketsRepo.save(ticket);
+				
+	}
 
 }
