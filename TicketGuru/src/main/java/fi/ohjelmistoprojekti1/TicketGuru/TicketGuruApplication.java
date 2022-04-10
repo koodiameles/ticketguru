@@ -49,7 +49,7 @@ public class TicketGuruApplication {
 		}
 	 }
 
-@Profile("local")	 
+@Profile("heroku")	 
 @Bean
 	public CommandLineRunner DemoRunner(EventRepository eventrepository, RoleRepository rolerepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository, EmployeeRepository emprepository) {
 		return (args) -> {
@@ -93,8 +93,8 @@ public class TicketGuruApplication {
 			ticketrepository.save(ticket2);
 
 			//TICKETDTO with entities TESTDATA
-			 TicketDTO ticketDTO = new TicketDTO(tt1, event1);
-			 log.info(ticketDTO.toString());
+			TicketDTO ticketDTO = new TicketDTO(tt1, event1);
+			log.info(ticketDTO.toString());
 
 			//ROLE TESTDATA
 			Role roleuser = new Role("USER");
