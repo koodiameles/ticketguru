@@ -137,8 +137,9 @@ Endpointit, joihin pääsy edellyttää user- tai admin-käyttöoikeudet:
 + [**Näytä yksi tapahtuma (ID)**](APIdokumentaatio/getoneevent.md) : `GET /events/{id}`
 + [**Näytä kaikki liput**](APIdokumentaatio/getalltickets.md) : `GET /tickets`
 + [**Näytä yksi lippu (ID)**](APIdokumentaatio/getoneticket.md) : `GET /tickets/{id}`
++ [**Näytä yksi lippu (ticketcode)**](APIdokumentaatio/getoneticketcode.md) : `GET /tickets?code={ticketcode}`
 + [**Luo myyntitapahtuma**](APIdokumentaatio/postsale.md) : `POST /sales`
-+ [**Muuta lippu käytetyksi**](APIdokumentaatio/putticket.md) : `PUT /useticket/{id}`
++ [**Muuta lippu käytetyksi**](APIdokumentaatio/putticket.md) : `PATCH /tickets?code={ticketcode}`
 
 Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
 

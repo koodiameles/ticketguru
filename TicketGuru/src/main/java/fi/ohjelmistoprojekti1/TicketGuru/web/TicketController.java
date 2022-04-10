@@ -157,9 +157,10 @@ public class TicketController {
 		return ticket;
 	}
 
+	// PATCH mark ticket as used by ticketcode
 	@PatchMapping("/tickets")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	public Date useTicket(@RequestParam("code") String ticketcode) {
+	public Date useTicketByCode(@RequestParam("code") String ticketcode) {
 		Ticket ticket = ticketsRepo.findByTicketcode(ticketcode);
 
 		if (ticket == null) {

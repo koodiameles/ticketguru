@@ -2,45 +2,31 @@
 
 Käytä Lippu. Lipun voi päivittää joko Admin- tai User-oikeuksin.
 
-**URL** : `/useticket/{id}`
+**URL** : `/tickets?code={ticketcode}`
 
-**Method** : `PUT`
+**Method** : `PATCH`
 
 **Auth required** : YES
 
 **Permissions required** : None
 
-**Data example** 
-
-```json
-{
-    "valid": false,
-}
-```
-
 ## Success Response
 
-**Condition** : Jos lipun muuttaminen käytetyksi onnistui.
+**Condition** : Jos lipun muuttaminen käytetyksi onnistui, palautetaan lipunkäyttöajankohta.
 
-**Code** : `201 CREATED`
+**Code** : `200 OK`
 
 **Content example**
 
 ```json
 {
-    "ticketid": 4,
-    "eventid": 1,
-    "tickettypeid": 4,
-    "tickettype": "Child",
-    "valid": false,
-    "description": "Konsertti",
-    "price": 5.5
+    "2022-04-10T16:51:42.337+00:00"
 }
 ```
 
 ## Error Responses
 
-**Condition** : Id on virheellinen.
+**Condition** : Lippukoodi on virheellinen.
 
 **Code** : `404 Not Found`
 
@@ -50,7 +36,6 @@ Käytä Lippu. Lipun voi päivittää joko Admin- tai User-oikeuksin.
     "timestamp": "2022-02-23T17:20:55.061+00:00",
     "status": 404,
     "error": "Not Found",    
-    "message": "Tikcet id {id} not found",
-    "path": "/useticket/{id}"
+    "message": "Ticket code {ticketcode} not found",
 }
 ```
