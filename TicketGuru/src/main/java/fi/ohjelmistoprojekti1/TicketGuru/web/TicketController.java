@@ -1,5 +1,6 @@
 package fi.ohjelmistoprojekti1.TicketGuru.web;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -96,6 +98,7 @@ public class TicketController {
 		data.setValid(true);
 		data.setTicketcode(ticket.getTicketcode());
 		data.setTickettype(ticket.getTickettype().getName());
+		data.setUseddatetime(ticket.getUseddatetime());
 		data.setTickettypeid(ticket.getTickettype().getTickettypeid());
 		data.setDescription(ticket.getEvent().getDescription());
 		// set dataprice
@@ -126,14 +129,15 @@ public class TicketController {
 	// Get ALL tickets
 	@GetMapping("/tickets")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	public ResponseEntity<List<Ticket>> getAllSales() {
+	public ResponseEntity<List<Ticket>> getAllTickets(@RequestParam(name= "code", required = false) String ticketcode) {
 		List<Ticket> list = (List<Ticket>) ticketsRepo.findAll();
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
+	// GET ticket by id
 	@GetMapping("/tickets/{id}")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	public Optional<Ticket> findEvent(@PathVariable("id") Long ticketid) {
+	public Optional<Ticket> findTicket(@PathVariable("id") Long ticketid) {
 		Optional<Ticket> ticket = ticketsRepo.findById(ticketid);
 		if (!ticket.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketid + " not found");
@@ -141,31 +145,30 @@ public class TicketController {
 		return ticket;
 	}
 
-	@PutMapping("/useticket/{id}")
+	// GET ticket by ticket code
+	@GetMapping(value = "/tickets", params = { "code" })
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	public Ticket updateTicket(@Valid @RequestBody Ticket newTicket, @PathVariable("id") Long ticketid) {
-		return ticketsRepo.findById(ticketid)
-				.map(ticket -> {
-					ticket.setValid(false);
-					return ticketsRepo.save(ticket);
-				})
-				.orElseGet(() -> {
-					// return eventrepository.save(newEvent);
-					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketid + " not found");
-				});
+	public Ticket findTicketByCode(@RequestParam("code") String ticketcode) {
+		Ticket ticket = ticketsRepo.findByTicketcode(ticketcode);
+
+		if (ticket == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket code " + ticketcode + " not found");
+		} // if ticketcode doesn't exist => error
+		return ticket;
 	}
 
-	@PutMapping("/tickets")
+	@PatchMapping("/tickets")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	public Ticket useTicket(@RequestParam("code") String ticketcode) {
-					Ticket ticket = ticketsRepo.findByTicketcode(ticketcode);
+	public Date useTicket(@RequestParam("code") String ticketcode) {
+		Ticket ticket = ticketsRepo.findByTicketcode(ticketcode);
 
-					if (ticket == null) {
-						throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket code " + ticketcode + " not found");
-					} // if ticketcode doesn't exist => error
-					ticket.setValid(false);
-					return ticketsRepo.save(ticket);
-				
+		if (ticket == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket code " + ticketcode + " not found");
+		} // if ticketcode doesn't exist => error
+		ticket.setUseddatetime(new Date());
+		ticket.setValid(false);
+		ticketsRepo.save(ticket);
+		return ticket.getUseddatetime();
 	}
 
 }

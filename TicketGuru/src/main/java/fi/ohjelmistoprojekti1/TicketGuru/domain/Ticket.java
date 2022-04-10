@@ -1,7 +1,7 @@
 package fi.ohjelmistoprojekti1.TicketGuru.domain;
 
 
-
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -30,6 +30,7 @@ public class Ticket {
     private double ticketprice;     // gets value from tickettype OR user can input manually
     @Column(name = "ticketcode", nullable = false, unique = true)
     private String ticketcode = UUID.randomUUID().toString();
+    private Date useddatetime = null;
 
     @ManyToOne
     @JoinColumn(name = "eventid")
@@ -110,6 +111,12 @@ public class Ticket {
     }
     public void setTicketcode(String ticketcode) {
         this.ticketcode = ticketcode;
+    }
+    public Date getUseddatetime() {
+        return useddatetime;
+    }
+    public void setUseddatetime(Date useddatetime) {
+        this.useddatetime = useddatetime;
     }
     public Event getEvent() {
         return event;

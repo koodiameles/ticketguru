@@ -3,6 +3,8 @@ package fi.ohjelmistoprojekti1.TicketGuru.web;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Event;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 
+import java.util.Date;
+
 public class TicketDTO {
 	private Long ticketid;
 	private Long eventid;
@@ -10,6 +12,7 @@ public class TicketDTO {
 	private String tickettype;	// Tickettype name E.g "child"
 	private Boolean valid;
 	private String ticketcode;
+	private Date useddatetime;
 	private String description;    // Event desc
 	private double price;			// Tickettype price
  
@@ -64,6 +67,12 @@ public class TicketDTO {
 	}
 	public void setTicketcode(String ticketcode) {
 		this.ticketcode = ticketcode;
+	}
+	public Date getUseddatetime() {
+		return useddatetime;
+	}
+	public void setUseddatetime(Date useddatetime) {
+			this.useddatetime = useddatetime;
 	}
 	public String getDescription() {
 		return description;
