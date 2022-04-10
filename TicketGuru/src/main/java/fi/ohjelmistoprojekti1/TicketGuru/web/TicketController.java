@@ -158,15 +158,10 @@ public class TicketController {
 	@PutMapping("/tickets")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public Ticket useTicket(@RequestParam("code") String ticketcode) {
-		// Optional<Ticket> ticket = ticketsRepo.findByTicketcode(ticketcode);
-		// if (!ticket.isPresent()) {
-		// 	throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketcode + " not found");
-		// } // if event id doesn't exist => error
-		// return ticket;
 					Ticket ticket = ticketsRepo.findByTicketcode(ticketcode);
 
 					if (ticket == null) {
-						throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket id " + ticketcode + " not found");
+						throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket code " + ticketcode + " not found");
 					} // if ticketcode doesn't exist => error
 					ticket.setValid(false);
 					return ticketsRepo.save(ticket);
