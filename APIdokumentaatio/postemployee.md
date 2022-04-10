@@ -12,17 +12,18 @@ Luo uusi työntekijä. Työntekijän luonti vaatii Admin-oikeudet.
 
 **Data constraints**
 
-Työntekijällä on oltava etunimi ja sukunimi.
+Työntekijällä on oltava etunimi ja sukunimi. Role ei saa olla tyhjä ja sen tulee olla olemassa. Käyttäjänimi tulee olla uniikki.
 
 **Data example** 
 
 ```json
 {
-    "roleid": 1,
-    "firstname": "Liisa",
-    "lastname": "Ihmemaa",
-    "username": "user"
-}
+    "firstname": "Aurinko",
+    "lastname": "Kukka",
+    "username": "aurinkoinen",
+    "role": 1,
+    "password" : "kovakuoriainen"
+    }
 ```
 
 ## Success Response
@@ -35,11 +36,12 @@ Työntekijällä on oltava etunimi ja sukunimi.
 
 ```json
 {
-    "roleid": 1,
-    "firstname": "Liisa",
-    "lastname": "Ihmemaa",
-    "username": "user"
-}
+    "firstname": "Aurinko",
+    "lastname": "Kukka",
+    "username": "aurinkoinen",
+    "role": 1,
+    "password" : "kovakuoriainen"
+    }
 ```
 
 ## Error Responses
