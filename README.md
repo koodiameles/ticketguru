@@ -138,6 +138,7 @@ Endpointit, joihin pääsy edellyttää user- tai admin-käyttöoikeudet:
 + [**Näytä kaikki liput**](APIdokumentaatio/getalltickets.md) : `GET /tickets`
 + [**Näytä yksi lippu (ID)**](APIdokumentaatio/getoneticket.md) : `GET /tickets/{id}`
 + [**Luo myyntitapahtuma**](APIdokumentaatio/postsale.md) : `POST /sales`
++ [**Muuta lippu käytetyksi**](APIdokumentaatio/useticket.md): `PUT / useticket/{id}´
 
 Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet: 
 
@@ -147,3 +148,7 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Näytä kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
 + [**Näytä yksi myyntitapahtuma (ID)**](APIdokumentaatio/getonesale.md) : `GET /sales/{id}`
 + [**Luo lippu myyntitapahtumaan**](APIdokumentaatio/postticket.md) : `POST /sales/{id}/tickets`
++ [**Näytä kaikki työntekijät**](APIdokumentaatio/getallemployees.md) : `GET /employees`
++ [**Luo työntekijät**](APIdokumentaatio/postemployee.md) : `POST /employees`
++ [**Päivitä työntekijä**](APIdokumentaatio/putemployee.md) : `PUT /employees/{id}`
++ [**Poista työntekijä**](APIdokumentaatio/deleteemployee.md) : `DELETE /employees/{id}`

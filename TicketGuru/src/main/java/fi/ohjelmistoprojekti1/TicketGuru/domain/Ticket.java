@@ -2,6 +2,9 @@ package fi.ohjelmistoprojekti1.TicketGuru.domain;
 
 
 
+import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +28,8 @@ public class Ticket {
 	private Boolean valid;          // Is ticket still valid. E.g not used
 	@NotNull(message = "Ticket must have a price")
     private double ticketprice;     // gets value from tickettype OR user can input manually
+    @Column(name = "ticketcode", nullable = false, unique = true)
+    private String ticketcode = UUID.randomUUID().toString();
 
     @ManyToOne
     @JoinColumn(name = "eventid")
@@ -100,6 +105,12 @@ public class Ticket {
     public void setTicketprice(double ticketprice) {
         this.ticketprice = ticketprice;
     }
+    public String getTicketcode() {
+        return ticketcode;
+    }
+    public void setTicketcode(String ticketcode) {
+        this.ticketcode = ticketcode;
+    }
     public Event getEvent() {
         return event;
     }
@@ -122,7 +133,7 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket [event=" + event + ", sale=" + sale + ", ticketType=" + tickettype + ", ticketid=" + ticketid
-                + ", ticketprice=" + ticketprice + ", valid=" + valid + "]";
+                + ", ticketprice=" + ticketprice + ", valid=" + valid + ", ticketcode" + ticketcode + "]";
     }
 
 }

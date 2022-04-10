@@ -9,6 +9,7 @@ public class TicketDTO {
 	private Long tickettypeid;
 	private String tickettype;	// Tickettype name E.g "child"
 	private Boolean valid;
+	private String ticketcode;
 	private String description;    // Event desc
 	private double price;			// Tickettype price
  
@@ -58,6 +59,12 @@ public class TicketDTO {
 	public void setValid(Boolean valid) {
 		this.valid = valid;
 	}
+	public String getTicketcode() {
+		return ticketcode;
+	}
+	public void setTicketcode(String ticketcode) {
+		this.ticketcode = ticketcode;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -75,7 +82,7 @@ public class TicketDTO {
 	@Override
 	public String toString() {
 		return "TicketDTO [description=" + description + ", eventid=" + eventid + ", price=" + price + ", tickettypeid="
-				+ tickettypeid + ", valid=" + valid + "]";
+				+ tickettypeid + ", valid=" + valid + ", ticketcode" + ticketcode + "]";
 	}
 
 	
