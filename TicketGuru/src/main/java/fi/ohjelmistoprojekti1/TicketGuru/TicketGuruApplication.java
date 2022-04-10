@@ -49,7 +49,7 @@ public class TicketGuruApplication {
 		}
 	 }
 
-@Profile("heroku")	 
+@Profile("local")	 
 @Bean
 	public CommandLineRunner DemoRunner(EventRepository eventrepository, RoleRepository rolerepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository, EmployeeRepository emprepository) {
 		return (args) -> {
