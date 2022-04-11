@@ -1,6 +1,7 @@
 package fi.ohjelmistoprojekti1.TicketGuru;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,9 +43,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .logout()
                 .permitAll()
-                .and()
+            .and()
             .cors()
-            	.and()
+            // .configurationSource(request -> {
+            //     var cors = new CorsConfiguration();
+            //     cors.setAllowedOrigins(List.of("*"));
+            //     cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "PATCH"));
+            //     cors.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+            //     // cors.setAllowCredentials(true);
+            //     return cors;
+            // })
+            .and()
             .csrf().disable();
 
     }
@@ -62,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
 
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        configuration.setAllowCredentials(true);
+        // configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
