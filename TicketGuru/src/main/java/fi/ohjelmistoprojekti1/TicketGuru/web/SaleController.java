@@ -1,5 +1,6 @@
 package fi.ohjelmistoprojekti1.TicketGuru.web;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +58,7 @@ public class SaleController {
 	@GetMapping("/sales")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<List<Sale>> getAllSales() {
-		List<Sale> list = (List<Sale>) salerepository.findAll();
+		List<Sale> list = salerepository.findAll();
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
@@ -69,6 +70,7 @@ public class SaleController {
 		if (bindingresult.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage());
 		}
+		sale.setDatetime(new Date());
 		salerepository.save(sale);
 		return sale;
 	}

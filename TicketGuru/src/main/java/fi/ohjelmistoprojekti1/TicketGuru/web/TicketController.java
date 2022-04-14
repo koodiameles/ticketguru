@@ -29,6 +29,7 @@ import fi.ohjelmistoprojekti1.TicketGuru.domain.Ticket;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TicketRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
+import net.minidev.json.JSONObject;
 
 @RestController
 public class TicketController {
@@ -160,16 +161,21 @@ public class TicketController {
 	// PATCH mark ticket as used by ticketcode
 	@PatchMapping("/tickets")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	public Date useTicketByCode(@RequestParam("code") String ticketcode) {
+	public JSONObject useTicketByCode(@RequestParam("code") String ticketcode) {
 		Ticket ticket = ticketsRepo.findByTicketcode(ticketcode);
 
-		if (ticket == null) {
+		if (ticket == null) { // if ticketcode doesn't exist => error
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket code " + ticketcode + " not found");
-		} // if ticketcode doesn't exist => error
+		} else if (!ticket.getValid()) { //if ticketcode is not valid => error
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ticket with ticket code " + ticketcode + " has already been used");
+		}
 		ticket.setUseddatetime(new Date());
 		ticket.setValid(false);
 		ticketsRepo.save(ticket);
-		return ticket.getUseddatetime();
+
+		JSONObject response = new JSONObject();
+		response.put("used", ticket.getUseddatetime());
+		return response;
 	}
 
 }

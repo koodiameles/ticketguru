@@ -20,7 +20,7 @@ Käytä Lippu. Lipun voi päivittää joko Admin- tai User-oikeuksin.
 
 ```json
 {
-    "2022-04-10T16:51:42.337+00:00"
+    "used": "2022-04-10T16:51:42.337+00:00"
 }
 ```
 
@@ -37,5 +37,19 @@ Käytä Lippu. Lipun voi päivittää joko Admin- tai User-oikeuksin.
     "status": 404,
     "error": "Not Found",    
     "message": "Ticket code {ticketcode} not found",
+}
+```
+
+**Condition** : Lippukoodilla löytyvä lippu on jo käytetty.
+
+**Code** : `400 Forbidden`
+
+**Content example**
+```json
+{
+    "timestamp": "2022-02-23T17:20:55.061+00:00",
+    "status": 400,
+    "error": "Forbidden",    
+    "message": "Ticket with ticket code {ticketcode} has already been used",
 }
 ```
