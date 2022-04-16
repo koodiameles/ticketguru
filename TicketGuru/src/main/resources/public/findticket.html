@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Ticketguru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<h1>Tarkista lippu</h1>
+		<form>
+			<label>Syötä lippukoodi</label>
+			<input type="text" id="code">
+			<input type="button" value="Etsi lippu" onclick="findTicket()">
+			<input type="button" value="Käytä lippu" onclick="useTicket()">
+		</form>
+	</div>
+	 <div >
+        <p id="result"></p>
+    </div>
+</body>
+<script>
+	var url = "https://ticketguru22.herokuapp.com/tickets?code="
+	var msg = ""
+	var pass = btoa('user:user')
+	
+	async function findTicket() {
+		try {
+			var code = document.getElementById("code").value; 
+			const response = await fetch(url + code, 
+					{method: 'GET',
+					headers: {'Authorization': 'Basic ' + pass}}); 
+			const json = await response.json(); 
+			console.log(json); 
+			
+			if(response.status == 404){
+				msg ="Koodilla " + code + " ei löydy lippua."; 
+				document.getElementById("result").innerHTML = msg; 
+			}
+			else {
+				msg ="Koodilla " + code + " löytyi lippu.";
+				document.getElementById("result").innerHTML = msg; 
+			}
+		} catch (error){
+			console.log(error); 
+			msg = "Lippua ei voitu hakea";
+			document.getElementById("result").innerHTML = msg; 
+		}
+	}
+	
+	async function useTicket() {
+		try{
+			var code = document.getElementById("code").value;
+			const response = await fetch(url + code,
+				{method: 'PATCH',
+				headers: {'Authorization': 'Basic ' + pass,
+				'Content-Type': 'application/json-patch+json'},
+				body: JSON.stringify([{
+					'op': 'replace', 
+					'path': '/valid', 
+					'value':false}])
+				}); 
+			const json = await response.json(); 
+			console.log(json); 
+			if(response.status == 200){
+			msg = "Lippu koodilla " + code + " on nyt käytetty."
+			document.getElementById("result").innerHTML = msg; 
+			} else {
+			msg = "Lippu koodilla " + code + " oli jo käytetty, sitä ei voi käyttää uudelleen."
+			document.getElementById("result").innerHTML = msg; 
+			}
+		} catch (error){
+		console.log(error); 
+		msg="Lippua ei voitu hakea"; 
+		document.getElementById("result").innerHTML = msg; 
+	}
+}
+</script>
+</html>
