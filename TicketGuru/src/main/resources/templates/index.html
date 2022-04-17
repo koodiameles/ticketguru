@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
+<head>
+    <title>Ticketguru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  <!-- Icon library  -->
+    <!-- <script type="text/javascript" href="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:href="@{/js/scripts.js}"></script> -->
+</head>
+
+<body>
+    <nav>
+        <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
+        <ul>
+            <a th:href="@{/login}">Sign in</a>
+            <a th:href="@{/logout}">Sign out</a>
+            <a th:href="@{/index}">Main page</a>
+        </ul>
+    </nav>
+
+    <div class="flexcontainercolumn">
+        <form >
+            <h2>Tarkista lippu</h2>
+            <label>
+                <input class="textInput" type="text" id="code" placeholder="Syötä lippukoodi...">
+            </label>
+            <label>
+                <input class="button" type="button" value="Etsi lippu" onclick="findTicket()">
+            </label>
+            <label>
+                <input class="button" type="button" value="Käytä lippu" onclick="useTicket()">
+            </label>
+        </form>
+        <h3 id="result"></h3>
+    </div>
+  
+</body>
+
+<script>
+    var url = "https://ticketguru22.herokuapp.com/tickets?code="
+    var msg = ""
+    var pass = btoa('user:user')
+
+    async function findTicket() {
+        try {
+            var code = document.getElementById("code").value; 
+            const response = await fetch(url + code, {
+                    method: 'GET',
+                    headers: {'Authorization': 'Basic ' + pass}
+                }); 
+            const json = await response.json(); 
+            console.log(json); 
+
+            if (response.status == 404) {
+                msg ="Koodilla " + code + " ei löydy lippua."; 
+                document.getElementById("result").innerHTML = msg; 
+            } else if (response.status == 403) {
+                msg ="Sinulla ei ole oikeuksia hakea lippua."; 
+                document.getElementById("result").innerHTML = msg; 
+            } else if (response.status == 200) {
+                msg ="Koodilla " + code + " löytyi lippu.";
+                document.getElementById("result").innerHTML = msg; 
+            } 
+            else {
+                msg ="Jokin men vikaan";
+                document.getElementById("result").innerHTML = msg; 
+            }
+        } catch (error) {
+            console.log(error); 
+            msg = "Lippua ei voitu hakea";
+            document.getElementById("result").innerHTML = msg; 
+        }
+    }
+    async function useTicket() {
+        try {
+            var code = document.getElementById("code").value;
+            const response = await fetch(url + code, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': 'Basic ' + pass,
+                    'Content-Type': 'application/json'
+                }
+                }); 
+            const json = await response.json(); 
+            console.log(json); 
+            if (response.status == 200) {
+            msg = "Lippu koodilla " + code + " on nyt käytetty."
+            document.getElementById("result").innerHTML = msg; 
+            } else if (response.status == 404) {
+            msg = "Lippua koodilla " + code + " ei ole olemassa."
+            document.getElementById("result").innerHTML = msg; 
+            } else if (response.status == 400) {
+            msg = "Lippu koodilla " + code + " oli jo käytetty, sitä ei voi käyttää uudelleen."
+            document.getElementById("result").innerHTML = msg; 
+            } else {
+            msg = "Jokin meni vikaan"
+            document.getElementById("result").innerHTML = msg; 
+            }
+        } catch (error) {
+        console.log(error); 
+        msg = "Lippua ei voitu merkitä käytetyksi."; 
+        document.getElementById("result").innerHTML = msg; 
+    }
+    }
+</script>
+
+</html>

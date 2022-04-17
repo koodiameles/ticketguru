@@ -1,0 +1,180 @@
+@charset "ISO-8859-1";
+
+/* Reset standard webpage css. "Start from clean table" */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Colors */
+:root {
+    --primary: #6200FF;
+    --secondary: #9f94ff;
+    --tertiary: #140f1b;
+    --error: #B30036;
+    --success: #00B32D;
+    --textLight: #e4e1ff;
+    --textDark: #161520;
+}
+
+/* BODY */
+body {
+    height: 100vh;
+    background-color: var(--tertiary);
+
+}
+
+/* GENERAL. FONTS and CONTAINERS */
+p {
+    color: #ffffff
+}
+
+h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2rem;
+    margin: 0.7rem;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff
+}
+
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+}
+
+.flexcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* border: 2px solid white; */
+}
+
+.flexcontainercolumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: 2px solid white; */
+}
+
+/* NAVIGATION BAR*/
+nav {
+    padding: 0.2rem;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--tertiary);
+}
+
+nav h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3rem;
+    margin: 0.2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px #362b52;
+    text-align: center;
+    align-items: center;
+    letter-spacing: 3px;
+}
+.navh1a {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem;
+    margin-right: 1rem;
+    border-radius: 8px;
+    color: var(--textLight);
+    background-color: var(--primary);
+    transition: color 0.5s, font-size 0.5s;
+}
+
+nav ul a:hover {
+    color: rgb(255, 255, 255);
+    font-size: 1.6rem;
+}
+
+
+/*FORMS */
+
+form {
+    padding: 1rem 3.5rem 1rem 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: 2px solid;  */
+}
+
+form .button {
+    font-weight: 600;
+    font-size: 1.5rem;
+    width: 15rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.4rem;
+    color: var(--textLight);
+    background-color: var(--primary);
+    transition: font-size 0.5s, color 0.5s;
+}
+form .button:hover {
+    font-size: 1.6rem;
+    color: white;
+}
+
+form .textInput {
+    width: 15rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    color: var(--textLight);
+    font-weight: 600;
+    background-color: var(--secondary);
+}
+
+form label {
+    color: #ffffff;
+    margin: 0.5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+form select {
+    font-size: 1rem;
+    color: white;
+    width: 15rem;
+    padding: 1rem;
+    margin: 1rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: var(--primary);
+}
+
+form ::placeholder{
+    text-align: center;
+    color: white;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
