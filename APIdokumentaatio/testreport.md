@@ -10,7 +10,9 @@ EventRepoTest: findByNameShouldReturnOneEvent | Hae tapahtuma "Sinfoniaorkesteri
 EventRepoTest: createEventAndUpdateTicketCount | Luo uusi tapahtuma. Vähennä lippumäärää: 1000-200. | Tapahtumalla on id. Tapahtuman lippumäärä on 800. | ok
 TickettypeRepoTest: findByNameAndCount | Hae lipputyyppi "Aikuinen", lisää se listaan | Listan koko on 2 | ok
 TickettypeRepoTest: createNewTickettype | Luo uusi lipputyyppi | Lipputyypillä on id. | ok
-text | text | text
+EmployeeRepoTest: findByLastname | Etsitään työntekijää sukunimellä | Järjestelmä vahvistaa työntekijän etunimen | OK
+EmployeeRepoTest: createNewEmployee | Asetetaan työntekijälle etu- ja sukunimi, salasana ja käyttäjätunnus | Työntekijällä on id. | ok
+text | text | text | ok
 
 ## Integraatiotestit (rajapintatestit)
 
@@ -23,5 +25,5 @@ text | text | text | ok
 
 Testitapaus | Syötteet | Odotetu tulokset | Saadut tulokset
 ------ | ------ | ------ | ------
-text | text | text | ok
+UI:n testausta. Syötetään lippukoodi ja haetaan lippu koodilla. Muutetaan lippu käytetyksi. Tarkistetaan, että lipun tila on muuttunut. | Lippukoodi | Järjetelmä kertoo, löytyykö tunnuksella lippua. Jos lippu löytyy, järjestelmä kertoo, kuinka lipun tila muuttuu. | ok
 text | text | text | ok
