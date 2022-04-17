@@ -12,5 +12,12 @@ public class ClientController {
 		// System.out.println("navigate to index");
 		return "index";
 	}
+
+	 // GET INDEX - SHOW MAIN PAGE
+	 @GetMapping(value={"/selltickets"})
+	 public String getSellTickets () {
+		 // System.out.println("navigate to index");
+		 return "selltickets";
+	 }
     
 }
