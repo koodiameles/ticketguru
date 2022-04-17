@@ -8,6 +8,8 @@ Testitapaus | Syötteet | Odotetu tulokset | Saadut tulokset
 ------ | ------ | ------ | ------
 EventRepoTest: findByNameShouldReturnOneEvent | Hae tapahtuma "Sinfoniaorkesteri", lisää se listaan | Listan koko on  1. Tapahtuman lokaatio on oikein (="Musiikkitalo") | ok
 EventRepoTest: createEventAndUpdateTicketCount | Luo uusi tapahtuma. Vähennä lippumäärää: 1000-200. | Tapahtumalla on id. Tapahtuman lippumäärä on 800. | ok
+TickettypeRepoTest: findByNameAndCount | Hae lipputyyppi "Aikuinen", lisää se listaan | Listan koko on 2 | ok
+TickettypeRepoTest: createNewTickettype | Luo uusi lipputyyppi | Lipputyypillä on id. | ok
 text | text | text
 
 ## Integraatiotestit (rajapintatestit)
