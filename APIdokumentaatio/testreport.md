@@ -25,5 +25,5 @@ text | text | text | ok
 
 Testitapaus | Syötteet | Odotetu tulokset | Saadut tulokset
 ------ | ------ | ------ | ------
-UI:n testausta. Syötetään lippukoodi ja haetaan lippu koodilla. Muutetaan lippu käytetyksi. Tarkistetaan, että lipun tila on muuttunut. | Lippukoodi | Järjetelmä kertoo, löytyykö tunnuksella lippua. Jos lippu löytyy, järjestelmä kertoo, kuinka lipun tila muuttuu. | ok
+UI:n testausta. Syötetään lippukoodi ja haetaan lippu koodilla. Muutetaan lippu käytetyksi. Tarkistetaan, että lipun tila on muuttunut. | Lippukoodi | Järjetelmä kertoo, löytyykö tunnuksella lippua. Jos lippu löytyy, järjestelmä kertoo, kuinka lipun tila on muuttuu. | Järjestelmä kertoo, jos koodilla löytyy lippu. Virheellisesti koodista ilmoitetaan. Lipun käyttämisen jälkeen järjestelmä kertoo lipun tulleen käytetyksi. Kun koodin syöttää uudelleen, järjestelmä kertoo lipun olevan jo käytetty. Testi OK.
 text | text | text | ok
