@@ -153,3 +153,9 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Luo työntekijät**](APIdokumentaatio/postemployee.md) : `POST /employees`
 + [**Päivitä työntekijä**](APIdokumentaatio/putemployee.md) : `PUT /employees/{id}`
 + [**Poista työntekijä**](APIdokumentaatio/deleteemployee.md) : `DELETE /employees/{id}`
+
+## Testaus
+
+*Johdanto, yleistä testeistä*
+
+[Testiraportti](APIdokumentaatio/testreport.md) kuvailee tarkemmin testitapausten toteutusta ja toimintaa.
