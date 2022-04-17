@@ -1,9 +1,9 @@
 
-var url = "https://ticketguru22.herokuapp.com/tickets?code="
 var msg = ""
 var pass = btoa('user:user')
 
 async function findTicket() {
+    let url = "https://ticketguru22.herokuapp.com/tickets?code="
     try {
         var code = document.getElementById("code").value; 
         const response = await fetch(url + code, {
@@ -34,6 +34,7 @@ async function findTicket() {
     }
 }
 async function useTicket() {
+    var url = "https://ticketguru22.herokuapp.com/tickets?code="
     try {
         var code = document.getElementById("code").value;
         const response = await fetch(url + code, {
@@ -62,6 +63,51 @@ async function useTicket() {
     console.log(error); 
     msg = "Lippua ei voitu merkitä käytetyksi."; 
     document.getElementById("result").innerHTML = msg; 
+    }
 }
+
+async function findAllTickets() {
+        
+    let url = "https://ticketguru22.herokuapp.com/tickets";
+    $(".hidden").css('display', 'block'); // Show hidden elements
+    try {
+        $.ajax({
+            headers: {
+                'Authorization': 'Basic ' + pass,
+                'Content-Type': 'application/json'
+            },
+            dataType: "json",
+            url: url,
+            success: function(data) {
+                console.log(data); 
+                var ticket = '';
+
+                // ITERATING THROUGH OBJECTS
+                $.each(data, function (key, value) {
+
+                    //CONSTRUCTION OF ROWS HAVING
+                    // DATA FROM JSON OBJECT
+                    ticket += '<tr>';
+                    ticket += '<td>' + 
+                        value.ticketcode + '</td>';
+
+                    ticket += '<td>' + 
+                        value.event.description + '</td>';
+
+                    ticket += '<td>' + 
+                        value.ticketprice + '</td>';
+
+                    ticket += '<td>' + 
+                        value.valid + '</td>';
+
+                    ticket += '</tr>';
+                });
+                //INSERTING ROWS INTO TABLE 
+                $('#table').append(ticket);
+            }
+        });
+    } catch (error) {
+    console.log(error); 
+    }
 }
 
