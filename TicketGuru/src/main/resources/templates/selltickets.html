@@ -5,7 +5,6 @@
     <title>Ticketguru</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
-    <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"> -->
     <script src="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script>
 </head>
@@ -23,7 +22,22 @@
     </nav>
 
     <div class="flexcontainercolumn">
-       <h2>SELL</h2>
+        <h2>Myy lippuja</h2>
+       <form >
+            <label>Valitse tapahtuma</label>
+            <select name="events" id="events">
+                <option value=""></option>
+                <option value="Konsertti">Konsertti</option>
+                <option value="Trio röyhkeät">Trio röyhkeät</option>
+                <option value="Sinfoniaorkesteri">Sinfoniaorkesteri</option>
+            </select>
+            <label> MyyntitapahtumaID </label>
+            <input class="textInput2" type="number" id="saleid" placeholder="#number">
+            <label> Hinta </label>
+            <input class="textInput2" type="number" id="ticketprice" placeholder="€€.€€">
+            <br>/
+            <button class="buttonSecondary" type="button" value="sellticket">Myy Lippu</button>
+       </form>
     </div>
   
 </body>

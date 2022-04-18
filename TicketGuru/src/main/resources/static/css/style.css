@@ -63,6 +63,7 @@ h3 {
     /* border: 2px solid white; */
 }
 
+
 /* NAVIGATION BAR*/
 nav {
     padding: 0.2rem;
@@ -134,7 +135,18 @@ form .button {
     background-color: var(--primary);
     transition: font-size 0.5s, color 0.5s;
 }
-form .button:hover {
+form .buttonSecondary {
+    font-weight: 600;
+    font-size: 1.5rem;
+    width: 15rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.4rem;
+    color: var(--textDark);
+    background-color: var(--secondary);
+    transition: font-size 0.5s, color 0.5s;
+}
+form .button:hover, .buttonSecondary:hover {
     font-size: 1.6rem;
     color: white;
 }
@@ -147,6 +159,15 @@ form .textInput {
     color: var(--textLight);
     font-weight: 600;
     background-color: var(--secondary);
+}
+form .textInput2 {
+    width: 15rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    color: white;
+    font-weight: 600;
+    background-color: var(--primary);
 }
 
 form label {
