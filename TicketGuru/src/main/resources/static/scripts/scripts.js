@@ -2,11 +2,14 @@
 var msg = ""
 var pass = btoa('user:user')
 
+//var url = 'https://ticketguru22.herokuapp.com/';
+var url = 'http://localhost:8080/';
+
 async function findTicket() {
-    let url = "https://ticketguru22.herokuapp.com/tickets?code="
+    let fturl = url + "tickets?code="
     try {
         var code = document.getElementById("code").value; 
-        const response = await fetch(url + code, {
+        const response = await fetch(fturl + code, {
                 method: 'GET',
                 headers: {'Authorization': 'Basic ' + pass}
             }); 
@@ -34,10 +37,10 @@ async function findTicket() {
     }
 }
 async function useTicket() {
-    var url = "https://ticketguru22.herokuapp.com/tickets?code="
+    var uturl = url + "tickets?code="
     try {
         var code = document.getElementById("code").value;
-        const response = await fetch(url + code, {
+        const response = await fetch(uturl + code, {
             method: 'PATCH',
             headers: {
                 'Authorization': 'Basic ' + pass,
@@ -68,8 +71,8 @@ async function useTicket() {
 
 async function findAllTickets() {
         
-    let url = "https://ticketguru22.herokuapp.com/tickets";
-    //let url = "http://localhost:8080/tickets";
+    let faturl = url + "tickets";
+
     $(".hidden").css('display', 'block'); // Show hidden elements
     try {
         $.ajax({
@@ -78,7 +81,7 @@ async function findAllTickets() {
                 'Content-Type': 'application/json'
             },
             dataType: "json",
-            url: url,
+            url: faturl,
             success: function(data) {
                 console.log(data); 
                 var ticket = '';
