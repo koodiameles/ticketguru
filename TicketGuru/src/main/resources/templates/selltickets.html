@@ -6,7 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
     <script src="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <!-- <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script> -->
 </head>
 
 <body>
@@ -23,7 +26,7 @@
 
     <div class="flexcontainercolumn">
         <h2>Myy lippuja</h2>
-       <form >
+       <!-- <form >
             <label>Valitse tapahtuma</label>
             <select name="events" id="events">
                 <option value=""></option>
@@ -38,8 +41,145 @@
             <br>/
             <button class="buttonSecondary" type="button" value="sellticket">Myy Lippu</button>
        </form>
+    </div> -->
+
+    <div>    
+        <form>
+            <label>Valitse tapahtuma:</label>
+            <select id="evdropdown" name="event"></select></br>
+            <label>Valitse lipputyyppi:</label>
+            <select id="ttdropdown" name="tickettype"></select></br>
+            <label>Valitse lippujen määrä:</label>
+            <input type="number" id="tiamount" name="tiamount"></select></br>
+            </br>
+            <button id="buyticket" >Osta liput</button>
+        </form>
     </div>
   
 </body>
 
+<script>
+
+    var url = 'https://ticketguru22.herokuapp.com/';
+    // var url = 'http://localhost:8080/';
+    var pass = btoa('admin:admin'); 
+    var saleid = 10;
+    var ticketamount = 1;
+    var evs;
+    var tickettosale = new Array();
+    var selevent;
+    var selttype;
+    var customprice;
+
+
+     $(document).ready(function() {
+        const saleurl = url + 'sales';
+  
+        // $.ajax({
+        //     url: saleurl,
+        //     method: 'POST',
+        //     dataType: 'json',
+        //     headers: {'Authorization': 'Basic ' + pass},
+        //     contentType: 'application/json; charset=utf-8',
+        //     data: JSON.stringify({employee : null}),
+        //     success: function (data) {
+        //         console.log(data);
+        //         saleid = data.saleid;
+        //         // return saleid;
+        //     },
+        //     error: function (error) {
+        //         console.log(error);
+        //     }
+        // });
+
+        $(function() {
+            let evdropdown = $('#evdropdown');
+            
+            evdropdown.empty();
+
+            evdropdown.append('<option selected="true" disabled>Valitse tapahtuma</option>');
+            evdropdown.prop('selectedIndex', 0);
+
+            const evurl = url + 'events/';
+
+            //Populate event dropdown
+            $.ajax({
+                url: evurl,
+                type: 'GET',
+                dataType: 'json',
+                headers: {'Authorization': 'Basic ' + pass},
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    evs = data;
+                    $.each(data, function (key, event) {
+                        evdropdown.append($('<option></option>').attr('value', event.eventid).text(event.description));
+                    })
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
+
+        //Tickettype dropdown
+        $('#evdropdown').change(function() {
+            let ttdropdown = $('#ttdropdown');
+
+            ttdropdown.empty();
+
+            ttdropdown.append('<option selected="true" disabled>Valitse lipputyyppi</option>');
+            ttdropdown.prop('selectedIndex', 0);
+
+            selevent = $('#evdropdown').val();
+            console.log(selevent);
+
+            console.log(evs[selevent]);
+            $.each(evs[selevent].tickettypes, function (key, ttype) {
+                ttdropdown.append($('<option></option>').attr('value', ttype.tickettypeid).text(ttype.name + ' (' + ttype.price + ' €)'));
+            })
+            
+        });
+        
+        $('#ttdropdown').change(function() {
+            selttype = $('#ttdropdown').val();
+            console.log(selttype);
+
+            $('#addticket').removeAttr('disabled');
+        });
+
+        $('#tiamount').change(function() {
+            ticketamount = $('#tiamount').val();
+            console.log(ticketamount);
+        });
+
+        $("#buyticket").click(function(e){
+            const titosaleurl = url + 'sales/' + saleid + '/tickets'
+
+            e.preventDefault();
+            for (i = 0; i < ticketamount; i++) {
+
+                $.ajax({
+                    url: titosaleurl,
+                    method: 'POST',
+                    dataType: 'json',
+                    headers: {'Authorization': 'Basic ' + pass},
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({eventid: selevent,
+                        tickettypeid: selttype}),
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+
+
+        });
+    
+    });
+
+</script>
 </html>

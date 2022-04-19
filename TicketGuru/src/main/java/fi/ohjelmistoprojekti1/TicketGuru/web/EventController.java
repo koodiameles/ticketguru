@@ -44,19 +44,17 @@ public class EventController {
 
 	@Autowired
 	private TickettypeRepository tickettyperepository;
-	
-	
 
 	// Get event by id
 	@GetMapping("/events/{id}")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public Optional<Event> findEvent(@PathVariable("id") Long eventid) {
-		
+
 		Optional<Event> event = eventrepository.findById(eventid);
 		if (!event.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event id " + eventid + " not found");
 		} // if event id doesn't exist => error
-		
+
 		return event;
 	}
 
@@ -64,10 +62,10 @@ public class EventController {
 	@GetMapping("/events")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public ResponseEntity<List<Event>> getAllEvents() {
-		List<Event>list =(List<Event>)eventrepository.findAll(); 
-		return new ResponseEntity<>(list, HttpStatus.OK); 
+		List<Event> list = (List<Event>) eventrepository.findAll();
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
-	
+
 	// Add (POST) a new event
 	@PostMapping("/events")
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -93,7 +91,7 @@ public class EventController {
 					return eventrepository.save(event);
 				})
 				.orElseGet(() -> {
-					//return eventrepository.save(newEvent);
+					// return eventrepository.save(newEvent);
 					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event id " + eventid + " not found");
 				});
 	}
@@ -102,12 +100,12 @@ public class EventController {
 	@DeleteMapping("/events/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<?> deleteEvent(@PathVariable("id") Long eventid) {
-		
+
 		Optional<Event> event = eventrepository.findById(eventid);
 		if (!event.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event id " + eventid + " not found");
 		} // if event id doesn't exist => error
-		
+
 		eventrepository.deleteById(eventid);
 		HashMap<String, String> message = new HashMap<String, String>();
 		message.put("message", "Deleted event " + event.get().getDescription() + " with the id " + eventid);
