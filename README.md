@@ -156,6 +156,8 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 
 ## Testaus
 
-*Johdanto, yleistä testeistä*
+Sovelluksesta on testattu tärkeimpiä ominaisuuksia, joiden vähintään tulee toimia, jotta järjestelmä toimii halutulla tavalla.
+
+Olennaista on esimerkiksi pystyä luomaan tapahtuma ja myymään siihen lippuja. Näihin liittyviä toimintoja on testattu onnistuneesti sekä automaatiotesteillä että manuaalisilla testeillä.  
 
 [Testiraportti](APIdokumentaatio/testreport.md) kuvailee tarkemmin testitapausten toteutusta ja toimintaa.
