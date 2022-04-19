@@ -88,14 +88,6 @@ public void setPrice(double price) {
 	this.price = price;
 }
 
-public Event getEvent() {
-	return event;
-}
-
-public void setEvent(Event event) {
-	this.event = event;
-}
-
 @Override
 public String toString() {
 	return "Tickettype [tickettypeid=" + tickettypeid + ", tickettype=" + name + ", price=" + price + "]";
