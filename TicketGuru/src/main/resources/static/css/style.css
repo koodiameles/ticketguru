@@ -41,11 +41,12 @@ h2 {
 
 h3 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 2rem;
     font-weight: bold;
     text-align: center;
     color: #ffffff;
+    padding-left: 1rem;
 }
 
 .flexcontainer {
