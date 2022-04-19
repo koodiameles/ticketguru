@@ -69,7 +69,7 @@ async function useTicket() {
 async function findAllTickets() {
         
     let url = "https://ticketguru22.herokuapp.com/tickets";
-    // let url = "http://localhost:8080/tickets";
+    //let url = "http://localhost:8080/tickets";
     $(".hidden").css('display', 'block'); // Show hidden elements
     try {
         $.ajax({

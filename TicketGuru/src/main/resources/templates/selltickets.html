@@ -61,9 +61,9 @@
 <script>
 
     var url = 'https://ticketguru22.herokuapp.com/';
-    // var url = 'http://localhost:8080/';
+    //var url = 'http://localhost:8080/';
     var pass = btoa('admin:admin'); 
-    var saleid = 10;
+    var saleid = 1;
     var ticketamount = 1;
     var evs;
     var tickettosale = new Array();
@@ -112,7 +112,7 @@
                 success: function (data) {
                     evs = data;
                     $.each(data, function (key, event) {
-                        evdropdown.append($('<option></option>').attr('value', event.eventid).text(event.description));
+                        evdropdown.append($('<option></option>').attr('value', (event.eventid -1)).text(event.description));
                     })
                 },
                 error: function (error) {
@@ -165,7 +165,7 @@
                     dataType: 'json',
                     headers: {'Authorization': 'Basic ' + pass},
                     contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify({eventid: selevent,
+                    data: JSON.stringify({eventid: Number(selevent) +1,
                         tickettypeid: selttype}),
                         success: function (data) {
                             console.log(data);
