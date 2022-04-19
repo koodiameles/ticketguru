@@ -112,7 +112,7 @@
                 success: function (data) {
                     evs = data;
                     $.each(data, function (key, event) {
-                        evdropdown.append($('<option></option>').attr('value', event.eventid -1).text(event.description));
+                        evdropdown.append($('<option></option>').attr('value', event.eventid).text(event.description));
                     })
                 },
                 error: function (error) {
