@@ -66,6 +66,5 @@ public class TickettypeController {
 		tickettyperepository.save(tickettype);
 		return tickettype;
 	}
-		
 
 }

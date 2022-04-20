@@ -153,3 +153,11 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Luo työntekijät**](APIdokumentaatio/postemployee.md) : `POST /employees`
 + [**Päivitä työntekijä**](APIdokumentaatio/putemployee.md) : `PUT /employees/{id}`
 + [**Poista työntekijä**](APIdokumentaatio/deleteemployee.md) : `DELETE /employees/{id}`
+
+## Testaus
+
+Sovelluksesta on testattu tärkeimpiä ominaisuuksia, joiden vähintään tulee toimia, jotta järjestelmä toimii halutulla tavalla.
+
+Olennaista on esimerkiksi pystyä luomaan tapahtuma ja myymään siihen lippuja. Näihin liittyviä toimintoja on testattu onnistuneesti sekä automaatiotesteillä että manuaalisilla testeillä.  
+
+[Testiraportti](APIdokumentaatio/testreport.md) kuvailee tarkemmin testitapausten toteutusta ja toimintaa.
