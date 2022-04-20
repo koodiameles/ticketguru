@@ -9,13 +9,13 @@ Alla olevassa taulukossa olevat testit testaavat yksittäisen eniteetin ja siihe
 
 Testitapaus | Syötteet | Odotetut tulokset | Saadut tulokset
 ------ | ------ | ------ | ------
-[EventRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventRepositoryTest.java): findByNameShouldReturnOneEvent | Hae tapahtuma "Sinfoniaorkesteri", lisää se listaan. | Listan koko on  1. Tapahtuman lokaatio on oikein (="Musiikkitalo"). | ok
-[EventRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventRepositoryTest.java): createEventAndUpdateTicketCount | Luo uusi tapahtuma. Vähennä lippumäärää: 1000-200. | Tapahtumalla on id. Tapahtuman lippumäärä on 800. | ok
-[TickettypeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TickettypeRepositoryTest.java): findByNameAndCount | Hae lipputyyppi "Aikuinen", lisää se listaan. | Listan koko on 2. | ok
-[TickettypeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TickettypeRepositoryTest.java): createNewTickettype | Luo uusi lipputyyppi. | Lipputyypillä on id. | ok
-[EmployeeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EmployeeRepositoryTest.java): findByLastname | Etsitään työntekijää sukunimellä. | Järjestelmä vahvistaa työntekijän etunimen. | ok
-[EmployeeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EmployeeRepositoryTest.java): createNewEmployee | Asetetaan työntekijälle etu- ja sukunimi, salasana ja käyttäjätunnus. | Työntekijällä on id. | ok
-[TicketTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TicketTest.java): </br> createNewTicket | Luodaan kokonaan uusi lippu luomalla uusi tapahtuma ja uusi lipputyyppi  | Luodulta lipulta löytyy tickerid, ticketprice, ticketcode ja tickettype, ja lippu on käyttämätön | ok
+[EventRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventRepositoryTest.java): </br> findByNameShouldReturnOneEvent | Hae tapahtuma "Sinfoniaorkesteri", lisää se listaan. | Listan koko on  1. Tapahtuman lokaatio on oikein (="Musiikkitalo"). | ok
+[EventRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventRepositoryTest.java): </br> createEventAndUpdateTicketCount | Luo uusi tapahtuma. Vähennä lippumäärää: 1000-200. | Tapahtumalla on id. Tapahtuman lippumäärä on 800. | ok
+[TickettypeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TickettypeRepositoryTest.java): </br> findByNameAndCount | Hae lipputyyppi "Aikuinen", lisää se listaan. | Listan koko on 2. | ok
+[TickettypeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TickettypeRepositoryTest.java): </br> createNewTickettype | Luo uusi lipputyyppi. | Lipputyypillä on id. | ok
+[EmployeeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EmployeeRepositoryTest.java): </br> findByLastname | Etsitään työntekijää sukunimellä. | Järjestelmä vahvistaa työntekijän etunimen. | ok
+[EmployeeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EmployeeRepositoryTest.java): </br> createNewEmployee | Asetetaan työntekijälle etu- ja sukunimi, salasana ja käyttäjätunnus. | Työntekijällä on id. | ok
+[TicketTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TicketTest.java): </br> createNewTicket | Luodaan kokonaan uusi lippu luomalla uusi tapahtuma ja uusi lipputyyppi.  | Luodulta lipulta löytyy ticketid, ticketprice, ticketcode ja tickettype, ja lippu on käyttämätön. | ok
 
 ## Integraatiotestit (rajapintatestit)
 
@@ -23,8 +23,8 @@ Seuraavassa taulukossa esitellyt testit testaavat kontrollerin kautta rajapinnan
 
 Testitapaus | Syötteet | Odotetut tulokset | Saadut tulokset
 ------ | ------ | ------ | ------
-[EventControllerWithAuthorizationTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventControllerWithAuthorizationTest.java): testEventIsCreatedAndDeleted (käyttäjäoikeutena admin) | 1. Luo testitapahtuma 2. Hae luotu testitapahtuma 3. Poista testitapahtuma. | 1. Status 201: testitapahtuma luodaan 2. Status 200: hakeminen onnistui, testitapahtuman nimi on "TestingHappen" 3. Status 200: testitapahtuma poistettiin. | ok
-[EventControllerWithAuthorizationTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventControllerWithAuthorizationTest.java): testEventIsCreated (käyttäjäoikeutena user) | Luo testitapahtuma. | Status 403: tapahtuman luonti on estetty. | ok
+[EventControllerWithAuthorizationTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventControllerWithAuthorizationTest.java): </br> testEventIsCreatedAndDeleted (käyttäjäoikeutena admin) | 1. Luo testitapahtuma 2. Hae luotu testitapahtuma 3. Poista testitapahtuma. | 1. Status 201: testitapahtuma luodaan 2. Status 200: hakeminen onnistui, testitapahtuman nimi on "TestingHappen" 3. Status 200: testitapahtuma poistettiin. | ok
+[EventControllerWithAuthorizationTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EventControllerWithAuthorizationTest.java): </br> testEventIsCreated (käyttäjäoikeutena user) | Luo testitapahtuma. | Status 403: tapahtuman luonti on estetty. | ok
 
 ## End-to-end-testit
 
