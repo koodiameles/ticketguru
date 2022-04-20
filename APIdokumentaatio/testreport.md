@@ -12,7 +12,7 @@ TickettypeRepoTest: findByNameAndCount | Hae lipputyyppi "Aikuinen", lisää se 
 TickettypeRepoTest: createNewTickettype | Luo uusi lipputyyppi. | Lipputyypillä on id. | ok
 EmployeeRepoTest: findByLastname | Etsitään työntekijää sukunimellä. | Järjestelmä vahvistaa työntekijän etunimen. | ok
 EmployeeRepoTest: createNewEmployee | Asetetaan työntekijälle etu- ja sukunimi, salasana ja käyttäjätunnus. | Työntekijällä on id. | ok
-text | text | text | ok
+TicketTest: </br> createNewTicket | Luodaan kokonaan uusi lippu luomalla uusi tapahtuma ja uusi lipputyyppi  | Luodulta lipulta löytyy tickerid, ticketprice, ticketcode ja tickettype, ja lippu on käyttämätön | ok
 
 ## Integraatiotestit (rajapintatestit)
 
