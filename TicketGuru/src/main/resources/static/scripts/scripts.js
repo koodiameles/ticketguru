@@ -17,13 +17,13 @@ async function findTicket() {
         console.log(json); 
 
         if (response.status == 404) {
-            msg ="Koodilla " + code + " ei löydy lippua."; 
+            msg ="Koodilla " + " <br /> " + code + " <br /> " +" ei löydy lippua."; 
             document.getElementById("result").innerHTML = msg; 
         } else if (response.status == 403) {
             msg ="Sinulla ei ole oikeuksia hakea lippua."; 
             document.getElementById("result").innerHTML = msg; 
         } else if (response.status == 200) {
-            msg ="Koodilla " + code + " löytyi lippu.";
+            msg ="Koodilla " + " <br /> " + code + " <br /> " + " löytyi lippu.";
             document.getElementById("result").innerHTML = msg; 
         } 
         else {
@@ -50,13 +50,13 @@ async function useTicket() {
         const json = await response.json(); 
         console.log(json); 
         if (response.status == 200) {
-        msg = "Lippu koodilla " + code + " on nyt käytetty."
+        msg = "Lippu koodilla " + " <br /> " +  code +  " <br /> " + " on nyt käytetty."
         document.getElementById("result").innerHTML = msg; 
         } else if (response.status == 404) {
-        msg = "Lippua koodilla " + code + " ei ole olemassa."
+        msg = "Lippua koodilla " + " <br /> " +  code + " ei ole olemassa."
         document.getElementById("result").innerHTML = msg; 
         } else if (response.status == 400) {
-        msg = "Lippu koodilla " + code + " oli jo käytetty, sitä ei voi käyttää uudelleen."
+        msg = "Lippu koodilla " + " <br /> " +  code + " <br /> " + "on jo käytetty, sitä ei voi käyttää uudelleen."
         document.getElementById("result").innerHTML = msg; 
         } else {
         msg = "Jokin meni vikaan"

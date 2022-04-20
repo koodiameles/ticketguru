@@ -15,7 +15,7 @@ Testitapaus | Syötteet | Odotetut tulokset | Saadut tulokset
 [TickettypeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TickettypeRepositoryTest.java): createNewTickettype | Luo uusi lipputyyppi. | Lipputyypillä on id. | ok
 [EmployeeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EmployeeRepositoryTest.java): findByLastname | Etsitään työntekijää sukunimellä. | Järjestelmä vahvistaa työntekijän etunimen. | ok
 [EmployeeRepoTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/EmployeeRepositoryTest.java): createNewEmployee | Asetetaan työntekijälle etu- ja sukunimi, salasana ja käyttäjätunnus. | Työntekijällä on id. | ok
-text | text | text | ok
+[TicketTest](/ticketguru/TicketGuru/src/test/java/fi/ohjelmistoprojekti1/TicketGuru/TicketTest.java): </br> createNewTicket | Luodaan kokonaan uusi lippu luomalla uusi tapahtuma ja uusi lipputyyppi  | Luodulta lipulta löytyy tickerid, ticketprice, ticketcode ja tickettype, ja lippu on käyttämätön | ok
 
 ## Integraatiotestit (rajapintatestit)
 
