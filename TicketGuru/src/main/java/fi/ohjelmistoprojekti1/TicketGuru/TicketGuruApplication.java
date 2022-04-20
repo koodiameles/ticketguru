@@ -73,10 +73,14 @@ public class TicketGuruApplication {
 			 Tickettype tt2 = new Tickettype("Child", 25.50, event1);
 			 Tickettype tt3 = new Tickettype("Adult", 13.50, event2);
 			 Tickettype tt4 = new Tickettype("Child", 5.50, event2);
+			 Tickettype tt5 = new Tickettype("Permantopaikka", 14.90, event3);
+			 Tickettype tt6 = new Tickettype("Aitiopaikka", 39.90, event3);
 			 tickettyperepository.save(tt1); 
 			 tickettyperepository.save(tt2);
 			 tickettyperepository.save(tt3); 
 			 tickettyperepository.save(tt4);
+			 tickettyperepository.save(tt5); 
+			 tickettyperepository.save(tt6);
 	
 			//SALE TESTDATA
 			 Date dateNow = new Date();

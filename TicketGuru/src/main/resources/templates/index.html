@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
+<head>
+    <title>Ticketguru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
+    <script src="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+
+<body>
+    <nav>
+        <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
+        <ul>
+            <a th:href="@{/login}">Sign in</a>
+            <a th:href="@{/logout}">Sign out</a>
+            <a th:href="@{/index}">Check Ticket</a>
+            <a th:href="@{/selltickets}">Sell Tickets</a>
+            <a th:href="@{/index}">Events</a>
+        </ul>
+    </nav>
+
+    <div class="flexcontainer">
+
+        <div class="flexcontainercolumn">
+            <form >
+                <label>
+                    <input class="button" type="button" value="Hae kaikki liput" onclick="findAllTickets()">
+                </label>
+            </form>
+            <div class="hidden">
+                <table id="table" >
+                    <h2>Lippulista</h2>
+                    <thead>
+                        <tr>
+                            <th>Koodi</th>
+                            <th>Tapahtuma</th>
+                            <th>Hinta</th>
+                            <th>Voimassa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <!-- empty because we insert data here with script findAllTickets() -->
+                    </tbody>
+                </table>
+             </div>
+        </div>
+
+        <div class="flexcontainercolumn">
+            <form >
+                <h2>Tarkista lippu</h2>
+                <label>
+                    <i class="fa-solid fa-ticket fa-lg"></i>
+                    <input class="textInput" type="text" id="code" placeholder="Syötä lippukoodi...">
+                </label>
+                <label>
+                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                    <input class="button" type="button" value="Etsi lippu" onclick="findTicket()">
+                </label>
+                <label>
+                    <i class="fa-solid fa-ticket-simple"></i>
+                    <input class="button" type="button" value="Käytä lippu" onclick="useTicket()">
+                </label>
+            </form>
+            <h3 id="result"></h3>
+        </div>
+    </div>
+    
+</body>
+
+</html>
