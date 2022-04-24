@@ -21,8 +21,8 @@
             <a th:href="@{/logout}">Sign out</a>
             <a th:href="@{/index}">Check Ticket</a>
             <a th:href="@{/selltickets}">Sell Tickets</a>
-            <a th:href="@{/addevent}">Events</a>
-            <a th:href="@{/addtickettype}">Add Tickettypes</a>
+            <a th:href="@{/addevent}" sec:authorize="hasAuthority('ADMIN')">Events</a>
+            <a th:href="@{/addtickettype}" sec:authorize="hasAuthority('ADMIN')">Add Tickettypes</a>
         </ul>
     </nav>
 
