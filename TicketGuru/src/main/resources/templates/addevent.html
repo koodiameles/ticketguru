@@ -11,33 +11,35 @@
     <!-- <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script> -->
 </head>
 <body>
-	<nav>
+     <!-- NAVIGATION BAR -->
+    <nav>
         <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
         <ul>
             <a th:href="@{/login}">Sign in</a>
             <a th:href="@{/logout}">Sign out</a>
             <a th:href="@{/index}">Check Ticket</a>
             <a th:href="@{/selltickets}">Sell Tickets</a>
-            <a th:href="@{/index}">Events</a>
+            <a th:href="@{/addevent}">Events</a>
             <a th:href="@{/addtickettype}">Add Tickettypes</a>
         </ul>
     </nav>
+
 	<div class="flexcontainercolumn">
 		<h2>Lisää uusi tapahtuma</h2>
-			<form form class="form-control" id="event-form" onsubmit="processForm(event)">
-		  		<label for="description">Tapahtuman nimi: </label>
-                <input type="text" name="description" id="name" required><br>
+			<form id="event-form" onsubmit="processForm(event)">
+		  		<label >Tapahtuman nimi: </label>
+                <input class="textInput2" type="text" name="description" id="name" required>
                 <label for="location">Paikka: </label>
-                <input type="text" name="location" id="location"><br>
+                <input class="textInput2" type="text" name="location" id="location">
                 <label for="city">Kaupunki: </label>
-                <input type="text" name="city" id="city"><br>
+                <input class="textInput2" type="text" name="city" id="city">
                 <label for="ticketcount">Lippujen määrä: </label>
-                <input type="number" name="ticketcount" id="ticketcount" value=""><br>
+                <input class="textInput2" type="number" name="ticketcount" id="ticketcount" value="">
                 <label for="datetime">Tapahtuma-aika: </label>
-                <input type="datetime-local" name="datetime" id="datetime" value=""><br>
+                <input class="textInput2" type="datetime-local" name="datetime" id="datetime" value="">
                 <label for="duration">Kesto minuutteina: </label>
-                <input type="number" name="duration" id="duration" value=""><br>
-                <input type="submit" value="Tallenna">
+                <input class="textInput2" type="number" name="duration" id="duration" value=""> <br />
+                <input class="buttonSecondary" type="submit" value="Tallenna">
     		</form>
     		  <div>
                 <p id="msg"></p>
