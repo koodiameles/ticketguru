@@ -17,5 +17,17 @@ public class ClientController {
 	 public String getSellTickets () {
 		 return "selltickets";
 	 }
+
+	// GET ADDEVENT - 
+	@GetMapping(value={"/addevent"})
+	public String getAddEvent () {
+		return "addevent";
+	}
+
+	// GET ADDTICKETTYPE - 
+	@GetMapping(value={"/addtickettype"})
+	public String getAddTicketType () {
+		return "addtickettype";
+	}
     
 }
