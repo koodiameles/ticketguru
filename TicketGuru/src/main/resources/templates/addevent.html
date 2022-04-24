@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <title>Ticketguru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
+    <script src="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <!-- <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script> -->
+</head>
+<body>
+     <!-- NAVIGATION BAR -->
+    <nav>
+        <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
+        <ul>
+            <a th:href="@{/login}">Sign in</a>
+            <a th:href="@{/logout}">Sign out</a>
+            <a th:href="@{/index}">Check Ticket</a>
+            <a th:href="@{/selltickets}">Sell Tickets</a>
+            <a th:href="@{/addevent}">Events</a>
+            <a th:href="@{/addtickettype}">Add Tickettypes</a>
+        </ul>
+    </nav>
+
+	<div class="flexcontainercolumn">
+		<h2>Lisää uusi tapahtuma</h2>
+			<form id="event-form" onsubmit="processForm(event)">
+		  		<label >Tapahtuman nimi: </label>
+                <input class="textInput2" type="text" name="description" id="name" required>
+                <label for="location">Paikka: </label>
+                <input class="textInput2" type="text" name="location" id="location">
+                <label for="city">Kaupunki: </label>
+                <input class="textInput2" type="text" name="city" id="city">
+                <label for="ticketcount">Lippujen määrä: </label>
+                <input class="textInput2" type="number" name="ticketcount" id="ticketcount" value="">
+                <label for="datetime">Tapahtuma-aika: </label>
+                <input class="textInput2" type="datetime-local" name="datetime" id="datetime" value="">
+                <label for="duration">Kesto minuutteina: </label>
+                <input class="textInput2" type="number" name="duration" id="duration" value=""> <br />
+                <input class="buttonSecondary" type="submit" value="Tallenna">
+    		</form>
+    		  <div>
+                <p id="msg"></p>
+            </div>
+	</div>
+</body>
+<script>
+		var url = 'https://ticketguru22.herokuapp.com/';
+		// var url = 'http://localhost:8080/';
+		var pass = btoa('admin:admin'); 
+		
+		async function processForm(e){
+            e.preventDefault();
+            const form = document.getElementById("event-form");
+            const formData = new FormData(form); // Luodaan lomakkeen tiedoista FormData-olio
+            const requestBody = processFormData(formData); // Metodi, joka luo FormDatasta halutun requestbodyn
+            const response = await submitForm(JSON.stringify(requestBody));
+
+            if(response.message == null){ 
+                console.log(response);
+                document.getElementById("msg").innerHTML = "Tapahtuma on lisätty!";
+            }else{
+                document.getElementById("msg").innerHTML = response.message;
+            }
+        }
+
+		function processFormData(formData){
+            let requestBody = {};
+
+            for(let [key, value] of formData){ // Käydään FormData avain-arvo-pari kerrallaan läpi, ja mikäli arvo on tyhjä merkkijono, vaihdetaan sen tilalle null
+                if(value === ''){
+                    value = null;
+                }
+
+                requestBody[key] = value;
+            }
+
+            return requestBody;
+        }
+
+		async function submitForm(request){
+            try{
+                const data = await fetch(`${url}events`, {
+                    method: 'POST',
+                    body: request,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + pass
+                    }
+                });
+
+                if(data.status === 201){
+                    return await data.json();
+                }else{
+                    return {message: "Jotain meni pieleen, yritä uudelleen."};
+                }
+                
+            }catch(error){
+                return error;
+            }
+        }
+		
+		
+</script>
+</html>

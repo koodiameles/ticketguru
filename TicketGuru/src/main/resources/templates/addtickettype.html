@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <title>Ticketguru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
+    <script src="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <!-- <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script> -->
+</head>
+<body>
+     <!-- NAVIGATION BAR -->
+    <nav>
+        <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
+        <ul>
+            <a th:href="@{/login}">Sign in</a>
+            <a th:href="@{/logout}">Sign out</a>
+            <a th:href="@{/index}">Check Ticket</a>
+            <a th:href="@{/selltickets}">Sell Tickets</a>
+            <a th:href="@{/addevent}">Events</a>
+            <a th:href="@{/addtickettype}">Add Tickettypes</a>
+        </ul>
+    </nav>
+
+	<div class="flexcontainercolumn">
+            <h2>Lisää tapahtumaan lipputyyppi</h2>
+            <form id="tickettype-form" onsubmit="processForm(event)">
+            	<label for="event">Valitse tapahtuma:</label>
+            	<select id="event" name="event" ></select>
+                <label for="type">Lipputyyppi:</label>
+                <input class="textInput2" type="text" name="name" id="name">
+                <label for="price">Hinta:</label>
+                <input class="textInput2" type="text" name="price" id="price" placeholder="€"><br>
+                <input class="buttonSecondary" type="submit" value="Lisää">
+            </form>
+            <div>
+                <p id="msg"></p>
+            </div>
+	</div>
+</body>
+<script>
+
+var url = 'https://ticketguru22.herokuapp.com/';
+// var url = 'http://localhost:8080/';
+var pass = btoa('admin:admin'); 
+
+async function processForm(e){
+    e.preventDefault();
+    const form = document.getElementById("tickettype-form");
+    const formData = new FormData(form); // Luodaan lomakkeen tiedoista FormData-olio
+    const requestBody = processFormData(formData); // Metodi, joka luo FormDatasta halutun requestbodyn
+    const response = await submitForm(JSON.stringify(requestBody));
+
+    if(response.message == null){ 
+        console.log(response);
+        document.getElementById("msg").innerHTML = "Lipputyyppi on lisätty!";
+    }else{
+        document.getElementById("msg").innerHTML = response.message;
+    }
+}
+
+function processFormData(formData){
+    let requestBody = {};
+
+    for(let [key, value] of formData){ // Käydään FormData avain-arvo-pari kerrallaan läpi, ja mikäli arvo on tyhjä merkkijono, vaihdetaan sen tilalle null
+        if(value === ''){
+            value = null;
+        }
+
+        requestBody[key] = value;
+    }
+
+    return requestBody;
+}
+
+async function getEvents(){
+    const events = await fetchEvents();
+    populateEventSelection(events);
+}
+
+async function submitForm(request){
+    try{
+        const data = await fetch(`${url}tickettypes`, {
+            method: 'POST',
+            body: request,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + pass
+            }
+        });
+
+        if(data.status === 201){
+            return await data.json();
+        }else{
+            return {message: "Something went wrong, please try again"};
+        }
+        
+    }catch(error){
+        return error;
+    }
+}
+
+async function fetchEvents(){
+    try{
+        const response = await fetch(`${url}events`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Basic ' + pass
+            }
+        });
+        return await response.json();
+    }catch(error){
+        return error;
+    }
+}
+
+function populateEventSelection(events){
+    let innerHtmlStr = "";
+
+    for(event of events){
+        innerHtmlStr += `<option value="${event.eventid}">${event.description}</option>`
+    }
+
+    document.getElementById("event").innerHTML = innerHtmlStr;
+}
+
+getEvents();
+</script>
+</html>
