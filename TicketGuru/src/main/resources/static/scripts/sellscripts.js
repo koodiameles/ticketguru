@@ -1,7 +1,7 @@
 //   var url = 'https://ticketguru22.herokuapp.com/';
   var url = 'http://localhost:8080/';
 
-  var pass = btoa('admin:admin'); 
+  var pass = btoa('user:user'); 
   var saleid;
   var ticketamount = 1;
   var evs;
