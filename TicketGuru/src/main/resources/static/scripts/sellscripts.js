@@ -139,6 +139,7 @@
               $('#evdropdown').val(null);
               $('#ttdropdown').val(null);
               $('#tiamount').val(null);
+			  $("#buyticket").hide();
 
               document.getElementById("saleinfo").innerHTML = "Myyntitapahtuma " + saleid; 
               
