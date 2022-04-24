@@ -16,7 +16,9 @@
 
       $(function() {
           let evdropdown = $('#evdropdown');
-          
+
+          $("#buyticket").hide();
+
           evdropdown.empty();
 
           evdropdown.append('<option selected="true" disabled>Valitse tapahtuma</option>');
@@ -65,6 +67,11 @@
       
       $('#ttdropdown').change(function() {
           selttype = $('#ttdropdown').val();
+
+		  if ($('#tiamount').val() != "") {
+			 $("#buyticket").show();
+		  }
+
           console.log('selected tickettype: ' + selttype);
 
           $('#addticket').removeAttr('disabled');
@@ -72,6 +79,15 @@
 
       $('#tiamount').change(function() {
           ticketamount = $('#tiamount').val();
+
+		  if ($('#ttdropdown').val() != null) {
+			 $("#buyticket").show();
+		  }
+
+		  if ($('#tiamount').val() == "") {
+			 $("#buyticket").hide();
+		  }
+
           console.log('ticketamount: ' + ticketamount);
       });
       
