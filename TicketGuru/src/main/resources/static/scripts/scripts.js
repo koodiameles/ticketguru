@@ -2,8 +2,8 @@
 var msg = ""
 var pass = btoa('user:user')
 
-//var url = 'https://ticketguru22.herokuapp.com/';
-var url = 'http://localhost:8080/';
+var url = 'https://ticketguru22.herokuapp.com/';
+// var url = 'http://localhost:8080/';
 
 async function findTicket() {
     let fturl = url + "tickets?code="
