@@ -1,5 +1,5 @@
-  var url = 'https://ticketguru22.herokuapp.com/';
-//   var url = 'http://localhost:8080/';
+//   var url = 'https://ticketguru22.herokuapp.com/';
+  var url = 'http://localhost:8080/';
 
   var pass = btoa('admin:admin'); 
   var saleid;
