@@ -210,8 +210,16 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (saledata) {
               var ticket;
+              
               // ITERATING THROUGH OBJECTS
               $.each(saledata.tickets, function (key, value) {
+                var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
+                var qrcode = document.createElement("IMG")
+                qrcode.setAttribute("src", myQR)
+                qrcode.setAttribute("width", "50")
+                qrcode.setAttribute("height", "50")
+
+
                 // CONSTRUCTION OF ROWS HAVING
                 // DATA FROM JSON OBJECT
                 ticket += "<tr>";
@@ -225,9 +233,16 @@ $(document).ready(function () {
                 ticket += "<td>" + value.valid + "</td>";
 
                 ticket += "<td>" + value.ticketcode + "</td>";
+                
+
+                ticket += "<td>" + document.body.appendChild(qrcode) + "</td>";          
+
 
                 ticket += "</tr>";
+                
+                
               });
+              
               //INSERTING ROWS INTO TABLE
               $("#table").append(ticket);
             },
