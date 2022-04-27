@@ -99,6 +99,13 @@ $(document).ready(function () {
       $("#buyticket").hide();
     }
 
+    if ($("#tiamount").val() > 10) {
+      $("#buyticket").hide();
+      document.getElementById("result").innerHTML = "Voit ostaa korkeintaan 10 lippua kerrallaan.";
+    } else if ($("#tiamount").val() <= 10) {
+      document.getElementById("result").innerHTML = "";
+    }
+
     console.log("ticketamount: " + ticketamount);
   });
 
@@ -202,6 +209,7 @@ $(document).ready(function () {
           console.log("salegeturl: " + salegeturl);
 
           $(".hidden").css("display", "block"); // Show hidden table
+          $("#tbody").empty(); // Empty table body
           $.ajax({
             url: salegeturl,
             method: "GET",
@@ -214,15 +222,13 @@ $(document).ready(function () {
               // ITERATING THROUGH OBJECTS
               $.each(saledata.tickets, function (key, value) {
                 var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
-                var qrcode = document.createElement("IMG")
-                qrcode.setAttribute("src", myQR)
-                qrcode.setAttribute("width", "50")
-                qrcode.setAttribute("height", "50")
-
-
+                const qrCodeString = `<img src="${myQR} width="80" height="80">`
                 // CONSTRUCTION OF ROWS HAVING
                 // DATA FROM JSON OBJECT
                 ticket += "<tr>";
+
+                ticket += "<td>" + key + "</td>";
+                console.log('key: ' + key);
 
                 ticket += "<td>" + value.event.description + "</td>";
 
@@ -233,10 +239,8 @@ $(document).ready(function () {
                 ticket += "<td>" + value.valid + "</td>";
 
                 ticket += "<td>" + value.ticketcode + "</td>";
-                
 
-                ticket += "<td>" + document.body.appendChild(qrcode) + "</td>";          
-
+                ticket += "<td>" + qrCodeString + "</td>";   
 
                 ticket += "</tr>";
                 

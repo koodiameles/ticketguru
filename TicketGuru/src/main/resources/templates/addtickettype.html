@@ -68,10 +68,10 @@ function processFormData(formData){
         if(value === ''){
             value = null;
         }
-
+        console.log(key + ' + ' + value);
         requestBody[key] = value;
     }
-
+    console.log('requestbody: ' + requestBody);
     return requestBody;
 }
 
