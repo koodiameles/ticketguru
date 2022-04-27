@@ -55,16 +55,22 @@ public class TickettypeController {
 		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
 	
-	// Add (POST) a new event
+	// Add (POST) a new tickettype
 	@PostMapping("/tickettypes")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Tickettype addTickettype(@Valid @RequestBody Tickettype tickettype, BindingResult bindingresult) {
+	public ResponseEntity<?> addTickettype(@Valid @RequestBody TickettypeDTO tickettype, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage()); 
 		}
-		tickettyperepository.save(tickettype);
-		return tickettype;
+
+		Optional<Event> event = eventrepository.findById(tickettype.getEvent());
+
+		if (event.isPresent()) {
+			Tickettype newtype = new Tickettype(tickettype.getName(), tickettype.getPrice(), event.get());
+			return new ResponseEntity<>(tickettyperepository.save(newtype), HttpStatus.CREATED);
+		}
+		
+		return new ResponseEntity<>(tickettype, HttpStatus.BAD_REQUEST);
 	}
 
 }

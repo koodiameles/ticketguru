@@ -3,10 +3,6 @@ package fi.ohjelmistoprojekti1.TicketGuru.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-
-//import java.util.List;
-
-//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -28,6 +26,7 @@ private Long tickettypeid;
 private String name;	//Ex. student, adult, child, pension
 private double price;	//Price of the tickettype
 
+@JsonBackReference
 @ManyToOne
 @JoinColumn(name = "eventid")
 private Event event;
@@ -86,6 +85,14 @@ public double getPrice() {
 
 public void setPrice(double price) {
 	this.price = price;
+}
+
+public Event getEvent() {
+	return event;
+}
+
+public void setEvent(Event event) {
+	this.event = event;
 }
 
 @Override

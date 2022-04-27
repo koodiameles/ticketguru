@@ -99,6 +99,13 @@ $(document).ready(function () {
       $("#buyticket").hide();
     }
 
+    if ($("#tiamount").val() > 10) {
+      $("#buyticket").hide();
+      document.getElementById("result").innerHTML = "Voit ostaa korkeintaan 10 lippua kerrallaan.";
+    } else if ($("#tiamount").val() <= 10) {
+      document.getElementById("result").innerHTML = "";
+    }
+
     console.log("ticketamount: " + ticketamount);
   });
 
@@ -202,6 +209,7 @@ $(document).ready(function () {
           console.log("salegeturl: " + salegeturl);
 
           $(".hidden").css("display", "block"); // Show hidden table
+          $("#tbody").empty(); // Empty table body
           $.ajax({
             url: salegeturl,
             method: "GET",
@@ -215,6 +223,9 @@ $(document).ready(function () {
                 // CONSTRUCTION OF ROWS HAVING
                 // DATA FROM JSON OBJECT
                 ticket += "<tr>";
+
+                ticket += "<td>" + key + "</td>";
+                console.log('key: ' + key);
 
                 ticket += "<td>" + value.event.description + "</td>";
 
