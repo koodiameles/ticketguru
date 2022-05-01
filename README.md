@@ -135,6 +135,8 @@ Endpointit, joihin pääsy edellyttää user- tai admin-käyttöoikeudet:
 
 + [**Näytä kaikki tapahtumat**](APIdokumentaatio/getallevents.md) : `GET /events`
 + [**Näytä yksi tapahtuma (ID)**](APIdokumentaatio/getoneevent.md) : `GET /events/{id}`
++ [**Näytä kaikki lipputyypit**](APIdokumentaatio/getalltickettypes.md) : `GET /tickettypes`
++ [**Näytä yksi lipputyyppi (ID)**](APIdokumentaatio/getonetickettype.md) : `GET /tickettypes/{id}`
 + [**Näytä kaikki liput**](APIdokumentaatio/getalltickets.md) : `GET /tickets`
 + [**Näytä yksi lippu (ID)**](APIdokumentaatio/getoneticket.md) : `GET /tickets/{id}`
 + [**Näytä yksi lippu (ticketcode)**](APIdokumentaatio/getoneticketcode.md) : `GET /tickets?code={ticketcode}`
@@ -148,6 +150,7 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Poista tapahtuma**](APIdokumentaatio/deleteevent.md) : `DELETE /events/{id}`
 + [**Näytä kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
 + [**Näytä yksi myyntitapahtuma (ID)**](APIdokumentaatio/getonesale.md) : `GET /sales/{id}`
++ [**Luo lipputyyppi**](APIdokumentaatio/posttickettype.md) : `POST /tickettypes`
 + [**Luo lippu myyntitapahtumaan**](APIdokumentaatio/postticket.md) : `POST /sales/{id}/tickets`
 + [**Näytä kaikki työntekijät**](APIdokumentaatio/getallemployees.md) : `GET /employees`
 + [**Luo työntekijät**](APIdokumentaatio/postemployee.md) : `POST /employees`

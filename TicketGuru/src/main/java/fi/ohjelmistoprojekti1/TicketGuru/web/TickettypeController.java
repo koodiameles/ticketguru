@@ -65,12 +65,12 @@ public class TickettypeController {
 
 		Optional<Event> event = eventrepository.findById(tickettype.getEvent());
 
-		if (event.isPresent()) {
-			Tickettype newtype = new Tickettype(tickettype.getName(), tickettype.getPrice(), event.get());
-			return new ResponseEntity<>(tickettyperepository.save(newtype), HttpStatus.CREATED);
+		if (! event.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event not valid");
 		}
 		
-		return new ResponseEntity<>(tickettype, HttpStatus.BAD_REQUEST);
+		Tickettype newtype = new Tickettype(tickettype.getName(), tickettype.getPrice(), event.get());
+		return new ResponseEntity<>(tickettyperepository.save(newtype), HttpStatus.CREATED);
 	}
 
 }
