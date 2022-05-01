@@ -222,7 +222,7 @@ $(document).ready(function () {
               // ITERATING THROUGH OBJECTS
               $.each(saledata.tickets, function (key, value) {
                 var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
-                const qrCodeString = `<img src="${myQR} width="80" height="80">`
+                const qrCodeString = `<img src="${myQR} width="70" height="70">`
                 // CONSTRUCTION OF ROWS HAVING
                 // DATA FROM JSON OBJECT
                 ticket += "<tr>";

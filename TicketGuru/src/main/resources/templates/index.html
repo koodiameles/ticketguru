@@ -11,7 +11,15 @@
     <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/configscript.js" th:src="@{/scripts/configscript.js}"></script>
     <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/sellscripts.js" th:src="@{/scripts/sellscripts.js}"></script>
     <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/checkticketscripts.js" th:src="@{/scripts/checkticketscripts.js}"></script>
-    
+    <!-- QR code script-->
+    <script type="text/javascript">
+        function generateBarCode() 
+        {
+            var QR = $('#text').val();
+            var url = 'https://api.qrserver.com/v1/create-qr-code/?data=' + QR + '&amp;size=50x50';
+            $('#barcode').attr('src', url);
+        }
+    </script>
 </head>
 
 <body>
@@ -46,6 +54,7 @@
                             <th>Tapahtuma</th>
                             <th>Hinta</th>
                             <th>Voimassa</th>
+                            <th>QR koodi</th> 
                         </tr>
                     </thead>
                     <tbody>

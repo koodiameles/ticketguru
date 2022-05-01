@@ -87,7 +87,8 @@ async function findAllTickets() {
 
                 // ITERATING THROUGH OBJECTS
                 $.each(data, function (key, value) {
-
+                    var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
+                    const qrCodeString = `<img src="${myQR} width="70" height="70">`
                     //CONSTRUCTION OF ROWS HAVING
                     // DATA FROM JSON OBJECT
                     ticket += '<tr>';
@@ -102,6 +103,8 @@ async function findAllTickets() {
 
                     ticket += '<td>' + 
                         value.valid + '</td>';
+
+                    ticket += "<td>" + qrCodeString + "</td>";   
 
                     ticket += '</tr>';
                 });
