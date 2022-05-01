@@ -30,12 +30,12 @@
     <nav>
         <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
         <ul>
-            <a th:href="@{/login}">Sign in</a>
-            <a th:href="@{/logout}">Sign out</a>
-            <a th:href="@{/index}">Check Ticket</a>
-            <a th:href="@{/selltickets}">Sell Tickets</a>
-            <a th:href="@{/addevent}" sec:authorize="hasAuthority('ADMIN')">Events</a>
-            <a th:href="@{/addtickettype}" sec:authorize="hasAuthority('ADMIN')">Add Tickettypes</a>
+            <a th:href="@{/logout}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Ulos</a>
+            <a th:href="@{/login}"><i class="fa-solid fa-right-to-bracket"></i> Sisään</a>
+            <a th:href="@{/index}"><i class="fa-solid fa-ticket"></i> Lipuntarkastus</a>
+            <a th:href="@{/selltickets}"><i class="fa-solid fa-money-check-dollar"></i> Myy</a>
+            <a th:href="@{/addevent}" sec:authorize="hasAuthority('ADMIN')"><i class="fa-solid fa-calendar-plus"></i> Tapahtuma</a>
+            <a th:href="@{/addtickettype}" sec:authorize="hasAuthority('ADMIN')"><i class="fa-solid fa-square-plus"></i> Lipputyyppi</a>
         </ul>
     </nav>
 
