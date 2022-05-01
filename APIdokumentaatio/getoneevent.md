@@ -16,33 +16,32 @@ Näytä yhden tapahtuman tiedot. Kaikki **käyttäjät** voivat hakea tapahtuman
 
 **Content examples**
 
-Haettu tapahtuman (ID 99) tiedot. /events/99
+Haettu tapahtuman (ID 1) tiedot. /events/1
 
 ```json
 {
-    "id": 99,
-    "description": "Kalevala Ooppera",
-    "location" : "Finlandia-Talo",
-    "city" : "Helsinki",
-    "ticketcount" : "400" ,
-    "datetime" : "2022-05-22T18:00:00" ,
-    "duration" :  "130"
+    "eventid": 1,
+    "description": "Konsertti",
+    "location": "Finlandia-Talo",
+    "city": "Helsinki",
+    "ticketcount": 400,
+    "datetime": "2022-06-24T15:00:00.000+00:00",
+    "duration": 90,
+    "tickettypes": [
+        {
+            "tickettypeid": 1,
+            "name": "Adult",
+            "price": 50.5
+        },
+        {
+            "tickettypeid": 2,
+            "name": "Child",
+            "price": 25.5
+        }
+    ]
 }
 ```
 
-Haettu tapahtuman (ID 2) tiedot. Tapahtumalla ei ole kaikkia arvoja alustettu. /events/2
-
-```json
-{
-    "id": 2,
-    "description": "Näytelmä1",
-    "location" : null,
-    "city" : null,
-    "ticketcount" : null,
-    "datetime" : null,
-    "duration" :  null
-}
-```
 ## Error Responses
 
 **Condition** : Id on virheellinen.
@@ -62,12 +61,6 @@ Haettu tapahtuman (ID 2) tiedot. Tapahtumalla ei ole kaikkia arvoja alustettu. /
 
 ### Or
 
-**Condition** : Jos tapahtuma on olemssa, mutta henkilöllä ei ole oikeuksia sen hakemiseen (esim. käyttäjä ei ole kirjautunut).
+**Condition** : Jos tapahtuma on olemassa, mutta henkilöllä ei ole oikeuksia sen hakemiseen (esim. käyttäjä ei ole kirjautunut).
 
-**Code** : `403 FORBIDDEN`
-
-**Content** :
-
-```json
-{"detail": "You do not have permission to perform this action."}
-```
+**Code** : `401 Unauthorized`

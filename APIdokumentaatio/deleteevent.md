@@ -56,3 +56,8 @@ Poista tapahtuma. Tapahtuman poistaminen vaatii Admin-oikeudet.
     "path": "/events/{id}"
 }
 ```
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia poistaa tapahtumaa (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

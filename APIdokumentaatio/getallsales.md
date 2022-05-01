@@ -1,6 +1,6 @@
 # Näytä kaikki myyntitapahtumat
 
-Näytä lista kaikista myyntitapahtumista.
+Näytä lista kaikista myyntitapahtumista. Kaikki **käyttäjät** voivat hakea myyntitapahtumien tiedot.
 
 **URL** : `/sales`
 
@@ -56,3 +56,8 @@ Näytä lista kaikista myyntitapahtumista.
         ]
     },
 ```
+## Error Responses
+
+**Condition** : Henkilöllä ei ole oikeuksia nähdä listausta (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`

@@ -28,3 +28,8 @@ Näytä lista kaikista lipputyypeistä. Kaikki **käyttäjät** voivat hakea lis
         "price": 25.5
     }
 ```
+## Error Responses
+
+**Condition** : Henkilöllä ei ole oikeuksia nähdä listausta (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`

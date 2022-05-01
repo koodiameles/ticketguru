@@ -41,3 +41,8 @@ Haettu lipputyypin (ID 1) tiedot. /tickettypes/1
     "path": "/tickettypes/{id}"
 }
 ```
+### Or
+
+**Condition** : Jos lipputyyppi on olemassa, mutta henkilöllä ei ole oikeuksia sen hakemiseen (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`

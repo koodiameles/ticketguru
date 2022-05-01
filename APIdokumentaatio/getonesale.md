@@ -1,6 +1,6 @@
 # Näytä yksi myyntitapahtuma (by ID)
 
-Näytä yhden myyntitapahtuman tiedot.
+Näytä yhden myyntitapahtuman tiedot. Kaikki **käyttäjät** voivat hakea myyntitapahtuman tiedot.
 
 **URL** : `/sales/{id}`
 
@@ -10,8 +10,11 @@ Näytä yhden myyntitapahtuman tiedot.
 
 **Permissions required** : None
 
-**Data example** 
+## Success Response
 
+**Code** : `200 OK`
+
+**Content examples**
 ```json
 {
     "saleid": 1,
@@ -52,12 +55,26 @@ Näytä yhden myyntitapahtuman tiedot.
     ]
 }
 ```
-## Success Response
-
-**Code** : `200 OK`
 
 ## Error Responses
 
 **Condition** : Jos id:llä ei löydy myyntitapahtumaa.
 
-**Code** : `404 NOT FOUND`
+**Code** : `404 Not Found`
+
+**Content example**
+```json
+{
+    "timestamp": "2022-05-01T18:09:38.446+00:00",
+    "status": 404,
+    "error": "Not Found",
+    "message": "Sale id 14 not found",
+    "path": "/sales/14"
+}
+```
+
+### Or
+
+**Condition** : Jos myyntitapahtuma on olemassa, mutta henkilöllä ei ole oikeuksia sen hakemiseen (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`

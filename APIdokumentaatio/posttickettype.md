@@ -71,3 +71,8 @@ Luo lipputyyppi. Lipputyypin luonti vaatii Admin-oikeudet.
     "path": "/tickettypes"
 }
 ```
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia luoda lipputyyppiä (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

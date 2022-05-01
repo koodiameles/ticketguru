@@ -63,7 +63,7 @@ Työntekijällä on oltava etunimi ja sukunimi.
 
 **Condition** : Jos työntekijälle ei annettu etunimeä.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -80,7 +80,7 @@ Työntekijällä on oltava etunimi ja sukunimi.
 
 **Condition** : Jos työntekijälle ei annettu sukunimeä.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -98,7 +98,7 @@ Työntekijällä on oltava etunimi ja sukunimi.
 
 **Condition** : Jos työntekijän role id on virheellinen.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -111,3 +111,9 @@ Työntekijällä on oltava etunimi ja sukunimi.
     "path": "/employees",
 }
 ```
+
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia muokata työntekijää (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`
