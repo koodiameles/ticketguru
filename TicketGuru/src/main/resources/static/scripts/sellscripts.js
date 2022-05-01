@@ -126,7 +126,7 @@ $(document).ready(function () {
           var ticketsLeft = eventamount - ticketamount;
           data.ticketcount = ticketsLeft;
           if (ticketsLeft < 0) {
-            document.getElementById("result").innerHTML = "Yrität ostaa liikaa lippuja!";
+            document.getElementById("result").innerHTML = "Tapahtumaan on lippuja jäljellä vain " + eventamount + " ja yritit ostaa " + ticketamount + "! Myyntitapahtuma epäonnistui";
             toomanytickets = true;
             return;
           }
