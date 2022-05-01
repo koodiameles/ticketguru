@@ -57,7 +57,7 @@ public class TickettypeController {
 	
 	// Add (POST) a new tickettype
 	@PostMapping("/tickettypes")
-	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<?> addTickettype(@Valid @RequestBody TickettypeDTO tickettype, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage()); 

@@ -48,7 +48,7 @@ public class TicketController {
 
 	// Add (POST) a new ticket to sale
 	@PostMapping("/sales/{id}/tickets")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO,
 			BindingResult bindingresult) {
 

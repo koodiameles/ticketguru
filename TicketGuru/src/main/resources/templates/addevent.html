@@ -5,11 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
     <script src="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <!-- <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/scripts.js" th:src="@{/scripts/scripts.js}"></script> -->
+
+    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/configscript.js" th:src="@{/scripts/configscript.js}"></script>
+    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/sellscripts.js" th:src="@{/scripts/sellscripts.js}"></script>
+    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/checkticketscripts.js" th:src="@{/scripts/checkticketscripts.js}"></script>
+    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/addeventscripts.js" th:src="@{/scripts/addeventscripts.js}"></script>
 </head>
+
 <body>
      <!-- NAVIGATION BAR -->
     <nav>
@@ -46,62 +50,4 @@
             </div>
 	</div>
 </body>
-<script>
-		// var url = 'https://ticketguru22.herokuapp.com/';
-		var url = 'http://localhost:8080/';
-		var pass = btoa('admin:admin'); 
-		
-		async function processForm(e){
-            e.preventDefault();
-            const form = document.getElementById("event-form");
-            const formData = new FormData(form); // Luodaan lomakkeen tiedoista FormData-olio
-            const requestBody = processFormData(formData); // Metodi, joka luo FormDatasta halutun requestbodyn
-            const response = await submitForm(JSON.stringify(requestBody));
-
-            if(response.message == null){ 
-                console.log(response);
-                document.getElementById("msg").innerHTML = "Tapahtuma on lisätty!";
-            }else{
-                document.getElementById("msg").innerHTML = response.message;
-            }
-        }
-
-		function processFormData(formData){
-            let requestBody = {};
-
-            for(let [key, value] of formData){ // Käydään FormData avain-arvo-pari kerrallaan läpi, ja mikäli arvo on tyhjä merkkijono, vaihdetaan sen tilalle null
-                if(value === ''){
-                    value = null;
-                }
-
-                requestBody[key] = value;
-            }
-
-            return requestBody;
-        }
-
-		async function submitForm(request){
-            try{
-                const data = await fetch(`${url}events`, {
-                    method: 'POST',
-                    body: request,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic ' + pass
-                    }
-                });
-
-                if(data.status === 201){
-                    return await data.json();
-                }else{
-                    return {message: "Jotain meni pieleen, yritä uudelleen."};
-                }
-                
-            }catch(error){
-                return error;
-            }
-        }
-		
-		
-</script>
 </html>

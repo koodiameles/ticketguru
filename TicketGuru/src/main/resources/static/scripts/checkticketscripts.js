@@ -1,9 +1,8 @@
 
-var msg = ""
-var pass = btoa('user:user')
+url = globalvariable.g_url;
+pass = globalvariable.g_pass;
+msg = globalvariable.g_msg;
 
-// var url = 'https://ticketguru22.herokuapp.com/';
-var url = 'http://localhost:8080/';
 
 async function findTicket() {
     let fturl = url + "tickets?code="
