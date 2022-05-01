@@ -49,7 +49,7 @@ public class TicketController {
 	// Add (POST) a new ticket to sale
 	@PostMapping("/sales/{id}/tickets")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	public TicketDTO addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO,
+	public ResponseEntity<TicketDTO> addTicketToSale(@PathVariable long id, @RequestBody TicketDTO ticketDTO,
 			BindingResult bindingresult) {
 
 		Optional<Sale> saleResult = salesRepo.findById(id); // Sale for which the ticket will be added
@@ -124,7 +124,7 @@ public class TicketController {
 					"Price must be a positive number (e.g 5.50) or null. (If null, price is set automatically according to tickettype)");
 		}
 
-		return data;
+		return new ResponseEntity<>(data, HttpStatus.CREATED);
 	}
 
 	// Get ALL tickets
