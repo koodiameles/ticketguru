@@ -61,41 +61,6 @@ Työntekijällä on oltava etunimi ja sukunimi.
 
 ### Or
 
-**Condition** : Jos työntekijälle ei annettu etunimeä.
-
-**Code** : `400 Bad request`
-
-**Content example**
-
-```json
-{
-    "timestamp": "2022-02-23T17:20:55.061+00:00",
-    "status": 400,
-    "error": "Bad request",    
-    "message": "Employee must have a firstname",
-    "path": "/employees",
-}
-```
-### Or
-
-**Condition** : Jos työntekijälle ei annettu sukunimeä.
-
-**Code** : `400 Bad request`
-
-**Content example**
-
-```json
-{
-    "timestamp": "2022-02-23T17:20:55.061+00:00",
-    "status": 400,
-    "error": "Bad request",    
-    "message": "Employee must have a lastname",
-    "path": "/employees",
-}
-```
-
-### Or
-
 **Condition** : Jos työntekijän role id on virheellinen.
 
 **Code** : `400 Bad request`
