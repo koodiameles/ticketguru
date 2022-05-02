@@ -7,9 +7,10 @@ var saleid;
 var ticketamount = 1;
 var evs;
 var tickettosale = new Array();
-var selevent;
-var selttype;
-var customprice;
+var seleventindex;
+var selttypeid;
+var seleventid;
+var customprice = 0;
 var toomanytickets;
 
 $(document).ready(function () {
@@ -63,11 +64,12 @@ $(document).ready(function () {
     );
     ttdropdown.prop("selectedIndex", 0);
 
-    selevent = $("#evdropdown").val();
-    console.log("selected event: " + selevent);
+    seleventindex = $("#evdropdown").val();
+    seleventid = Number($("#evdropdown").val()) + 1; 
+    console.log("selected event: " + seleventindex);
 
-    console.log(evs[selevent]);
-    $.each(evs[selevent].tickettypes, function (key, ttype) {
+    console.log(evs[seleventindex]);
+    $.each(evs[seleventindex].tickettypes, function (key, ttype) {
       ttdropdown.append(
         $("<option></option>")
           .attr("value", ttype.tickettypeid)
@@ -77,15 +79,17 @@ $(document).ready(function () {
   });
 
   $("#ttdropdown").change(function () {
-    selttype = $("#ttdropdown").val();
+    selttypeid = $("#ttdropdown").val();
 
     if ($("#tiamount").val() != "") {
       $("#buyticket").show();
     }
 
-    console.log("selected tickettype: " + selttype);
-
     $("#addticket").removeAttr("disabled");
+  });
+
+  $("#price").change(function () {
+    customprice = $("#price").val();
   });
 
   $("#tiamount").change(function () {
@@ -114,7 +118,7 @@ $(document).ready(function () {
     //Check ticket amount
     function ajax2() {
       return $.ajax({
-        url: url + "events/" + (Number(selevent) + 1),
+        url: url + "events/" + (Number(seleventindex) + 1),
         method: "GET",
         dataType: "json",
         headers: { Authorization: "Basic " + pass },
@@ -133,7 +137,7 @@ $(document).ready(function () {
           e.preventDefault();
 
           $.ajax({
-            url: url + "events/" + (Number(selevent) + 1),
+            url: url + "events/" + (Number(seleventindex) + 1),
             method: "PUT",
             dataType: "json",
             headers: { Authorization: "Basic " + pass },
@@ -173,8 +177,9 @@ $(document).ready(function () {
               headers: { Authorization: "Basic " + pass },
               contentType: "application/json; charset=utf-8",
               data: JSON.stringify({
-                eventid: Number(selevent) + 1,
-                tickettypeid: selttype,
+                eventid: Number(seleventindex) + 1,
+                tickettypeid: selttypeid,
+                price: customprice
               }),
               success: function (titosaledata) {
                 document.getElementById("result").innerHTML = "Lippujen ostaminen onnistui!";
@@ -199,6 +204,7 @@ $(document).ready(function () {
           $("#evdropdown").val(null);
           $("#ttdropdown").val(null);
           $("#tiamount").val(null);
+          $("#price").val(null);
           $("#buyticket").hide();
 
           document.getElementById("saleinfo").innerHTML =
