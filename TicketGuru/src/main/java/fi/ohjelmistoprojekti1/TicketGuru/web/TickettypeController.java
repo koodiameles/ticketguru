@@ -25,6 +25,7 @@ import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Sale;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
+import fi.ohjelmistoprojekti1.TicketGuru.web.TickettypeDTO; 
 
 
 @RestController
@@ -55,6 +56,8 @@ public class TickettypeController {
 		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
 	
+	
+	
 	// Add (POST) a new tickettype
 	@PostMapping("/tickettypes")
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -70,6 +73,14 @@ public class TickettypeController {
 		}
 		
 		Tickettype newtype = new Tickettype(tickettype.getName(), tickettype.getPrice(), event.get());
+		
+			List <Tickettype> list = tickettyperepository.findByEvent(event.get());
+			for(Tickettype type:list) {
+				if(type.getName().equalsIgnoreCase(newtype.getName())) {
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tickettype already exists."); 
+				}
+			}
+			
 		return new ResponseEntity<>(tickettyperepository.save(newtype), HttpStatus.CREATED);
 	}
 
