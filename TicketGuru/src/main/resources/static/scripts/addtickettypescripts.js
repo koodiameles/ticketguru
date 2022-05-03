@@ -52,7 +52,7 @@ async function submitForm(request){
         if(data.status === 201){
             return await data.json();
         }else{
-            return {message: "Something went wrong, please try again"};
+            return {message: "Lipputyyppi on jo olemassa."};
         }
         
     }catch(error){
