@@ -6,23 +6,36 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/TicketGuru/src/main/resources/static/css/style.css" th:href="@{/css/style.css}" /> <!-- add styles to style.css -->
     <script src="https://kit.fontawesome.com/3b4089212c.js" crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/configscript.js" th:src="@{/scripts/configscript.js}"></script>
     <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/sellscripts.js" th:src="@{/scripts/sellscripts.js}"></script>
+    <script type="text/javascript" src="/TicketGuru/src/main/resources/static/scripts/checkticketscripts.js" th:src="@{/scripts/checkticketscripts.js}"></script>
+   <!-- QR code script-->
+    <script type="text/javascript">
+        function generateBarCode() 
+        {
+            var QR = $('#text').val();
+            var url = 'https://api.qrserver.com/v1/create-qr-code/?data=' + QR + '&amp;size=50x50';
+            $('#barcode').attr('src', url);
+        }
+    </script>
+
 </head>
 
 <body>
+    
     <!-- NAVIGATION BAR -->
     <nav>
         <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
         <ul>
-            <a th:href="@{/login}">Sign in</a>
-            <a th:href="@{/logout}">Sign out</a>
-            <a th:href="@{/index}">Check Ticket</a>
-            <a th:href="@{/selltickets}">Sell Tickets</a>
-            <a th:href="@{/addevent}">Events</a>
-            <a th:href="@{/addtickettype}">Add Tickettypes</a>
+            <a th:href="@{/logout}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Ulos</a>
+            <a th:href="@{/login}"><i class="fa-solid fa-right-to-bracket"></i> Sisään</a>
+            <a th:href="@{/index}"><i class="fa-solid fa-ticket"></i> Lipuntarkastus</a>
+            <a th:href="@{/selltickets}"><i class="fa-solid fa-money-check-dollar"></i> Myy</a>
+            <a th:href="@{/addevent}" sec:authorize="hasAuthority('ADMIN')"><i class="fa-solid fa-calendar-plus"></i> Tapahtuma</a>
+            <a th:href="@{/addtickettype}" sec:authorize="hasAuthority('ADMIN')"><i class="fa-solid fa-square-plus"></i> Lipputyyppi</a>
         </ul>
     </nav>
 
@@ -35,12 +48,14 @@
                 <select id="evdropdown" name="event"></select>
                 <label>Valitse lipputyyppi:</label>
                 <select id="ttdropdown" name="tickettype"></select>
+                <label>Hinta:</label>
+                <input class="textInput2" type="number" id="price" name="price" step=".01">
                 <label>Valitse lippujen määrä:</label>
                 <input class="textInput2" type="number" id="tiamount" name="tiamount" min="1" max="10">
                 <br /> <br />
                 <button class="buttonSecondary" type="button" id="buyticket" >Osta liput</button>
             </form>
-            <p id="result"></p>
+            <h3 id="result"></h3>
         </div>
         
         <!-- SHOW SOLD TICKETS -->
@@ -51,20 +66,24 @@
                     <h3 id="saleinfo"></h3> <br/>
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Tapahtuma</th>
                             <th>Lipputyyppi</th>
                             <th>Hinta</th>
                             <th>Voimassa</th>
                             <th>Koodi</th>
+                            <th>QR koodi</th> 
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                     <!-- empty because we insert data here when sale is completed -->
                     </tbody>
                 </table>
             </div> <!-- /hidden (table) -->
         </div>  <!-- /flexcontainercolumn -->
     </div>  <!-- /flexcontainer -->
+
+  
 </body>
 
 </html>

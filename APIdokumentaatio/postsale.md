@@ -1,6 +1,6 @@
 # Luo myyntitapahtuma
 
-Luo uusi myyntitapahtuma. Myyntitapahtuman luonti vaatii Admin- tai User-oikeudet.
+Luo uusi myyntitapahtuma. Kaikki **käyttäjät** voivat luoda uuden myyntitapahtuman.
 
 **URL** : `/sales`
 
@@ -34,3 +34,8 @@ Luo uusi myyntitapahtuma. Myyntitapahtuman luonti vaatii Admin- tai User-oikeude
     "tickets": null
 }
 ```
+## Error Responses
+
+**Condition** : Henkilöllä ei ole oikeuksia luoda myyntitapahtumaa (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`

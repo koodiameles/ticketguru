@@ -1,6 +1,6 @@
 # Näytä kaikki liput
 
-Näytä lista kaikista lipuista.
+Näytä lista kaikista lipuista. Kaikki **käyttäjät** voivat hakea listan.
 
 **URL** : `/tickets`
 
@@ -82,3 +82,8 @@ Näytä lista kaikista lipuista.
     }
 ]
 ```
+## Error Responses
+
+**Condition** : Henkilöllä ei ole oikeuksia sen listausta (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`

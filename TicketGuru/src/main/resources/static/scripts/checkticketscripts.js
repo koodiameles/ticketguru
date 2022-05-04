@@ -1,9 +1,8 @@
 
-var msg = ""
-var pass = btoa('user:user')
+url = globalvariable.g_url;
+pass = globalvariable.g_pass;
+msg = globalvariable.g_msg;
 
-var url = 'https://ticketguru22.herokuapp.com/';
-// var url = 'http://localhost:8080/';
 
 async function findTicket() {
     let fturl = url + "tickets?code="
@@ -88,7 +87,8 @@ async function findAllTickets() {
 
                 // ITERATING THROUGH OBJECTS
                 $.each(data, function (key, value) {
-
+                    var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
+                    const qrCodeString = `<img src="${myQR} width="70" height="70">`
                     //CONSTRUCTION OF ROWS HAVING
                     // DATA FROM JSON OBJECT
                     ticket += '<tr>';
@@ -103,6 +103,8 @@ async function findAllTickets() {
 
                     ticket += '<td>' + 
                         value.valid + '</td>';
+
+                    ticket += "<td>" + qrCodeString + "</td>";   
 
                     ticket += '</tr>';
                 });

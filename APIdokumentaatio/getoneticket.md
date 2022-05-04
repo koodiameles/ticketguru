@@ -68,4 +68,10 @@ Haettu lipun (ID 2) tiedot. /tickets/2
 }
 ```
 
+### Or
+
+**Condition** : Jos lippu on olemassa, mutta henkilöllä ei ole oikeuksia sen hakemiseen (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`
+
 

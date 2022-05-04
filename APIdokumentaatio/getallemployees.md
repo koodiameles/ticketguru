@@ -1,6 +1,6 @@
 # Näytä kaikki työntekijät
 
-Näytä lista kaikista työntekijöistä. Kaikilla käyttäjäoikeuksilla saa etsittyä listauksen. 
+Näytä lista kaikista työntekijöistä. Listan näkeminen vaatii Admin-oikeudet. 
 
 **URL** : `/employees`
 
@@ -14,7 +14,7 @@ Näytä lista kaikista työntekijöistä. Kaikilla käyttäjäoikeuksilla saa et
 
 **Code** : `200 OK`
 
-**Data examples**
+**Content example**
 
 ```json
     {
@@ -23,5 +23,17 @@ Näytä lista kaikista työntekijöistä. Kaikilla käyttäjäoikeuksilla saa et
         "lastname": "Ihmemaa",
         "username": "user",
         "sales": []
+    },    
+    {
+        "employeeid": 2,
+        "firstname": "cpt Jaakko",
+        "lastname": "Varpunen",
+        "username": "admin",
+        "sales": []
     }
 ```
+## Error Responses
+
+**Condition** : Henkilöllä ei ole oikeuksia nähdä listausta (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

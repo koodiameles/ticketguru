@@ -49,7 +49,8 @@ Tapahtumalla on oltava nimi (description).
     "city": "Tamperee",
     "ticketcount": 3000,
     "datetime": "2023-08-12T12:30:00.000+00:00",
-    "duration": 120
+    "duration": 120,
+    "tickettypes": null
 }
 ```
 
@@ -57,7 +58,7 @@ Tapahtumalla on oltava nimi (description).
 
 **Condition** : Jos tapahtumalle ei annettu nimeä.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad Request`
 
 **Content example**
 
@@ -75,7 +76,7 @@ Tapahtumalla on oltava nimi (description).
 
 **Condition** : Jos päivämäärä/aika on jo mennyt.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad Request`
 
 **Content example**
 
@@ -88,3 +89,8 @@ Tapahtumalla on oltava nimi (description).
     "path": "/events",
 }
 ```
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia luoda tapahtumaa (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

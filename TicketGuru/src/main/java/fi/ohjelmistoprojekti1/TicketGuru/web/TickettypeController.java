@@ -25,6 +25,7 @@ import fi.ohjelmistoprojekti1.TicketGuru.domain.EventRepository;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Sale;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Tickettype;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.TickettypeRepository;
+import fi.ohjelmistoprojekti1.TicketGuru.web.TickettypeDTO; 
 
 
 @RestController
@@ -55,16 +56,32 @@ public class TickettypeController {
 		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
 	
-	// Add (POST) a new event
+	
+	
+	// Add (POST) a new tickettype
 	@PostMapping("/tickettypes")
-	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Tickettype addTickettype(@Valid @RequestBody Tickettype tickettype, BindingResult bindingresult) {
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public ResponseEntity<?> addTickettype(@Valid @RequestBody TickettypeDTO tickettype, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingresult.getFieldError().getDefaultMessage()); 
 		}
-		tickettyperepository.save(tickettype);
-		return tickettype;
+
+		Optional<Event> event = eventrepository.findById(tickettype.getEvent());
+
+		if (! event.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event not valid");
+		}
+		
+		Tickettype newtype = new Tickettype(tickettype.getName(), tickettype.getPrice(), event.get());
+		
+			List <Tickettype> list = tickettyperepository.findByEvent(event.get());
+			for(Tickettype type:list) {
+				if(type.getName().equalsIgnoreCase(newtype.getName())) {
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tickettype already exists."); 
+				}
+			}
+			
+		return new ResponseEntity<>(tickettyperepository.save(newtype), HttpStatus.CREATED);
 	}
 
 }
