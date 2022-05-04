@@ -65,9 +65,9 @@ Luo Lippu. Lippu kuuluu aina myyntitapahtumaan (sale). Lipun luonti vaatii Admin
 
 ## Error Responses
 
-**Condition** : Annettu eventid on virheellinen.
+**Condition** : Annettu event id on virheellinen.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -83,9 +83,9 @@ Luo Lippu. Lippu kuuluu aina myyntitapahtumaan (sale). Lipun luonti vaatii Admin
 
 ### Or
 
-**Condition** : Annettu tickettypeid on virheellinen.
+**Condition** : Annettu tickettype id on virheellinen.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -101,9 +101,9 @@ Luo Lippu. Lippu kuuluu aina myyntitapahtumaan (sale). Lipun luonti vaatii Admin
 
 ### Or
 
-**Condition** : Annettu price on virheellinen (Huom! Price kohtaan ei tarvitse merkitä mitään ja se saa olla myös null)
+**Condition** : Annettu price on virheellinen (Huom! Price kohtaan ei tarvitse merkitä mitään ja se saa olla myös null).
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -116,4 +116,8 @@ Luo Lippu. Lippu kuuluu aina myyntitapahtumaan (sale). Lipun luonti vaatii Admin
     "path": "/sales/1/tickets"
 }
 ```
+### Or
 
+**Condition** : Henkilöllä ei ole oikeuksia luoda lippua (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

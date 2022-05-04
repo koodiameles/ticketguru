@@ -53,7 +53,7 @@ Tapahtumalla on oltava nimi (description).
 
 **Condition** : Jos tapahtumalle ei annettu nimeä.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad Request`
 
 **Content example**
 
@@ -70,7 +70,7 @@ Tapahtumalla on oltava nimi (description).
 
 **Condition** : Jos päivämäärä/aika on jo mennyt.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad Request`
 
 **Content example**
 
@@ -100,3 +100,8 @@ Tapahtumalla on oltava nimi (description).
     "path": "/events/{id}"
 }
 ```
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia muokata tapahtumaa (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

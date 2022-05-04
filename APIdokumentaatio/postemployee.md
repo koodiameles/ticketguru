@@ -41,49 +41,14 @@ Työntekijällä on oltava etunimi ja sukunimi. Role ei saa olla tyhjä ja sen t
     "username": "aurinkoinen",
     "role": 1,
     "password" : "kovakuoriainen"
-    }
+}
 ```
 
 ## Error Responses
 
-**Condition** : Jos työntekijälle ei annettu etunimeä.
-
-**Code** : `400 BAD REQUEST`
-
-**Content example**
-
-```json
-{
-    "timestamp": "2022-02-23T17:20:55.061+00:00",
-    "status": 400,
-    "error": "Bad request",    
-    "message": "Employee must have a firstname",
-    "path": "/employees",
-}
-```
-### Or
-
-**Condition** : Jos työntekijälle ei annettu sukunimeä.
-
-**Code** : `400 BAD REQUEST`
-
-**Content example**
-
-```json
-{
-    "timestamp": "2022-02-23T17:20:55.061+00:00",
-    "status": 400,
-    "error": "Bad request",    
-    "message": "Employee must have a lastname",
-    "path": "/employees",
-}
-```
-
-### Or
-
 **Condition** : Jos työntekijän role id on virheellinen.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -101,7 +66,7 @@ Työntekijällä on oltava etunimi ja sukunimi. Role ei saa olla tyhjä ja sen t
 
 **Condition** : Jos käyttäjänimi on jo olemassa.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `400 Bad request`
 
 **Content example**
 
@@ -110,3 +75,9 @@ Työntekijällä on oltava etunimi ja sukunimi. Role ei saa olla tyhjä ja sen t
     "message": "This username already exists",
 }
 ```
+
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia luoda työntekijää (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

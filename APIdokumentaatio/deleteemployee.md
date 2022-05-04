@@ -73,3 +73,9 @@ Poista työntekijä. Työntekijän poistaminen vaatii Admin-oikeudet.
     "path": "/employees/{id}"
 }
 ```
+
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia poistaa työntekijää (esim. käyttäjänä user).
+
+**Code** : `401 Unauthorized`

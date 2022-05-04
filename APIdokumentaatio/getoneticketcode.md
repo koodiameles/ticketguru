@@ -68,5 +68,10 @@ Haettu lipun tiedot.
     "message": "Ticket code {ticketcode} not found",
 }
 ```
+### Or
+
+**Condition** : Jos lippu on olemassa, mutta henkilöllä ei ole oikeuksia sen hakemiseen (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`
 
 

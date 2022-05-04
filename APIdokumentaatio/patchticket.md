@@ -1,6 +1,6 @@
 # Muuta lippu käytetyksi
 
-Käytä Lippu. Lipun voi päivittää joko Admin- tai User-oikeuksin.
+Käytä Lippu. Kaikki **käyttäjät** voivat päivittää lipun käytetyksi.
 
 **URL** : `/tickets?code={ticketcode}`
 
@@ -40,6 +40,8 @@ Käytä Lippu. Lipun voi päivittää joko Admin- tai User-oikeuksin.
 }
 ```
 
+### Or
+
 **Condition** : Lippukoodilla löytyvä lippu on jo käytetty.
 
 **Code** : `400 Forbidden`
@@ -53,3 +55,8 @@ Käytä Lippu. Lipun voi päivittää joko Admin- tai User-oikeuksin.
     "message": "Ticket with ticket code {ticketcode} has already been used",
 }
 ```
+### Or
+
+**Condition** : Henkilöllä ei ole oikeuksia muuttaa lippua käytetyksi (esim. käyttäjä ei ole kirjautunut).
+
+**Code** : `401 Unauthorized`

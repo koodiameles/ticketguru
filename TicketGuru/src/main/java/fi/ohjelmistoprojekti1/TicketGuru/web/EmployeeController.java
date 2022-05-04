@@ -65,7 +65,7 @@ public class EmployeeController {
 		Role role = roleResult.get(); //get the role in question
 		
 		try {
-			for (Employee find : emprepo.findAll()) {
+			for (Employee find : emprepo.findAll()) { //Check here, if the username is already in use
 				if (find.getUsername().equals(employeeDTO.getUsername())) {
 					throw new Exception(); 
 				}
@@ -76,8 +76,31 @@ public class EmployeeController {
 				employeeDTO.getUsername(),
 				employeeDTO.getPassword(),
 				role);
-		emprepo.save(create);
-		return new ResponseEntity<>(create, HttpStatus.CREATED);
+			if(employeeDTO.getFirstname()==null){
+				Map<String, String> response = new HashMap<>(); 
+				response.put("message", "Firstname is missing");
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
+			else if(employeeDTO.getLastname()==null){
+				Map<String, String> response = new HashMap<>(); 
+				response.put("message", "Lastname is missing");
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
+			else if(employeeDTO.getUsername()==null){
+				Map<String, String> response = new HashMap<>(); 
+				response.put("message", "Username is missing");
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
+			else if(employeeDTO.getPassword()==null){
+				Map<String, String> response = new HashMap<>(); 
+				response.put("message", "Password is missing");
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
+			else{
+				emprepo.save(create);
+				return new ResponseEntity<>(create, HttpStatus.CREATED);
+			}
+		
 
 	} catch (Exception e) {
 		Map<String, String> response = new HashMap<>(); 
@@ -122,10 +145,24 @@ public class EmployeeController {
 					employee.setLastname(employeeDTO.getLastname());
 					employee.setHashpassword(employeeDTO.getPassword());
 					employee.setUsername(employeeDTO.getUsername());
+					
+					if(employeeDTO.getFirstname()==null) {
+						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Firstname is missing"); 
+					}
+					else if(employeeDTO.getLastname()==null) {
+						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lastname is missing"); 
+					}
+					else if(employeeDTO.getPassword()==null) {
+						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password is missing"); 
+					}
+					else if(employeeDTO.getUsername()==null) {
+						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is missing"); 
+					}
+					else {
 					return emprepo.save(employee);
+					}
 				})
 				.orElseGet(() -> {
-					//return eventrepository.save(newEvent);
 					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee id " + employeeid + " not found");
 				});
 	}

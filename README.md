@@ -60,7 +60,7 @@ Ticketgurulla käyttääjä voi muun muassa:
 ![UML malli](./Kuvat/UMLkaaviokuva.PNG) 
 
 > ### _Employee – Työntekijä_
-> Työntekijä-taulu sisältää tiedon tyontekijän etu- ja sukunimestä sekä hänen roolistaan. Työntekijällä voi olla myös useita myyntitapahtumia tehtynä.
+> Työntekijä-taulu sisältää tiedon tyontekijän etu- ja sukunimestä, roolista, käyttäjänimestä ja salasanasta. Työntekijällä voi olla myös useita myyntitapahtumia tehtynä.
 > 
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
@@ -68,6 +68,8 @@ Ticketgurulla käyttääjä voi muun muassa:
 > rooli | long FK | Viittaus Roolit-tauluun. Määrittelee työntekijän oikeudet käyttää järjestelmää
 > firstname | varchar(50) | Työntekijän etunimi
 > lastname | varchar(50) | Työntekijän sukunimi
+> username | varchar(15) | Käyttäjänimi
+> password | varchar(70) | Salasana
 
 > ### _Role – Rooli_
 > Rooli-taulu sisältää työntekijöiden käyttöoikeudet järjestelmässä. Työntekijällä voi olla vain yksi rooli. Tietty rooli voi kuulua monelle eri työntekijälle.
@@ -101,6 +103,8 @@ Ticketgurulla käyttääjä voi muun muassa:
 > tickettype | long FK | Viittaus tickettype -tauluun. Minkä tyyppinen lippu tämä on. (Child/Adult/...)
 > ticketprice | double | Lipun hinta. Voidaan ottaa tickettypen mukaan tai syöttää manuaalisesti.
 > valid | boolean |  Onko lippu voimassa. Esim. onko käytetty
+> ticketcode | varchar(20) |  Onko lippu voimassa. Esim. onko käytetty
+> useddatetime | datetime |  Ajankohta milloin lippu on käytetty. PVM sekä KLO.
 
 > ### _Sale – Myyntitapahtuma_
 > Myyntitapahtuma-taulu sisältää tiedot myyntitapahtumasta ja siihen liittyvistä lipuista. Myyntitapahtuma kertoo, kuka työntekijä liput on myynyt ja koska. Myyntitapahtumaan voi liittyä useampia lippuja, mutta ainoastaan yksi työntekijä.
@@ -135,9 +139,13 @@ Endpointit, joihin pääsy edellyttää user- tai admin-käyttöoikeudet:
 
 + [**Näytä kaikki tapahtumat**](APIdokumentaatio/getallevents.md) : `GET /events`
 + [**Näytä yksi tapahtuma (ID)**](APIdokumentaatio/getoneevent.md) : `GET /events/{id}`
++ [**Näytä kaikki lipputyypit**](APIdokumentaatio/getalltickettypes.md) : `GET /tickettypes`
++ [**Näytä yksi lipputyyppi (ID)**](APIdokumentaatio/getonetickettype.md) : `GET /tickettypes/{id}`
 + [**Näytä kaikki liput**](APIdokumentaatio/getalltickets.md) : `GET /tickets`
 + [**Näytä yksi lippu (ID)**](APIdokumentaatio/getoneticket.md) : `GET /tickets/{id}`
 + [**Näytä yksi lippu (ticketcode)**](APIdokumentaatio/getoneticketcode.md) : `GET /tickets?code={ticketcode}`
++ [**Näytä kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
++ [**Näytä yksi myyntitapahtuma (ID)**](APIdokumentaatio/getonesale.md) : `GET /sales/{id}`
 + [**Luo myyntitapahtuma**](APIdokumentaatio/postsale.md) : `POST /sales`
 + [**Muuta lippu käytetyksi**](APIdokumentaatio/patchticket.md) : `PATCH /tickets?code={ticketcode}`
 
@@ -146,11 +154,10 @@ Endpointit, joihin pääsy edellyttää admin-käyttöoikeudet:
 + [**Luo tapahtuma**](APIdokumentaatio/postevent.md) : `POST /events`
 + [**Päivitä tapahtuma**](APIdokumentaatio/putevent.md) : `PUT /events/{id}`
 + [**Poista tapahtuma**](APIdokumentaatio/deleteevent.md) : `DELETE /events/{id}`
-+ [**Näytä kaikki myyntitapahtumat**](APIdokumentaatio/getallsales.md) : `GET /sales`
-+ [**Näytä yksi myyntitapahtuma (ID)**](APIdokumentaatio/getonesale.md) : `GET /sales/{id}`
++ [**Luo lipputyyppi**](APIdokumentaatio/posttickettype.md) : `POST /tickettypes`
 + [**Luo lippu myyntitapahtumaan**](APIdokumentaatio/postticket.md) : `POST /sales/{id}/tickets`
 + [**Näytä kaikki työntekijät**](APIdokumentaatio/getallemployees.md) : `GET /employees`
-+ [**Luo työntekijät**](APIdokumentaatio/postemployee.md) : `POST /employees`
++ [**Luo työntekijä**](APIdokumentaatio/postemployee.md) : `POST /employees`
 + [**Päivitä työntekijä**](APIdokumentaatio/putemployee.md) : `PUT /employees/{id}`
 + [**Poista työntekijä**](APIdokumentaatio/deleteemployee.md) : `DELETE /employees/{id}`
 
@@ -161,3 +168,18 @@ Sovelluksesta on testattu tärkeimpiä ominaisuuksia, joiden vähintään tulee 
 Olennaista on esimerkiksi pystyä luomaan tapahtuma ja myymään siihen lippuja. Näihin liittyviä toimintoja on testattu onnistuneesti sekä automaatiotesteillä että manuaalisilla testeillä.  
 
 [Testiraportti](APIdokumentaatio/testreport.md) kuvailee tarkemmin testitapausten toteutusta ja toimintaa.
+
+## Asennustiedot
+
+### Kehitysympäristön käyttöönotto
+
++ Projektin voi kloonata GitHubista (https://github.com/koodiameles/ticketguru). Projektin voi avata Visual Studio Codella tai Eclipsellä. 
++ Kehitysympäristössä tietokantana voi käyttää h2-kantaa. 
++ Pysyvämpää tietokantaa varten koneelle asennetaan PostgreSQL-tietokanta. 
++ Käyttäjätunnukset ja salasanat ovat hallinnoitavissa application-heroku.properties- ja application-local.properties-tiedostoissa. Application.properties-tiedostossa voi määrittää, käytetäänkö kehitysympäristössä h2- vai PostgreSQL-kantaa.   
++ Postmanilla pyynnöt tulee autentikoida. 
+
+### Tuotantoympäristön käyttöönotto 
+
++ Projekti on julkaistu Herokussa. 
++ Sovelluksen Herokussa toimivan tietokannan osoite, käyttäjätunnus ja salasana löytyvät projektin Settings-välilehdeltä kohdasta "Config Vars". Näitä tarvitaan, jotta saadaan luotua tietokantayhteys. 
