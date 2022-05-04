@@ -131,7 +131,7 @@ Ticketgurulla käyttääjä voi muun muassa:
 
 Endpointit, joihin kaikilla käyttäjillä on pääsy: 
 
-Login : POST /login/
+Login : `POST /login/`
 
 ### Endpoints, vaatii autentikoinnin (Authentication required)
 
