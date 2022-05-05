@@ -168,3 +168,18 @@ Sovelluksesta on testattu tärkeimpiä ominaisuuksia, joiden vähintään tulee 
 Olennaista on esimerkiksi pystyä luomaan tapahtuma ja myymään siihen lippuja. Näihin liittyviä toimintoja on testattu onnistuneesti sekä automaatiotesteillä että manuaalisilla testeillä.  
 
 [Testiraportti](APIdokumentaatio/testreport.md) kuvailee tarkemmin testitapausten toteutusta ja toimintaa.
+
+## Asennustiedot
+
+### Kehitysympäristön käyttöönotto
+
++ Projektin voi kloonata GitHubista (https://github.com/koodiameles/ticketguru). Projektin voi avata Visual Studio Codella tai Eclipsellä. 
++ Kehitysympäristössä tietokantana voi käyttää h2-kantaa. 
++ Pysyvämpää tietokantaa varten koneelle asennetaan PostgreSQL-tietokanta. 
++ Käyttäjätunnukset ja salasanat ovat hallinnoitavissa application-heroku.properties- ja application-local.properties-tiedostoissa. Application.properties-tiedostossa voi määrittää, käytetäänkö kehitysympäristössä h2- vai PostgreSQL-kantaa.   
++ Postmanilla pyynnöt tulee autentikoida. 
+
+### Tuotantoympäristön käyttöönotto 
+
++ Projekti on julkaistu Herokussa. 
++ Sovelluksen Herokussa toimivan tietokannan osoite, käyttäjätunnus ja salasana löytyvät projektin Settings-välilehdeltä kohdasta "Config Vars". Näitä tarvitaan, jotta saadaan luotua tietokantayhteys. 
