@@ -204,7 +204,9 @@ $(document).ready(function () {
           $("#evdropdown").val(null);
           $("#ttdropdown").val(null);
           $("#tiamount").val(null);
+          ticketamount = 0;
           $("#price").val(null);
+          customprice = 0;
           $("#buyticket").hide();
 
           document.getElementById("saleinfo").innerHTML =
