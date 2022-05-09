@@ -44,14 +44,14 @@
         <div class="flexcontainercolumn">
             <h2>Myy lippuja</h2>
             <form>
-                <label>Valitse tapahtuma:</label>
+                <label>Tapahtuma:</label>
                 <select id="evdropdown" name="event"></select>
-                <label>Valitse lipputyyppi:</label>
+                <label>Lipputyyppi:</label>
                 <select id="ttdropdown" name="tickettype"></select>
-                <label>Hinta:</label>
-                <input class="textInput2" type="number" id="price" name="price" step=".01">
-                <label>Valitse lippujen määrä:</label>
-                <input class="textInput2" type="number" id="tiamount" name="tiamount" min="1" max="10">
+                <label>Hinta (muokattavissa):</label>
+                <input class="textInput2" type="number" id="price" name="price" step=".01" placeholder="€">
+                <label>Lippujen määrä:</label>
+                <input class="textInput2" type="number" id="tiamount" name="tiamount" min="1" max="10" placeholder="1–10">
                 <br /> <br />
                 <button class="buttonSecondary" type="button" id="buyticket" >Osta liput</button>
             </form>
@@ -61,7 +61,7 @@
         <!-- SHOW SOLD TICKETS -->
         <div class="flexcontainercolumn">
             <div class="hidden">
-                <table id="table" >
+                <table id="table">
                     <h2>Ostetut liput</h2>
                     <h3 id="saleinfo"></h3> <br/>
                     <thead>

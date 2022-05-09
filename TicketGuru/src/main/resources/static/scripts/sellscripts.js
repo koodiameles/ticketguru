@@ -4,7 +4,7 @@ pass = globalvariable.g_pass;
 msg = globalvariable.g_msg;
 
 var saleid;
-var ticketamount = 1;
+var ticketamount;
 var evs;
 var tickettosale = new Array();
 var seleventindex;
@@ -15,23 +15,20 @@ var toomanytickets;
 
 $(document).ready(function () {
   $(function () {
-    let evdropdown = $("#evdropdown");
 
     $("#buyticket").hide();
 
     toomanytickets = false;
 
-    evdropdown.empty();
-
-    evdropdown.append(
+    $("#evdropdown").empty();
+    $("#evdropdown").append(
       '<option selected="true" disabled>Valitse tapahtuma</option>'
     );
-    evdropdown.prop("selectedIndex", 0);
-    populate()
-    function populate() {
-      const evurl = url + "events/";
+    $("#evdropdown").prop("selectedIndex", 0);
 
-    //Populate event dropdown
+    const evurl = url + "events/";
+
+    // Populate event dropdown
     $.ajax({
       url: evurl,
       type: "GET",
@@ -41,7 +38,7 @@ $(document).ready(function () {
       success: function (data) {
         evs = data;
         $.each(data, function (key, event) {
-          evdropdown.append(
+          $("#evdropdown").append(
             $("<option></option>")
               .attr("value", event.eventid - 1)
               .text(event.description + " (" + event.ticketcount + " lippua jäljellä)")
@@ -52,20 +49,16 @@ $(document).ready(function () {
         console.log(error);
       },
     });
-    }
     
   });
 
-  //Tickettype dropdown
+  // Populate tickettype dropdown when event is chosen
   $("#evdropdown").change(function () {
-    let ttdropdown = $("#ttdropdown");
-
-    ttdropdown.empty();
-
-    ttdropdown.append(
+    $("#ttdropdown").empty();
+    $("#ttdropdown").append(
       '<option selected="true" disabled>Valitse lipputyyppi</option>'
     );
-    ttdropdown.prop("selectedIndex", 0);
+    $("#ttdropdown").prop("selectedIndex", 0);
 
     seleventindex = $("#evdropdown").val();
     seleventid = Number($("#evdropdown").val()) + 1; 
@@ -73,28 +66,56 @@ $(document).ready(function () {
 
     console.log(evs[seleventindex]);
     $.each(evs[seleventindex].tickettypes, function (key, ttype) {
-      ttdropdown.append(
+      $("#ttdropdown").append(
         $("<option></option>")
           .attr("value", ttype.tickettypeid)
           .text(ttype.name + " (" + ttype.price + " €)")
       );
     });
+    $("#price").val(null);
   });
 
+  // When tickettype is chosen
   $("#ttdropdown").change(function () {
     selttypeid = $("#ttdropdown").val();
+
+    const ttypeurl = url + "tickettypes/" + selttypeid;
+    // Set tickettype price to price input 
+    $.ajax({
+      url: ttypeurl,
+      method: "GET",
+      dataType: "json",
+      headers: { Authorization: "Basic " + pass },
+      contentType: "application/json; charset=utf-8",
+      success: function (data) {
+        $("#price").val(data.price);
+        customprice = data.price;
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
 
     if ($("#tiamount").val() != "") {
       $("#buyticket").show();
     }
 
+    if ($("#tiamount").val() > 10) {
+      $("#buyticket").hide();
+      document.getElementById("result").innerHTML = "Voit ostaa korkeintaan 10 lippua kerrallaan.";
+    } else if ($("#tiamount").val() <= 10) {
+      document.getElementById("result").innerHTML = "";
+    }
+
     $("#addticket").removeAttr("disabled");
   });
 
+  // When price changes
   $("#price").change(function () {
     customprice = $("#price").val();
   });
 
+  // When ticketamount changes
   $("#tiamount").change(function () {
     ticketamount = $("#tiamount").val();
 
@@ -116,10 +137,11 @@ $(document).ready(function () {
     console.log("ticketamount: " + ticketamount);
   });
 
+  //  Clicking the "Osta liput" button
   $("#buyticket").click(function (e) {
     const saleurl = url + "sales";
-    //Check ticket amount
-    function ajaxCheckAmount() {
+    // Check ticket amount
+    function ajaxCheckTicketamount() {
       return $.ajax({
         url: url + "events/" + (Number(seleventindex) + 1),
         method: "GET",
@@ -138,7 +160,7 @@ $(document).ready(function () {
             return;
           }
           e.preventDefault();
-
+          // Decrease the number of tickets available
           $.ajax({
             url: url + "events/" + (Number(seleventindex) + 1),
             method: "PUT",
@@ -184,7 +206,7 @@ $(document).ready(function () {
                 tickettypeid: selttypeid,
                 price: customprice
               }),
-              async: false,
+              async: false, // Sync request to prevent table population before all tickets have been created
               success: function (titosaledata) {
                 document.getElementById("result").innerHTML = "Lippujen ostaminen onnistui!";
               },
@@ -200,13 +222,13 @@ $(document).ready(function () {
       });
     }
 
-    $.when(ajaxCheckAmount()).then(function (a2) {
+    $.when(ajaxCheckTicketamount()).then(function () {
       if (!toomanytickets) {
-        // Execute this when ajax2 is done
-        $.when(ajaxSellTickets()).then(function (a1) {
-          // Reset dropdowns and ticketamount
+        // Execute this when ajax for checking ticketamount is done
+        $.when(ajaxSellTickets()).then(function () {
+          // Reset dropdowns, ticketamount and price
           $("#evdropdown").prop("selectedIndex", 0);
-          $("#ttdropdown").val(null);
+          $("#ttdropdown").empty();
           $("#tiamount").val(null);
           ticketamount = 0;
           $("#price").val(null);
@@ -257,6 +279,35 @@ $(document).ready(function () {
               
               //INSERTING ROWS INTO TABLE
               $("#table").append(ticket);
+            },
+            error: function (error) {
+              console.log(error);
+            },
+          });
+
+          // Repopulate event dropdown with updated ticketamount
+          $("#evdropdown").empty();
+          $("#evdropdown").append(
+            '<option selected="true" disabled>Valitse tapahtuma</option>'
+          );
+          $("#evdropdown").prop("selectedIndex", 0);
+          const evurl = url + "events/";
+
+          $.ajax({
+            url: evurl,
+            type: "GET",
+            dataType: "json",
+            headers: { Authorization: "Basic " + pass },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+              evs = data;
+              $.each(data, function (key, event) {
+                $("#evdropdown").append(
+                  $("<option></option>")
+                    .attr("value", event.eventid - 1)
+                    .text(event.description + " (" + event.ticketcount + " lippua jäljellä)")
+                );
+              });
             },
             error: function (error) {
               console.log(error);
