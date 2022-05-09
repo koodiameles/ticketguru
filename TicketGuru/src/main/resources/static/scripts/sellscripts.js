@@ -239,9 +239,6 @@ $(document).ready(function () {
                 // DATA FROM JSON OBJECT
                 ticket += "<tr>";
 
-                ticket += "<td>" + key + "</td>";
-                console.log('key: ' + key);
-
                 ticket += "<td>" + value.event.description + "</td>";
 
                 ticket += "<td>" + value.tickettype.name + "</td>";
