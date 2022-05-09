@@ -43,7 +43,7 @@ $(document).ready(function () {
           evdropdown.append(
             $("<option></option>")
               .attr("value", event.eventid - 1)
-              .text(event.description)
+              .text(event.description + " (" + event.ticketcount + " lippua jäljellä)")
           );
         });
       },
@@ -116,7 +116,7 @@ $(document).ready(function () {
   $("#buyticket").click(function (e) {
     const saleurl = url + "sales";
     //Check ticket amount
-    function ajax2() {
+    function ajaxCheckAmount() {
       return $.ajax({
         url: url + "events/" + (Number(seleventindex) + 1),
         method: "GET",
@@ -155,7 +155,7 @@ $(document).ready(function () {
       });
     }
 
-    function ajax1() {
+    function ajaxSellTickets() {
       // Post new sale
       return $.ajax({
         url: saleurl,
@@ -169,7 +169,7 @@ $(document).ready(function () {
           saleid = data.saleid;
           const titosaleurl = url + "sales/" + data.saleid + "/tickets";
           e.preventDefault();
-          for (i = 0; i < ticketamount; i++) {
+          for (var i = 0; i < ticketamount; i++) {
             $.ajax({
               url: titosaleurl,
               method: "POST",
@@ -181,6 +181,7 @@ $(document).ready(function () {
                 tickettypeid: selttypeid,
                 price: customprice
               }),
+              async: false,
               success: function (titosaledata) {
                 document.getElementById("result").innerHTML = "Lippujen ostaminen onnistui!";
               },
@@ -196,15 +197,17 @@ $(document).ready(function () {
       });
     }
 
-    $.when(ajax2()).done(function (a2) {
-      if (toomanytickets != true) {
+    $.when(ajaxCheckAmount()).then(function (a2) {
+      if (!toomanytickets) {
         // Execute this when ajax2 is done
-        $.when(ajax1()).done(function (a1) {
+        $.when(ajaxSellTickets()).then(function (a1) {
           // Reset dropdowns and ticketamount HOW TO RESET TO 'Valitse tapahtuma:' etc, NOT EMPTY?
           $("#evdropdown").val(null);
           $("#ttdropdown").val(null);
           $("#tiamount").val(null);
+          ticketamount = 0;
           $("#price").val(null);
+          customprice = 0;
           $("#buyticket").hide();
 
           document.getElementById("saleinfo").innerHTML =
