@@ -246,7 +246,7 @@ $(document).ready(function () {
 
                 ticket += "<td>" + value.tickettype.name + "</td>";
 
-                ticket += "<td>" + value.ticketprice + "</td>";
+                ticket += "<td>" + value.ticketprice + " € </td>";
 
                 ticket += "<td>" + value.valid + "</td>";
 
