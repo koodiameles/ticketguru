@@ -27,8 +27,9 @@ $(document).ready(function () {
       '<option selected="true" disabled>Valitse tapahtuma</option>'
     );
     evdropdown.prop("selectedIndex", 0);
-
-    const evurl = url + "events/";
+    populate()
+    function populate() {
+      const evurl = url + "events/";
 
     //Populate event dropdown
     $.ajax({
@@ -51,6 +52,8 @@ $(document).ready(function () {
         console.log(error);
       },
     });
+    }
+    
   });
 
   //Tickettype dropdown
@@ -130,7 +133,7 @@ $(document).ready(function () {
           var ticketsLeft = eventamount - ticketamount;
           data.ticketcount = ticketsLeft;
           if (ticketsLeft < 0) {
-            document.getElementById("result").innerHTML = "Tapahtumaan on lippuja jäljellä vain " + eventamount + " ja yritit ostaa " + ticketamount + "! Myyntitapahtuma epäonnistui";
+            document.getElementById("result").innerHTML = "Tapahtumaan on lippuja jäljellä vain " + eventamount + " ja yritit ostaa " + ticketamount + "! Myyntitapahtuma epäonnistui.";
             toomanytickets = true;
             return;
           }
@@ -201,8 +204,8 @@ $(document).ready(function () {
       if (!toomanytickets) {
         // Execute this when ajax2 is done
         $.when(ajaxSellTickets()).then(function (a1) {
-          // Reset dropdowns and ticketamount HOW TO RESET TO 'Valitse tapahtuma:' etc, NOT EMPTY?
-          $("#evdropdown").val(null);
+          // Reset dropdowns and ticketamount
+          $("#evdropdown").prop("selectedIndex", 0);
           $("#ttdropdown").val(null);
           $("#tiamount").val(null);
           ticketamount = 0;
@@ -230,7 +233,7 @@ $(document).ready(function () {
               
               // ITERATING THROUGH OBJECTS
               $.each(saledata.tickets, function (key, value) {
-                var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
+                var myQR = "https://api.qrserver.com/v1/create-qr-code/?data=" + value.ticketcode;
                 const qrCodeString = `<img src="${myQR} width="70" height="70">`
                 // CONSTRUCTION OF ROWS HAVING
                 // DATA FROM JSON OBJECT
@@ -252,7 +255,6 @@ $(document).ready(function () {
                 ticket += "<td>" + qrCodeString + "</td>";   
 
                 ticket += "</tr>";
-                
                 
               });
               
