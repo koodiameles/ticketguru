@@ -4,19 +4,19 @@ Tiimi: Max Arponen, Mirka Heikkilä, Elina Hilkko, Jussi Junnila, Emmi Sulander 
 
 ## Johdanto
 
-Ticketguru on lipunmyyntiin tarkoitettu sovellus. Käyttäjä lisää sovellukseen tapahtumat tietoineen ja lippuhintoineen. Hän voi myydä lippuja ja tarkastella myyntihistoriaa. Yksittäisessä myyntitapahtumassa voi olla myyty useampi lippu erilaisilla hinnoilla (opiskelijahinta, eläkeläishinta) useampaan tapahtumaan. Jokaisella lipulla on yksilöity koodi, joka on helppo tarkastaa tarvittaessa. 
+TicketGuru on lipunmyyntiin tarkoitettu sovellus. Käyttäjä lisää sovellukseen tapahtumat tietoineen ja lippuhintoineen. Hän voi myydä lippuja ja tarkastella myyntihistoriaa. Yksittäisessä myyntitapahtumassa voi olla myyty useampi lippu erilaisilla hinnoilla (opiskelijahinta, eläkeläishinta) useampaan tapahtumaan. Jokaisella lipulla on yksilöity koodi, joka on helppo tarkastaa tarvittaessa. 
 
 Ensimmäiseen lopulliseen versioon ei tule verkkokaupan ominaisuuksia, eli lippuja haluavat asiakkaat eivät itse pysty ostamaan lippuja sovelluksella. Sovellus on siis lipputoimiston käyttöön ja myyntitapahtumia hallinnoi joku sovelluksen käyttäjistä (**myyjä**). Sovellusta ollaan aikeissa jatkokehittää ja tulevaisuudessa lisätä verkkokauppa.
 
-Ticketgurulla käyttääjä voi muun muassa:
+TicketGurulla käyttääjä voi muun muassa:
 + **Lisää Tapahtuma** (Nimi, ajankohta, paikka, kuvaus, kaupunki, myytävien lippujen määrä)
 + **Lisätä lipputyyppejä** (Aikuinen, lapsi, eläkäinen jne.)
 + **Myy lippuja** (Mihin tapahtumiin, montako lippua)
 + **Tulostaa myydyt liput**
 + **Tutkia myyntiraportteja** (Yhteenveto myynnistä tapahtumaan X. Halutessa selaa yksittäisiä myyntitapahtumia)
 
-Ticketguru on toteutettu Java Spring Boot:lla REST-tyyppisesti. Julkaistun version tietokantajärjestelmä on Postgress.
-Käyttöliittymä on suunniteltu ensisijaisesti PC/MAC laittelle. Ticketguru toimii myös mobiilisti, mutta käyttökokemus ei ole tällöin optimoitu.
+TicketGuru on toteutettu Javan Spring Bootilla REST-tyyppisesti. Julkaistun version tietokantajärjestelmä on PostgreSQL.
+Käyttöliittymä on suunniteltu ensisijaisesti työpöytäpäätteen selaimella käytettäväksi. TicketGuru toimii myös mobiilisti, mutta käyttökokemus ei ole tällöin optimoitu. Käyttöliittymä on toteutettu JavaScriptin, HTML:n ja CSS:n avulla.
 
 ## Järjestelmän määrittely
 
@@ -106,7 +106,7 @@ Käyttöliittymä on suunniteltu ensisijaisesti PC/MAC laittelle. Ticketguru toi
 > tickettype | long FK | Viittaus tickettype -tauluun. Minkä tyyppinen lippu tämä on. (Child/Adult/...)
 > ticketprice | double | Lipun hinta. Voidaan ottaa tickettypen mukaan tai syöttää manuaalisesti.
 > valid | boolean |  Onko lippu voimassa. Esim. onko käytetty
-> ticketcode | varchar(20) |  Onko lippu voimassa. Esim. onko käytetty
+> ticketcode | varchar(20) |  Yksilöllinen koodi, jonka avulla lippu voidaan merkitä käytetyksi
 > useddatetime | datetime |  Ajankohta milloin lippu on käytetty. PVM sekä KLO.
 
 > ### _Sale – Myyntitapahtuma_
@@ -179,10 +179,17 @@ Olennaista on esimerkiksi pystyä luomaan tapahtuma ja myymään siihen lippuja.
 + Projektin voi kloonata GitHubista (https://github.com/koodiameles/ticketguru). Projektin voi avata Visual Studio Codella tai Eclipsellä. 
 + Kehitysympäristössä tietokantana voi käyttää h2-kantaa. 
 + Pysyvämpää tietokantaa varten koneelle asennetaan PostgreSQL-tietokanta. 
++ Tietokannan voi alustaa [CommandLineRunnerissa](ticketguru/TicketGuru/src/main/java/fi/ohjelmistoprojekti1/TicketGuru/TicketGuruApplication.java) olevan testidatan avulla on kyseessä sitten h2 tai PostgreSQL. Alustuksen voi tehdä myös käyttäen [tietokantaskeemaa](TicketGuru/preliminary_schema.sql).
 + Käyttäjätunnukset ja salasanat ovat hallinnoitavissa application-heroku.properties- ja application-local.properties-tiedostoissa. Application.properties-tiedostossa voi määrittää, käytetäänkö kehitysympäristössä h2- vai PostgreSQL-kantaa.   
 + Postmanilla pyynnöt tulee autentikoida. 
 
 ### Tuotantoympäristön käyttöönotto 
 
-+ Projekti on julkaistu Herokussa. 
-+ Sovelluksen Herokussa toimivan tietokannan osoite, käyttäjätunnus ja salasana löytyvät projektin Settings-välilehdeltä kohdasta "Config Vars". Näitä tarvitaan, jotta saadaan luotua tietokantayhteys. 
++ Projekti on julkaistu Herokussa. Ryhmän jäsenillä on dynoon käyttöoikeus omilla tunnuksillaan.
++ Sovelluksen Herokussa toimivan tietokannan osoite, käyttäjätunnus ja salasana löytyvät tietokannan Settings-välilehdeltä kohdasta "Database Credentials". Näitä tarvitaan, jotta saadaan luotua tietokantayhteys.
++ Tietokannan tiedot tulee löytyä joko tiedostosta application-heroku.properties tai projektin dynon Settings-välilehdeltä kohdasta "Config Vars", jolloin niihin viitataan em. tiedostossa muodossa ${DATABASE_URL}.
++ Herokuun on julkaistu GitHubista main-haara. Se ei kuitenkaan päivity automaattisesti johtuen siitä, että Herokun GitHub-intergaatio on tällä hetkellä (5/2022) pois käytöstä.
+
+## Käynnistys- ja käyttöohje
+
+Sovellus on julkaistu osoitteessa https://ticketguru22.herokuapp.com/. Kirjautumiseen tarvittavat tunnukset ovat ryhmän jäsenten tiedossa. Julkaisu sisältää sekä palvelinpuolen järjestelmän että käyttöliittymän, jolla sitä voi käyttää.

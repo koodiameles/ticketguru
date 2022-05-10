@@ -46,13 +46,15 @@ eventid bigserial,
 PRIMARY KEY(tickettypeid),
 CONSTRAINT fk_event
 	FOREIGN KEY (eventid)
-		REFERENCES event (eventid)
+		REFERENCES event(eventid)
 );
 
 CREATE TABLE ticket(
 ticketid bigserial NOT NULL,
-valid 	boolean,
+valid boolean,
 ticketprice decimal,
+ticketcode varchar(50),
+useddatetime timestamp,
 eventid bigserial,
 saleid bigserial,
 tickettypeid bigserial,
@@ -91,6 +93,6 @@ VALUES('Adult', 49.9, 1),
       ('Adult', 10.0, 2),
       ('Child', 5.0, 2);
 
-INSERT INTO ticket(valid, ticketprice, eventid, saleid, tickettypeid)
-VALUES(true, 49.9, 1, 1, 1),
-      (true, 10.0, 2, 2, 2);
+INSERT INTO ticket(valid, ticketprice, ticketcode, useddatetime, eventid, saleid, tickettypeid)
+VALUES(true, 49.9, "6e4263ac-9c6a-46d2-9b70-dfcafee5e005", null, 1, 1, 1),
+      (true, 10.0, "02edd6a2-8a66-49a0-8259-5c1742568f97", null,  2, 2, 2);
