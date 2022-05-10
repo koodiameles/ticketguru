@@ -31,7 +31,6 @@
         <h1><a th:href="@{/index}" class="navh1a">TicketGuru</a></h1>
         <ul>
             <a th:href="@{/logout}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Ulos</a>
-            <a th:href="@{/login}"><i class="fa-solid fa-right-to-bracket"></i> Sisään</a>
             <a th:href="@{/index}"><i class="fa-solid fa-ticket"></i> Lipuntarkastus</a>
             <a th:href="@{/selltickets}"><i class="fa-solid fa-money-check-dollar"></i> Myy</a>
             <a th:href="@{/addevent}" sec:authorize="hasAuthority('ADMIN')"><i class="fa-solid fa-calendar-plus"></i> Tapahtuma</a>
@@ -41,17 +40,17 @@
 
     <div class="flexcontainer">
         <!-- SELL TICKETS -->
-        <div class="flexcontainercolumn">
+        <div class="flexcontainercolumn1">
             <h2>Myy lippuja</h2>
             <form>
-                <label>Valitse tapahtuma:</label>
+                <label>Tapahtuma:</label>
                 <select id="evdropdown" name="event"></select>
-                <label>Valitse lipputyyppi:</label>
+                <label>Lipputyyppi:</label>
                 <select id="ttdropdown" name="tickettype"></select>
-                <label>Hinta:</label>
-                <input class="textInput2" type="number" id="price" name="price" step=".01">
-                <label>Valitse lippujen määrä:</label>
-                <input class="textInput2" type="number" id="tiamount" name="tiamount" min="1" max="10">
+                <label>Hinta (muokattavissa):</label>
+                <input class="textInput2" type="number" id="price" name="price" step=".01" placeholder="€">
+                <label>Lippujen määrä:</label>
+                <input class="textInput2" type="number" id="tiamount" name="tiamount" min="1" max="10" placeholder="1–10">
                 <br /> <br />
                 <button class="buttonSecondary" type="button" id="buyticket" >Osta liput</button>
             </form>
@@ -59,20 +58,20 @@
         </div>
         
         <!-- SHOW SOLD TICKETS -->
-        <div class="flexcontainercolumn">
+        <div class="flexcontainercolumn2">
             <div class="hidden">
-                <table id="table" >
+                <table id="table">
                     <h2>Ostetut liput</h2>
                     <h3 id="saleinfo"></h3> <br/>
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Tapahtuma</th>
                             <th>Lipputyyppi</th>
                             <th>Hinta</th>
                             <th>Voimassa</th>
                             <th>Koodi</th>
-                            <th>QR koodi</th> 
+                            <th>QR-koodi</th> 
+                            <button class="buttonTertiary" type="button" onclick="window.print()" >Tulosta liput</button>
                         </tr>
                     </thead>
                     <tbody id="tbody">

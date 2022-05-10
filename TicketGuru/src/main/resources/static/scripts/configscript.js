@@ -9,7 +9,7 @@ var globalvariable = {
     g_pass: btoa("admin:admin"),
     // g_pass: btoa("user:user"),
 
-    g_msg: "",
+   g_msg: "",
 
  };
 
