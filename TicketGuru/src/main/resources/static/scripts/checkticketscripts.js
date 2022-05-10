@@ -73,6 +73,7 @@ async function findAllTickets() {
     let faturl = url + "tickets";
 
     $(".hidden").css('display', 'block'); // Show hidden elements
+    $("#liput").empty(); // Empty table body
     try {
         $.ajax({
             headers: {
@@ -88,7 +89,7 @@ async function findAllTickets() {
                 // ITERATING THROUGH OBJECTS
                 $.each(data, function (key, value) {
                     var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
-                    const qrCodeString = `<img src="${myQR} width="70" height="70">`
+                    const qrCodeString = `<img src="${myQR}" width="70" height="70">`
                     //CONSTRUCTION OF ROWS HAVING
                     // DATA FROM JSON OBJECT
                     ticket += '<tr>';
@@ -99,7 +100,7 @@ async function findAllTickets() {
                         value.event.description + '</td>';
 
                     ticket += '<td>' + 
-                        value.ticketprice + '</td>';
+                        value.ticketprice + ' € </td>';
 
                     ticket += '<td>' + 
                         value.valid + '</td>';

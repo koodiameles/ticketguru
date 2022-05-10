@@ -15,6 +15,9 @@ Ticketgurulla käyttääjä voi muun muassa:
 + **Tulostaa myydyt liput**
 + **Tutkia myyntiraportteja** (Yhteenveto myynnistä tapahtumaan X. Halutessa selaa yksittäisiä myyntitapahtumia)
 
+Ticketguru on toteutettu Java Spring Boot:lla REST-tyyppisesti. Julkaistun version tietokantajärjestelmä on Postgress.
+Käyttöliittymä on suunniteltu ensisijaisesti PC/MAC laittelle. Ticketguru toimii myös mobiilisti, mutta käyttökokemus ei ole tällöin optimoitu.
+
 ## Järjestelmän määrittely
 
 ### Käyttäjäroolit
