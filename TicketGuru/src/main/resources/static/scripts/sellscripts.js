@@ -11,14 +11,12 @@ var seleventindex;
 var selttypeid;
 var seleventid;
 var customprice = 0;
-var toomanytickets;
+var toomanytickets = false;
 
 $(document).ready(function () {
   $(function () {
 
     $("#buyticket").hide();
-
-    toomanytickets = false;
 
     $("#evdropdown").empty();
     $("#evdropdown").append(
