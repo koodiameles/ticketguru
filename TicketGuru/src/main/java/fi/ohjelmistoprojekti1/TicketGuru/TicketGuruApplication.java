@@ -9,13 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-
 
 import fi.ohjelmistoprojekti1.TicketGuru.domain.Employee;
 import fi.ohjelmistoprojekti1.TicketGuru.domain.EmployeeRepository;
@@ -40,23 +36,23 @@ public class TicketGuruApplication {
 		SpringApplication.run(TicketGuruApplication.class, args);
 	}
 
-	//function for more convenient date input. E.g: Date date = parseDate("2022-06-24 18:00");
+	// function for more convenient date input. E.g: Date date = parseDate("2022-06-24 18:00");
 	public static Date parseDate(String date) {
 		try {
 			return new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date);
 		} catch (ParseException e) {
 			return null;
 		}
-	 }
+	}
 
 @Profile("local")	 
 @Bean
 	public CommandLineRunner DemoRunner(EventRepository eventrepository, RoleRepository rolerepository, TicketRepository ticketrepository, TickettypeRepository tickettyperepository, SaleRepository salerepository, EmployeeRepository emprepository) {
 		return (args) -> {
 
-			//TEST DATA
+			// TEST DATA
 			
-			//EVENT TESTDATA
+			// EVENT TESTDATA
 			 log.info("save some event test data");
 			 Date date = parseDate("2022-06-24 18:00");
 			 Date date2 = parseDate("2022-08-12 15:30");
@@ -68,7 +64,7 @@ public class TicketGuruApplication {
 			 eventrepository.save(event2);
 			 eventrepository.save(event3);	 
 
-			//TICKETTYPE TESTDATA
+			// TICKETTYPE TESTDATA
 			 Tickettype tt1 = new Tickettype("Adult", 50.50, event1);
 			 Tickettype tt2 = new Tickettype("Child", 25.50, event1);
 			 Tickettype tt3 = new Tickettype("Adult", 13.50, event2);
@@ -82,7 +78,7 @@ public class TicketGuruApplication {
 			 tickettyperepository.save(tt5); 
 			 tickettyperepository.save(tt6);
 	
-			//SALE TESTDATA
+			// SALE TESTDATA
 			 Date dateNow = new Date();
 			 Date date3 = parseDate("2022-07-22 12:37"); 
 			 Sale testsale1 = new Sale(dateNow);
@@ -90,48 +86,50 @@ public class TicketGuruApplication {
 			 Sale testsale2 = new Sale(date3);
 			 salerepository.save(testsale2);
 
-			//TICKET TESTDATA
+			// TICKET TESTDATA
 		 	Ticket ticket1 = new Ticket(true, tt1.getPrice(), event1, testsale1, tt1);
 			Ticket ticket2 = new Ticket(true, tt2.getPrice(), event2, testsale2, tt2);
 			ticketrepository.save(ticket1);
 			ticketrepository.save(ticket2);
 
-			//TICKETDTO with entities TESTDATA
+			// TICKETDTO with entities TESTDATA
 			TicketDTO ticketDTO = new TicketDTO(tt1, event1);
 			log.info(ticketDTO.toString());
 
-			//ROLE TESTDATA
+			// ROLE TESTDATA
 			Role roleuser = new Role("USER");
 			Role roleadmin = new Role("ADMIN");
 			rolerepository.save(roleuser);
 			rolerepository.save(roleadmin);
 
-			//EMPLOYEE TESTDATA
-			//firstname, lastname, username, password, role
+			// EMPLOYEE TESTDATA
+			// firstname, lastname, username, password, role
 			Employee user = new Employee("Liisa", "Ihmemaa", "user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", roleuser);
 			Employee admin = new Employee("cpt Jaakko", "Varpunen", "admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", roleadmin);
 			emprepository.save(user);
 			emprepository.save(admin);
 
-			//LOG DATA IN TERMINAL
+			// LOG DATA IN TERMINAL
 			log.info("fetch all events");
-				for (Event event : eventrepository.findAll()) {
-			log.info(event.toString());
+			for (Event event : eventrepository.findAll()) {
+				log.info(event.toString());
 			}
 
 			log.info("fetch all tickets");
-				for (Ticket ticket : ticketrepository.findAll()) {
-			log.info(ticket.toString());
+			for (Ticket ticket : ticketrepository.findAll()) {
+				log.info(ticket.toString());
 			}
 			
 			log.info("fetch all sales");
 			for (Sale sale : salerepository.findAll()) {
-			log.info(sale.toString());
+				log.info(sale.toString());
 			}
+
 			log.info("fetch all employees");
 			for (Employee employee : emprepository.findAll()) {
-			log.info(employee.toString());
+				log.info(employee.toString());
 			}
+			
 		};
 	}
 

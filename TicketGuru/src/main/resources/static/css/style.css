@@ -64,7 +64,6 @@ h3 {
     /* border: 2px solid white; */
 }
 
-
 /* NAVIGATION BAR*/
 nav {
     padding: 0.2rem;
@@ -85,6 +84,7 @@ nav h1 {
     align-items: center;
     letter-spacing: 3px;
 }
+
 .navh1a {
     text-decoration: none;
     color: var(--primary);
@@ -136,6 +136,7 @@ form .button {
     background-color: var(--primary);
     transition: font-size 0.5s, color 0.5s;
 }
+
 form .buttonSecondary {
     font-weight: 600;
     font-size: 1.5rem;
@@ -147,6 +148,7 @@ form .buttonSecondary {
     background-color: var(--secondary);
     transition: font-size 0.5s, color 0.5s;
 }
+
 form .button:hover, .buttonSecondary:hover {
     font-size: 1.6rem;
     color: white;
@@ -162,6 +164,7 @@ form .button:hover, .buttonSecondary:hover {
     color: var(--textDark);
     background-color: var(--secondary);
 }
+
 .buttonTertiary:hover {
     font-size: 1.6rem;
     color: white;
@@ -176,6 +179,7 @@ form .textInput {
     font-weight: 600;
     background-color: var(--secondary);
 }
+
 form .textInput2 {
     width: 15rem;
     padding: 1rem;
@@ -193,7 +197,6 @@ form label {
     font-size: 1rem;
     font-weight: bold;
 }
-
 
 form select {
     font-size: 1rem;
@@ -218,6 +221,7 @@ table {
 	border-collapse: collapse;
 	text-align: center;
  }
+
  table td, table th {
    border: 1px solid rgba(70, 58, 235, 0.212);
    padding: 0.5rem; 
@@ -251,6 +255,7 @@ table {
 @page {
     size: landscape;
 }
+
 @media print {
 
     .flexcontainercolumn1, nav, .buttonTertiary  {

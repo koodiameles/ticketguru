@@ -3,7 +3,7 @@ url = globalvariable.g_url;
 pass = globalvariable.g_pass;
 msg = globalvariable.g_msg;
 
-
+// Get ticket with ticketcode
 async function findTicket() {
     let fturl = url + "tickets?code="
     try {
@@ -12,8 +12,6 @@ async function findTicket() {
                 method: 'GET',
                 headers: {'Authorization': 'Basic ' + pass}
             }); 
-        const json = await response.json(); 
-        console.log(json); 
 
         if (response.status == 404) {
             msg ="Koodilla " + " <br /> " + code + " <br /> " +" ei löydy lippua."; 
@@ -35,6 +33,8 @@ async function findTicket() {
         document.getElementById("result").innerHTML = msg; 
     }
 }
+
+// Use ticket with ticketcode
 async function useTicket() {
     var uturl = url + "tickets?code="
     try {
@@ -68,6 +68,7 @@ async function useTicket() {
     }
 }
 
+// Get and list all tickets
 async function findAllTickets() {
         
     let faturl = url + "tickets";
@@ -83,12 +84,11 @@ async function findAllTickets() {
             dataType: "json",
             url: faturl,
             success: function(data) {
-                console.log(data); 
                 var ticket = '';
 
                 // ITERATING THROUGH OBJECTS
                 $.each(data, function (key, value) {
-                    var myQR = "https://api.qrserver.com/v1/create-qr-code/?data="+value.ticketcode;
+                    var myQR = "https://api.qrserver.com/v1/create-qr-code/?data=" + value.ticketcode;
                     const qrCodeString = `<img src="${myQR}" width="70" height="70">`
                     //CONSTRUCTION OF ROWS HAVING
                     // DATA FROM JSON OBJECT
@@ -117,4 +117,3 @@ async function findAllTickets() {
     console.log(error); 
     }
 }
-

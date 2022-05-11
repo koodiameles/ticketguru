@@ -24,9 +24,8 @@ $(document).ready(function () {
     );
     $("#evdropdown").prop("selectedIndex", 0);
 
-    const evurl = url + "events/";
-
     // Populate event dropdown
+    const evurl = url + "events/";
     $.ajax({
       url: evurl,
       type: "GET",
@@ -35,14 +34,6 @@ $(document).ready(function () {
       contentType: "application/json; charset=utf-8",
       success: function (data) {
         evs = data;
-        console.log(evs);
-
-        // just for some debugging --jj
-        // var events = "";
-        // $.each(data, function (index, event) {
-        //   events += index + ": " + event.description + ", ID:" + event.eventid + "\n";
-        // });
-        // console.log(events);
 
         $.each(data, function (index, event) {
           $("#evdropdown").append(
@@ -70,10 +61,7 @@ $(document).ready(function () {
 
     seleventindex = $("#evdropdown").val();
     selectedEventidValue = $("#evdropdown").find('option:selected').attr('eventidValue');
-    console.log("selected LIST INDEX: " + seleventindex);
-    console.log("selected eventidValue: " + selectedEventidValue);
 
-    console.log(evs[seleventindex]);
     $.each(evs[seleventindex].tickettypes, function (key, ttype) {
       $("#ttdropdown").append(
         $("<option></option>")
@@ -88,8 +76,8 @@ $(document).ready(function () {
   $("#ttdropdown").change(function () {
     selttypeid = $("#ttdropdown").val();
 
-    const ttypeurl = url + "tickettypes/" + selttypeid;
     // Set tickettype price to price input 
+    const ttypeurl = url + "tickettypes/" + selttypeid;
     $.ajax({
       url: ttypeurl,
       method: "GET",
@@ -142,14 +130,12 @@ $(document).ready(function () {
     } else if ($("#tiamount").val() <= 10) {
       document.getElementById("result").innerHTML = "";
     }
-
-    console.log("ticketamount: " + ticketamount);
   });
 
   //  Clicking the "Osta liput" button
   $("#buyticket").click(function (e) {
-    const saleurl = url + "sales";
     // Check ticket amount
+    const saleurl = url + "sales";
     function ajaxCheckTicketamount() {
       return $.ajax({
         url: url + "events/" + (Number(selectedEventidValue)),
@@ -249,7 +235,6 @@ $(document).ready(function () {
 
           // Add sold tickets to table
           const salegeturl = saleurl + "/" + saleid;
-          console.log("salegeturl: " + salegeturl);
 
           $(".hidden").css("display", "block"); // Show hidden table
           $("#tbody").empty(); // Empty table body

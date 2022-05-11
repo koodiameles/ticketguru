@@ -10,7 +10,6 @@ public class TickettypeDTO {
   @NotNull
   private double price;
 
-
   public TickettypeDTO(long event, String name, double price) {
     this.event = event;
     this.name = name;

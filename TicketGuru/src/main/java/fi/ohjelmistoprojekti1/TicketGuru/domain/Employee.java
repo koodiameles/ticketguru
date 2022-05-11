@@ -18,14 +18,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @Entity
 public class Employee {
 
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employeeid", nullable = false, updatable = false)
 	private Long employeeid;
 	
@@ -42,19 +41,16 @@ public class Employee {
 	@JsonIgnore
 	private String hashpassword;
 
-	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 	private List<Sale> sales;
 
 	@ManyToOne
-    @JoinColumn(name = "roleid")
+  @JoinColumn(name = "roleid")
 	@JsonIgnore
-    private Role role; 
-
+  private Role role; 
 
 	public Employee() {
 	}
-	
 
 	public Employee(String firstname, String lastname, String username, String hashpassword) {
 		this.firstname = firstname;
@@ -63,8 +59,6 @@ public class Employee {
 		this.hashpassword = hashpassword;
 	}
 	
-	
-
 	public Employee(@NotBlank(message = "Employee must have a firstname") String firstname,
 			@NotBlank(message = "Employee must have a lastname") String lastname, String username, String hashpassword, Role role) {
 		super();

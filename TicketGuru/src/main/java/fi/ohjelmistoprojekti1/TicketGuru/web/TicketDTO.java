@@ -17,7 +17,7 @@ public class TicketDTO {
 	private double price;			// Tickettype price
  
 
-	//Not in use. Constructor using entities.
+	// Not in use. Constructor using entities.
 	public TicketDTO(Tickettype entity_tickettype, Event entity_event) {
         this.eventid = entity_event.getEventid();
         this.tickettypeid = entity_tickettype.getTickettypeid();
@@ -34,9 +34,11 @@ public class TicketDTO {
 	public String getTickettype() {
 		return tickettype;
 	}
+
 	public Long getTicketid() {
 		return ticketid;
 	}
+
 	public void setTicketid(Long ticketid) {
 		this.ticketid = ticketid;
 	}
@@ -44,39 +46,51 @@ public class TicketDTO {
 	public void setTickettype(String tickettype) {
 		this.tickettype = tickettype;
 	}
+
 	public Long getTickettypeid() {
 		return tickettypeid;
 	}
+
 	public void setTickettypeid(Long tickettypeid) {
 		this.tickettypeid = tickettypeid;
 	}
+
 	public Long getEventid() {
 		return eventid;
 	}
+
 	public void setEventid(Long eventid) {
 		this.eventid = eventid;
 	}
+
 	public Boolean getValid() {
 		return valid;
 	}
+
 	public void setValid(Boolean valid) {
 		this.valid = valid;
 	}
+
 	public String getTicketcode() {
 		return ticketcode;
 	}
+
 	public void setTicketcode(String ticketcode) {
 		this.ticketcode = ticketcode;
 	}
+
 	public Date getUseddatetime() {
 		return useddatetime;
 	}
+
 	public void setUseddatetime(Date useddatetime) {
 			this.useddatetime = useddatetime;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -94,5 +108,4 @@ public class TicketDTO {
 				+ tickettypeid + ", valid=" + valid + ", ticketcode" + ticketcode + "]";
 	}
 
-	
 }

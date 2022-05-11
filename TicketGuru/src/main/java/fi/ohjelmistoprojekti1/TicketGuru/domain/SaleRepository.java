@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface SaleRepository extends CrudRepository<Sale, Long> {
 
     List<Sale> findBySaleid(Long saleid);
-    List<Sale>findAll(); 
+    List<Sale> findAll();
+
 }

@@ -10,26 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Role {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long roleid;
 	@NotBlank(message = "Role must have a description")
 	private String description;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
 	private List<Employee> employees;
-	
-	
 
 	public Role(String description) {
 		super();
 		this.description = description;
 	}
+
 	public Role() {
 		super();
 	}
@@ -50,7 +47,6 @@ public class Role {
 		this.description = description;
 	}
 
-
 	public List<Employee> getEmployees() {
 		return employees;
 	}
@@ -59,9 +55,9 @@ public class Role {
 		this.employees = employees;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Role [description=" + description + ", roleid=" + roleid + "]";
-	}	
+	}
+
 }

@@ -14,13 +14,11 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
-
 @Entity
 public class Tickettype {
 
 @Id
-@GeneratedValue(strategy=GenerationType.IDENTITY)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long tickettypeid; 
 @NotBlank(message = "Tickettype must have a name/description")
 private String name;	//Ex. student, adult, child, pension
@@ -41,7 +39,6 @@ public Tickettype () {
 public Tickettype(String name) {
 	this.name = name; 
 }
-
 
 public Tickettype(String name, double price, Event event) {
 	super(); 
@@ -99,6 +96,5 @@ public void setEvent(Event event) {
 public String toString() {
 	return "Tickettype [tickettypeid=" + tickettypeid + ", tickettype=" + name + ", price=" + price + "]";
 } 
-
 
 }

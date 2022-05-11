@@ -4,42 +4,39 @@ pass = globalvariable.g_pass;
 msg = globalvariable.g_msg;
 
 
-async function processForm(e){
+async function processForm(e) {
     e.preventDefault();
     const form = document.getElementById("tickettype-form");
-    const formData = new FormData(form); // Luodaan lomakkeen tiedoista FormData-olio
-    const requestBody = processFormData(formData); // Metodi, joka luo FormDatasta halutun requestbodyn
+    const formData = new FormData(form); // Create object FormData with data in form
+    const requestBody = processFormData(formData); // Method to create desired requestbody out of FormData
     const response = await submitForm(JSON.stringify(requestBody));
 
-    if(response.message == null){ 
-        console.log(response);
+    if (response.message == null) {
         document.getElementById("msg").innerHTML = "Lipputyyppi on lisätty!";
-    }else{
+    } else {
         document.getElementById("msg").innerHTML = response.message;
     }
 }
 
-function processFormData(formData){
+function processFormData(formData) {
     let requestBody = {};
 
-    for(let [key, value] of formData){ // Käydään FormData avain-arvo-pari kerrallaan läpi, ja mikäli arvo on tyhjä merkkijono, vaihdetaan sen tilalle null
-        if(value === ''){
+    for (let [key, value] of formData) { // Loop through each key-value pair in FormData, if value is an empty string, replace it with null
+        if (value === '') {
             value = null;
         }
-        console.log(key + ' + ' + value);
         requestBody[key] = value;
     }
-    console.log('requestbody: ' + requestBody);
     return requestBody;
 }
 
-async function getEvents(){
+async function getEvents() {
     const events = await fetchEvents();
     populateEventSelection(events);
 }
 
-async function submitForm(request){
-    try{
+async function submitForm(request) {
+    try {
         const data = await fetch(`${url}tickettypes`, {
             method: 'POST',
             body: request,
@@ -49,19 +46,19 @@ async function submitForm(request){
             }
         });
 
-        if(data.status === 201){
+        if (data.status === 201) {
             return await data.json();
-        }else{
+        } else {
             return {message: "Lipputyyppi on jo olemassa."};
         }
         
-    }catch(error){
+    } catch(error) {
         return error;
     }
 }
 
 async function fetchEvents(){
-    try{
+    try {
         const response = await fetch(`${url}events`, {
             method: 'GET',
             headers: {
@@ -69,15 +66,15 @@ async function fetchEvents(){
             }
         });
         return await response.json();
-    }catch(error){
+    } catch(error) {
         return error;
     }
 }
 
-function populateEventSelection(events){
+function populateEventSelection(events) {
     let innerHtmlStr = "";
 
-    for(event of events){
+    for (event of events) {
         innerHtmlStr += `<option value="${event.eventid}">${event.description}</option>`
     }
 
