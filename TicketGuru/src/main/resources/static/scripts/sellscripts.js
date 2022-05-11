@@ -37,10 +37,20 @@ $(document).ready(function () {
       contentType: "application/json; charset=utf-8",
       success: function (data) {
         evs = data;
-        $.each(data, function (key, event) {
+        console.log(evs);
+
+        // just for some debugging --jj
+        // var events = "";
+        // $.each(data, function (index, event) {
+        //   events += index + ": " + event.description + ", ID:" + event.eventid + "\n";
+        // });
+        // console.log(events);
+
+        $.each(data, function (index, event) {
           $("#evdropdown").append(
             $("<option></option>")
-              .attr("value", event.eventid - 1)
+              .attr("value",  index)
+              .attr("eventidValue",  event.eventid )
               .text(event.description + " (" + event.ticketcount + " lippua jäljellä)")
           );
         });
@@ -61,8 +71,9 @@ $(document).ready(function () {
     $("#ttdropdown").prop("selectedIndex", 0);
 
     seleventindex = $("#evdropdown").val();
-    seleventid = Number($("#evdropdown").val()) + 1; 
-    console.log("selected event: " + seleventindex);
+    selectedEventidValue = $("#evdropdown").find('option:selected').attr('eventidValue');
+    console.log("selected LIST INDEX: " + seleventindex);
+    console.log("selected eventidValue: " + selectedEventidValue);
 
     console.log(evs[seleventindex]);
     $.each(evs[seleventindex].tickettypes, function (key, ttype) {
@@ -143,7 +154,7 @@ $(document).ready(function () {
     // Check ticket amount
     function ajaxCheckTicketamount() {
       return $.ajax({
-        url: url + "events/" + (Number(seleventindex) + 1),
+        url: url + "events/" + (Number(selectedEventidValue)),
         method: "GET",
         dataType: "json",
         headers: { Authorization: "Basic " + pass },
@@ -162,7 +173,7 @@ $(document).ready(function () {
           e.preventDefault();
           // Decrease the number of tickets available
           $.ajax({
-            url: url + "events/" + (Number(seleventindex) + 1),
+            url: url + "events/" + (Number(selectedEventidValue)),
             method: "PUT",
             dataType: "json",
             headers: { Authorization: "Basic " + pass },
@@ -202,7 +213,7 @@ $(document).ready(function () {
               headers: { Authorization: "Basic " + pass },
               contentType: "application/json; charset=utf-8",
               data: JSON.stringify({
-                eventid: Number(seleventindex) + 1,
+                eventid: Number(selectedEventidValue),
                 tickettypeid: selttypeid,
                 price: customprice
               }),
@@ -301,10 +312,11 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
               evs = data;
-              $.each(data, function (key, event) {
+              $.each(data, function (index, event) {
                 $("#evdropdown").append(
                   $("<option></option>")
-                    .attr("value", event.eventid - 1)
+                    .attr("value",  index)
+                    .attr("eventidValue",  event.eventid )
                     .text(event.description + " (" + event.ticketcount + " lippua jäljellä)")
                 );
               });
